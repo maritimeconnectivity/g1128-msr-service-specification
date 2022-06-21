@@ -1,37 +1,38 @@
 ---
 titlepage: true
 toc-own-page: true
-title: "Service specification for MCP Service Registry (MSR)"
+title: "Service specification for the MCP Service Registry (MSR)"
 author: [MCP Consortium]
 date: "2022-06-21"
-keywords: [maritime, technical, service, registrym, MCP, MSR]
+keywords: [maritime, technical, service, registry, MCP, MSR]
 logo: "materials/mcplogo.png"
 titlepage-text-color: "476E7D"
-footer-center: "G1128 Service Specification"
+footer-center: "G-1128 MSR Service Specification"
 ...
 
-# Service specification for MCP Service Registry (MSR)
+# Service specification for the MCP Service Registry (MSR)
 <!-- Hey it is comment! This must be seen only at the source code editing.  -->
 
 ## Introduction
 
-In IMO resolution MSC.467(101) “guidance on the definition and harmonization of
-the format and structure of maritime services in the context of e-navigation”,
+In IMO resolution MSC.467(101) “Guidance on the Definition and Harmonization of
+the Format and Structure of Maritime Services in the Context of e-Navigation”,
 IMO defines Maritime Services and Technical Services in the context of
-e-Navigation. In the resolution the Maritime Services are on the highest level,
-describing a service in an entirely non-technical manner. One or more Technical
-Services are associated with a Maritime Service, and these Technical Services
-are the ones defining the actual information exchange needed to take place in
-order to carry our a Maritime Service.
+e-Navigation. In this resolution, the Maritime Services are on the highest 
+level, describing a service in an entirely non-technical manner. One or more
+Technical Services are associated with a Maritime Service, and these Technical
+Services are the ones defining the actual information exchange needed to take
+place in order to carry our a Maritime Service.
 
-Maritime Service Registry, MSR for short, takes a place of a registry for
-Technical Service and a reference point to  information and an end-point of
-registered services and thus to improve the accessibility of available services
-in the maritime domain.
+The Maritime Service Registry, or MSR for short, assumes the role of a general 
+registry for Technical Services. It provides a reference point to the most
+relevant information and the respective end-points of the registered services 
+and thus to improve the accessibility of available services in the maritime 
+domain.
 
 The Technical Services in the resolution are also defined on three levels
-following the same structure as G1128, where MSR supervises all service
-providers to describe their service in the format of G1128.
+following the same structure as G-1128, where MSR supervises all service
+providers to describe their service in the format of G-1128.
 
 ### Purpose
 <!--
@@ -84,22 +85,19 @@ providers to describe their service in the format of G1128.
     This section shall be replaced by a suitable description of the purpose.
 -->
 
-The main tasks of MSR are registration of services by service provider and a
-discovery service for registered services, so any service consumer can identify
-available services and gain access. MSR registration needs to be able to 
-register all relevant e-Navigation and e-Maritime services, commercial and 
-non-commercial, authorized and non-authorized, for free and against payment. MSR
-needs to allow service consumers to discover available services and enable the
-use of the services through given end-points. It can be seen as a sophisticated
-yellow pages phone book. A registry can be searched using a number of different
-criteria including coverage area.
+The MSR is an implementation of service management concept which was given from
+the IALA G-1128 specification. The main tasks of MSR are the registration of 
+Technical Services by a service provider and the provision of a discovery 
+mechanism for the registered services, so that any service consumer can identify
+available services and gain access. 
 
-MSR is an implementation of service management concept which was given from the
-IALA’s G1128 specification.
-
-![service management concept](materials/example.png)
-
-*Service management concept (from the IALA’s G1128 specification)*
+The MSR registration needs to be able to register all relevant e-Navigation 
+services, commercial and non-commercial, authorized and non-authorized, for free
+and against payment. The MSR also needs to allow service consumers to discover
+available services and enable the use of those services through defined 
+end-point locations. It can therefore be seen as a sophisticated yellow pages 
+phone book. A registry can be searched using a wide variety of different
+criteria including the coverage area of interest.
 
 ### Intended readership
 <!--
@@ -113,7 +111,7 @@ system engineers and developers in charge of developing and operating an MSR
 instance. Furthermore, this service specification is intended to be read by
 enterprise architects, service architects, information architects, system 
 engineers and developers in pursuing architecting, design and development
-activities of related maritime services.
+activities of related e-Navigation services.
 
 ### Inputs from other sources
 <!--
@@ -122,7 +120,7 @@ activities of related maritime services.
   finished) projects. 
 -->
 
-The service management concept originally given from the IALA’s G1128 
+The service management concept originally given from the IALA G-1128 
 specification was given and implemented throughout previous projects such as
 EfficienSea2 and Sea Traffic Management.
 
@@ -137,12 +135,12 @@ Attribute     | Content
 Name          | Maritime Service Registry (MSR)
 ID            | urn:mrn:mcp:service:mcc:mcc:specification:msr
 Version       | 0.0.1
-Description   | A service registry and a reference point to provide information of registered services and thus to improve the visibility and accessibility of available information and services in the maritime domain.
-Keywords      | service registry, service discoverability, service specification, G1128, technical services
+Description   | A service registry acting as a reference point to provide information on the registered services and thus to improve the visibility and accessibility of available information and services in the maritime domain.
+Keywords      | service, registry, discoverability, specification, G-1128, technical
 Architect(s)  | MCC MSR WG
 Status        | Provisional
 
-## Operational context
+## Operational Context
 <!--
     The operational context description shall be based on the description of the
     operational model, consisting of a structure of operational nodes and
@@ -183,52 +181,50 @@ Status        | Provisional
         * Information exchange requirements.
 -->
 
-This section describes the context of the service from an operational
-perspective.
+This section describes the context of the MSR from an operational perspective.
 
-In the operational context of MSR, it is mostly contexts of service consumers 
-and providers that make interactions with. MSR acts as a trustworthy information
-provider of service to service consumers where they can get the list of services
-with certain search parameters. For service provider MSR facilitates the 
-dissemination of their service information and an access point when the relevant
-information is successfully registered. More detailed descriptions are given 
-below.
+The main intention is to provide a description on how the MSR supports the 
+interaction among the operational nodes. In this case, these are the service 
+consumers and service providers that use the MSR. The MSR acts as a trustworthy 
+information provider to the service consumers, from which they can acquire a 
+list of services that conform to a set of selection criteria. For service 
+providers the MSR facilitates the dissemination of their service information 
+and an access point where the relevant information is successfully registered.
 
-##### Service Discoverability
+![service management concept](materials/example.png)
 
-The following aspects need to be satisfied:
-* Only organisations that are registered in a MIR instance (see details on 
-“Vetting procedure for organisations joining MCP instances”; Document ID: MCP 
-Gen 5) are allowed to submit service descriptions (any level, i.e. service 
-specifications, service designs, and service instances) to a MSR. i.e. a 
-submitter needs to authenticate itself using MIR.
-* MSR needs to be open for queries/searches without authentication.
-* Endpoints in Service Instances needs to point to active services that are in 
-production (not test services). This is of course only the case if the MSR 
-itself is a production environment.
-* Requirements on service provider authentication and service consumer
-authentication is entirely up to the service provider.
+*Service Registration/Discoverability Concept (based on the IALA G-1128 specification)*
+
+Another operational node to be taken into account is the MSR itself. More
+specifically, multiple MSR instances that may exist independently of each other.
+This kind of decentralized scenarios, result in the need for a certain level
+of coordination, especially in terms of service discoverability. This can be
+provided by a centralized/distributed ledger service, through which all 
+interested MSRs can exchange information on their current registrations. The 
+specification of this ledger operation however is outside the scope of this 
+document. The participation of an MSR is such a scheme and any implementation 
+decisions are therefore left to the MSR service providers.
+
+More detailed descriptions on the basic operational aspects can be found below.
 
 ##### Service Registration
 
-With regard to service registration, the MSR instances work nearly independent
-of each other. a MSR instance provider will only accept services to be 
-registered using identities from MIR instances it chooses.
+An MSR instance provider is naturally only accountable towards its own users, as
+defined by any Service Level Agreements (SLAs) present. Hence, in regard to 
+service registration, an MSR instance should be able to work independently.
 
-With regard to service registration, the MSR instance provider naturally only 
-has an obligation to it’s own users that it allows to register services in its 
-registry. So, SLA and accountability is only towards its own users.
+Many services registered to an MSR might be local, i.e. will only be 
+discoverable in that specific MSR instance. Some services however, might be
+intended to be globally available, and should therefore be discoverable
+across multiple MSR instances. When such a service is registered in an MSR, 
+the registration will have to be propagated to the ledger mechanism mentioned
+previously. Thus, the MSR instance provider needs to review whether to support
+a centralized/distributed ledger operation.
 
-Some services registered to a MSR will be local, i.e. will only be discoverable
-in that specific MSR instance. Other services should be globally discoverable
-across all MSR instances and when such a service is registered in the MSR, the
-searchable parameters must be added to the distributed ledger of maritime
-services. Thus, the MSR instance provider needs to run a node in the ledger.
+##### Requirements on Service Registration
 
-##### Requirement on Service Registration
-
-Services registered in a MSR must follow the IALA guideline on e-Navigation
-technical services (G1128). In this guideline services are described on three
+Services registered in an MSR must follow the IALA guideline on e-Navigation
+technical services (G-1128). In this guideline services are described on three
 levels:
 
 * Service specification
@@ -249,6 +245,21 @@ information of concrete service providers. The most important information is the
 endpoint of the service, but other significant information includes a 
 geographical coverage of the service.
 
+##### Service Discoverability
+
+The following aspects need to be satisfied:
+* Only organisations that are registered in a MIR instance (see details on
+  “Vetting procedure for organisations joining MCP instances”; Document ID: MCP
+  Gen 5) are allowed to submit service descriptions (any level, i.e. service
+  specifications, service designs, and service instances) to a MSR. i.e. a
+  submitter needs to authenticate itself using MIR.
+* MSR needs to be open for queries/searches without authentication.
+* Endpoints in Service Instances needs to point to active services that are in
+  production (not test services). This is of course only the case if the MSR
+  itself is a production environment.
+* Requirements on service provider authentication and service consumer
+  authentication is entirely up to the service provider.
+
 ##### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
@@ -262,21 +273,25 @@ In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
 
-    <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
-    <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
-    <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
-    <IPSS> ::= pchar *(pchar / "/")
+```
+<MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
+<MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
+<IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
+<IPSS> ::= pchar *(pchar / "/")
+```
 
 More detailed description of the syntax is given in the referenced document.
 
 Here the MRN syntax of for a service document is given:
 
-    <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
-    <ORG> ::= pchar *(pchar / "/")
-    <G1128-TYPE> ::= "instance" | "specification" | "design"
-    <SERVICE-NAME> ::= pchar *(pchar / "/")
+```
+<MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
+<ORG> ::= pchar *(pchar / "/")
+<G1128-TYPE> ::= "instance" | "specification" | "design"
+<SERVICE-NAME> ::= pchar *(pchar / "/")
+```
 
-where represents an organization ID assigned by , represents the type of the
+where represents an organization ID assigned by, represents the type of the
 documentation, i.e., specification, design, and instance, and can be any
 specific string representing an unique identifier of a service. together with
 represents the identity of the service provider, an organization or a company
@@ -522,7 +537,8 @@ Example of an UML diagram:
 
 #### Data Models
 
-    "XmlDto": {
+```json
+      "XmlDto": {
         "required": [
           "content",
           "name"
@@ -1359,7 +1375,8 @@ Example of an UML diagram:
             }
           }
         }
-      
+      }
+```      
 
 ### Service internal data model (Optional)
 <!--
