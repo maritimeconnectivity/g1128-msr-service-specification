@@ -1,0 +1,86 @@
+name: Markdown to nicely-formatted PDF
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: md to formatted pdf
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Set version
+        id: set_version
+        uses: paulhatch/semantic-version@v4.0.2
+        with:
+          # The prefix to use to identify tags
+          tag_prefix: "v"
+          # A string which, if present in a git commit, indicates that a change represents a
+          # major (breaking) change, supports regular expressions wrapped with '/'
+          major_pattern: "(MAJOR)"
+          # Same as above except indicating a minor change, supports regular expressions wrapped with '/'
+          minor_pattern: "(MINOR)"
+          # A string to determine the format of the version output
+          format: "${major}.${minor}.${patch}"
+          # Optional path to check for changes. If any changes are detected in the path the
+          # 'changed' output will true. Enter multiple paths separated by spaces.
+          change_path: "./"
+          # Named version, will be used as suffix for name version tag
+          namespace: svc-spec
+          # Indicate whether short tags like 'v1' should be supported. If false only full
+          # tags like 'v1.0.0' will be recognized.
+          short_tags: true
+          # If this is set to true, *every* commit will be treated as a new version.
+          bump_each_commit: false
+
+      - name: Confirmation of version
+        run: echo "Current version - v${{ steps.set_version.outputs.version }}"
+
+      - run: mkdir -p public/templates
+
+      - uses: suisei-cn/actions-download-file@v1
+        id: download_file  # Remember to give an ID if you need the output
+        name: Download the template for formatting
+        with:
+          url: "[template for pdf](https://github.com/Wandmalfarbe/pandoc-latex-template/releases/download/v2.0.0/Eisvogel.zip)!"
+          target: public/
+          auto-match: true
+
+      - name: Decompress the format
+        uses: TonyBogdanov/zip@1.0
+        with:
+            args: unzip -qq public/${{ steps.download_file.outputs.filename }} -d public/templates
+
+      - name: Export a PDF from markdown
+        uses: Ender-events/pandoc@master
+        with:
+          args: '-s -o service-specification.pdf service-specification.md --from markdown --template eisvogel --data-dir public/'
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.set_version.outputs.version }}
+          release_name: Release v${{ steps.set_version.outputs.version }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./service-specification.pdf
+          asset_name: service-specification-v${{ steps.set_version.outputs.version }}.pdf
+          asset_content_type: application/pdf

@@ -1,0 +1,62 @@
+<mxfile host="app.diagrams.net" modified="2021-04-19T18:12:29.065Z" agent="5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36" etag="wBM9zOgWMmiMy3Ia6NbR" version="14.6.0" type="github">
+  <diagram id="JUZ05NPTfhQuIxtCzizv" name="Page-1">
+    <mxGraphModel dx="1426" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-1" value="publish service&lt;br&gt;specification" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=27.5;entryPerimeter=0;" edge="1" parent="1" source="G8nP9d9J7FoPLp3Mcluq-2" target="G8nP9d9J7FoPLp3Mcluq-11">
+          <mxGeometry x="0.2747" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-2" value="Service specification producer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="120" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-3" value="discover service&lt;br&gt;specification" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=27.5;entryPerimeter=0;" edge="1" parent="1" source="G8nP9d9J7FoPLp3Mcluq-4" target="G8nP9d9J7FoPLp3Mcluq-11">
+          <mxGeometry x="0.2318" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-4" value="Service implementer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="390" y="120" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-5" value="discover service&lt;br&gt;specification &lt;br&gt;and instance" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=52.5;entryPerimeter=0;" edge="1" parent="1" source="G8nP9d9J7FoPLp3Mcluq-7" target="G8nP9d9J7FoPLp3Mcluq-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="370" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="190" y="330" />
+              <mxPoint x="190" y="273" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="G8nP9d9J7FoPLp3Mcluq-7" target="G8nP9d9J7FoPLp3Mcluq-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-7" value="Service consumer" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="300" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-8" value="publish service&lt;br&gt;instance" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=52.5;entryPerimeter=0;" edge="1" parent="1" source="G8nP9d9J7FoPLp3Mcluq-10" target="G8nP9d9J7FoPLp3Mcluq-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="G8nP9d9J7FoPLp3Mcluq-10" target="G8nP9d9J7FoPLp3Mcluq-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-10" value="Service provider" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="390" y="300" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-11" value="MSR" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="240" y="220" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-12" value="Use service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="G8nP9d9J7FoPLp3Mcluq-13" target="G8nP9d9J7FoPLp3Mcluq-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-13" value="Service consumption&lt;br&gt;implementation" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="420" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="G8nP9d9J7FoPLp3Mcluq-14" value="Service&lt;br&gt;implementation" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="345" y="420" width="120" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
