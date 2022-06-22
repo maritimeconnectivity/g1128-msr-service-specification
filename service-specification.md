@@ -10,6 +10,7 @@ titlepage-text-color: "476E7D"
 footer-center: "G-1128 MSR Service Specification"
 toc: true
 toc-own-page: true
+code-block-font-size: \small
 ...
 
 # Service specification for the MCP Service Registry (MSR)
@@ -202,17 +203,17 @@ service information and an access point where the relevant information is
 successfully registered. An example of this whole process can be seen in
 the @fig:msrcontext.
 
-![MSR Service Registration/Discoverability Concept](materials/mcpcontext.png) {#fig:msrcontext}
+![MSR Service Registration/Discoverability Concept](materials/mcpcontext.png)
 
 Another operational node to be taken into account is the MSR itself. More
 specifically, multiple MSR instances that may exist independently of each other.
-This kind of decentralized scenarios, result in the need for a certain level
+This kind of decentralized scenarios, demonstrate the need for a certain level
 of coordination, especially in terms of service discoverability. This can be
 provided by a centralized/distributed ledger service, through which all 
 interested MSRs can exchange information on their current registrations. The 
 specification of this ledger operation however is outside the scope of this 
 document. The participation of an MSR is such a scheme and any implementation 
-decisions are therefore left to the MSR service providers.
+decisions are therefore left to the MSR service developers/providers.
 
 More detailed descriptions on the basic operational aspects can be found below.
 
@@ -230,8 +231,6 @@ the registration will have to be propagated to the ledger mechanism mentioned
 previously. Thus, the MSR instance provider needs to review whether to support
 a centralized/distributed ledger operation.
 
-##### Requirements on Service Registration
-
 Services registered in an MSR must follow the IALA guideline on e-Navigation
 technical services (G-1128). In this guideline services are described on three
 levels:
@@ -247,20 +246,38 @@ service specification will have one or more associated technical designs. Each
 technical design describes how the service can be implemented using a specific
 technology.
 
-Although the technologies in principle can be anything (even a phone number),
+Although these technologies in principle can be anything (even a phone number),
 the MCC promotes the use of web-services and services using the MMS. For each
-technical design that will be one or more service instances that provides
+technical design there will be one or more service instances that provides
 information of concrete service providers. The most important information is the
 endpoint of the service, but other significant information includes a 
-geographical coverage of the service.
+geographical coverage of the service. It is therefore mandated that any MSR 
+implementation must support at least the ***Service Instance*** specification
+of G-1128. Support in this context refers to the provision of a G-1128 
+compliant service instance specification XML schema. References to the other two
+G-1128 specifications (i.e. service specification and technical design) should 
+also be provided, although it is acceptable that these are hosted by third 
+parties.
+
+Optionally, MSR implementations may also support G-1128 non-compliant service
+registrations. In those cases, the XML schema of the service instance 
+specification can be omitted and only the mandatory fields of a registration
+will be required from the service provider.
 
 ##### Service Discoverability
 
-The following aspects need to be satisfied:
+Service discoverability is intended to facilitate the dissemination of the 
+e-Navigation service information. As such, the employed mechanism should follow
+the most widely-used set of standards, which in the maritime domain related 
+directly to the IEC 63173-2 ED1 standard, more widely known as SECOM. 
+
+SECOM already defines a mechanism for service discovery and this should be 
+employed by the MSR. Apart from the requirements set by SECOM however, the
+following additional aspects need to be satisfied:
 * Only organisations that are registered in a MIR instance (see details on
   “Vetting procedure for organisations joining MCP instances”; Document ID: MCP
   Gen 5) are allowed to submit service descriptions (any level, i.e. service
-  specifications, service designs, and service instances) to a MSR. i.e. a
+  specifications, service designs, and service instances) to an MSR. i.e. a
   submitter needs to authenticate itself using MIR.
 * MSR needs to be open for queries/searches without authentication.
 * Endpoints in Service Instances needs to point to active services that are in
@@ -272,45 +289,41 @@ The following aspects need to be satisfied:
 ##### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
-the MRN scheme for the identification of service documents. The G1128 clearly
-stated MRN as an unique identifier scheme. A service provider should follow the
-MRN scheme of the MCP identity service provider (who operates a MIR) that they
+the MRN scheme for the identification of service documents. G-1128 clearly 
+mentions MRN as a unique identifier scheme. A service provider should follow the
+MRN scheme of the MCP Identity Service provider (who operates a MIR) that they
 belong. There is a possibility of having more than one MRN of a service document
 for the identification.
 
 In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
+```
+  <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
+  <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
+  <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
+  <IPSS> ::= pchar *(pchar / "/")
+```
 
+For a service document, the MRN system is defined as follows:
 ```
-<MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
-<MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
-<IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
-<IPSS> ::= pchar *(pchar / "/")
+  <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
+  <ORG> ::= pchar *(pchar / "/")
+  <G1128-TYPE> ::= "instance" | "specification" | "design"
+  <SERVICE-NAME> ::= pchar *(pchar / "/")
 ```
+
+The ```ORG``` section represents an organization ID assigned by MIR, 
+```<G1128-TYPE>``` represents the type of the documentation, i.e. specification,
+design, or instance, and ```<SERVICE-NAME>``` can be any specific string 
+representing a unique identifier of a service.
 
 More detailed description of the syntax is given in the referenced document.
 
-Here the MRN syntax of for a service document is given:
-
-```
-<MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
-<ORG> ::= pchar *(pchar / "/")
-<G1128-TYPE> ::= "instance" | "specification" | "design"
-<SERVICE-NAME> ::= pchar *(pchar / "/")
-```
-
-where represents an organization ID assigned by, represents the type of the
-documentation, i.e., specification, design, and instance, and can be any
-specific string representing an unique identifier of a service. together with
-represents the identity of the service provider, an organization or a company
-registered to a specific MIR.
-
-Governance of MRN of service documents is a responsibility of a MSR provider and
-thus the uniqueness of a MRN at the database level.
+Governance of MRN of service documents is a responsibility of an MSR provider, 
+as well as the uniqueness of an MRN at the database level.
 
 ### Functional and non-functional requirements
-
 <!--
     This section lists all (functional and non-functional) requirements 
     applicable to the service being described. A tabular list of requirements 
@@ -326,71 +339,65 @@ thus the uniqueness of a MRN at the database level.
     service specification document.
 -->
 
-#### Functional requirements
-Requirement Id | Requirement Name | Requirement Text | References
---- | --- | --- | ---
-MSR-FR001 | something | something | something
-MSR-FR002 | something | something | something
-MSR-FR003 | something | something | something
+#### Functional Requirements
 
-##### Requirement definitions - XYZ-FR001
-Requirement Id | Requirement Name
---- | ---
-Requirement Name |
-Requirement Text |
-Rationale |
-Author |
+The table below lists applicable existing requirements for the MSR service.
 
-##### Requirement definitions - XYZ-FR002
-Requirement Id | Requirement Name
---- | ---
-Requirement Name |
-Requirement Text |
-Rationale |
-Author |
+Requirement Id  | Requirement Name                 | Requirement Text                                                                   | References
+----------------|----------------------------------|------------------------------------------------------------------------------------|------------
+MSR-FR001       | Service Registration             | Allow the registrations of new service                                             | 
+MSR-FR002       | Service Registration Update      | Allow updates on an existing registrations                                         | 
+MSR-FR003       | Service Registration Cancelation | Allow the deletion of an existing registrations                                    |
+MSR-FR004       | Service Discoverability          | Allow services to be discoverable as per SECOM                                     |
 
-##### Requirement definitions - XYZ-FR003
-Requirement Id | Requirement Name
---- | ---
-Requirement Name |
-Requirement Text |
-Rationale |
-Author |
+The following tables define additional requirements for the XYZ service.
 
-#### Non-functional requirements
-Requirement Id | Requirement Name | Requirement Text | References
---- | --- | --- | ---
-MSR-NFR001 | something | something | something
-MSR-NFR002 | something | something | something
-MSR-NFR003 | something | something | something
+Requirement Id    | MSR-FR005
+------------------|------------------
+Requirement Name  | G-1128 Support
+Requirement Text  | Support the registration of services using the G-1128 Service Instance XML schemas
+Rationale         | G-1128 standardizes the description of e-Navigation service instances
+Author            | GRAD
 
-##### Requirement definitions - XYZ-NFR001
-Requirement Id | Requirement Name
---- | ---
-Requirement Name |
-Requirement Text |
-Rationale |
-Author |
+Requirement Id    | MSR-FR006
+------------------|------------------
+Requirement Name  | Service Instance Documentation
+Requirement Text  | Support multiple to documents to be attached to a service registration
+Rationale         | Multiple documentation sources are frequently required to describe a service
+Author            | GRAD
 
-##### Requirement definitions - XYZ-NFR002
-Requirement Id | Requirement XYZ
---- | ---
-Requirement Name |
-Requirement Text |
-Rationale |
-Author |
+#### Non-Functional Requirements
 
-##### Requirement definitions - XYZ-NFR003
-Requirement Id | Requirement Name
---- | ---
-Requirement Name |
-Requirement Text |
-Rationale |
-Author |
+The table below lists applicable existing requirements for the MSR service.
+
+Requirement Id  | Requirement Name | Requirement Text                                                                                                   | References
+----------------|------------------|--------------------------------------------------------------------------------------------------------------------|------------
+MSR-NFR001      | Authenticity     | The service consumers must be able to verify the authenticity of the received data                                 |
+MSR-NFR002      | Integrity        | It must be clear to both service providers and consumers whether changes have been made to the registered services |
+MSR-NFR003      | Availability     | The service must be available at least at a 99% availability rate                                                  |
+
+The tables below define additional non-functional requirements for the MSR service.
+
+Requirement Id    | MSR-NFR004
+------------------|------------------
+Requirement Name  | Performance
+Requirement Text  | The service must respond to a request in a timely fashion and not allow any HTTP call to timeout 
+Rationale         | Performance, especially in terms of service discoverability is crucial for a smooth service provision
+Author            | GRAD
+
+Requirement Id    | MSR-NFR005
+------------------|------------------
+Requirement Name  | Modularity
+Requirement Text  | The services architecture must be constructed in such a way that individual functionality can be extended, modified or deleted, without changing the basic service architecture.
+Rationale         | The MSR should be easily upgradable to ensure future operations
+Author            | GRAD
 
 ### Other constraints
 
-To be written
+Inter-compatibility with the other MCP components, namely the MCP Identity
+Registry (MIR) and the MCP Messaging Service (MMS) should be ensured. In
+regards to different versions, the MSR should make clear which MCP version it
+supports and if more than one.
 
 #### Relevant industrial standards
 <!--
@@ -399,7 +406,7 @@ To be written
     include, for example, OGC, WFS, WMS, etc.
 -->
 
-There are no such relevant industrial standards found.
+Apart from SECOM, there are no such relevant industrial standards found.
 
 #### Operational nodes
 <!--
@@ -412,19 +419,19 @@ There are no such relevant industrial standards found.
     tables of service providers and consumers.
 -->
 
-To be written
+The following tables describe the operational nodes of the service.
 
 ##### Operational nodes providing the MSR service
 
-Operational Node    | Remarks
----                 | ---
-something           | something
+Operational Node  | Remarks
+------------------|---------
+Service Provider  | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services
 
 ##### Operational nodes consuming the MSR service
 
-Operational Node    | Remarks
----                 | ---
-something           | something
+Operational Node  | Remarks
+------------------|---------
+Service Consumer  | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services
 
 #### Operational activities (Optional)
 <!--
@@ -433,15 +440,9 @@ something           | something
     the service to the relevant operational activities.
 -->
 
-To be written
-
-##### Operational activities supported by the MSR service
-
-Operational Node    | Remarks
----                 | ---
-something           | something
-
-To be written
+Operational Activity  | Remarks
+----------------------|---------
+TBD                   |
 
 ## Service overview
 <!--
@@ -546,846 +547,7 @@ Example of an UML diagram:
 
 #### Data Models
 
-```json
-      "XmlDto": {
-        "required": [
-          "content",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "content": {
-            "type": "string"
-          },
-          "contentContentType": {
-            "type": "string"
-          }
-        }
-      },
-      "LedgerRequestDto": {
-        "required": [
-          "serviceInstanceId"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "serviceInstanceId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "INACTIVE",
-              "CREATED",
-              "VETTING",
-              "VETTED",
-              "REQUESTING",
-              "SUCCEEDED",
-              "FAILED",
-              "REJECTED"
-            ]
-          },
-          "reason": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "Coordinate": {
-        "type": "object",
-        "properties": {
-          "x": {
-            "type": "number",
-            "format": "double"
-          },
-          "y": {
-            "type": "number",
-            "format": "double"
-          },
-          "z": {
-            "type": "number",
-            "format": "double"
-          },
-          "m": {
-            "type": "number",
-            "format": "double"
-          },
-          "coordinate": {
-            "$ref": "#/components/schemas/Coordinate"
-          }
-        }
-      },
-      "CoordinateSequence": {
-        "type": "object",
-        "properties": {
-          "dimension": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "measures": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "CoordinateSequenceFactory": {
-        "type": "object"
-      },
-      "DocDto": {
-        "required": [
-          "filecontent",
-          "mimetype",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "mimetype": {
-            "type": "string"
-          },
-          "filecontent": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "byte"
-            }
-          },
-          "filecontentContentType": {
-            "type": "string"
-          },
-          "instanceId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "Envelope": {
-        "type": "object",
-        "properties": {
-          "null": {
-            "type": "boolean"
-          },
-          "width": {
-            "type": "number",
-            "format": "double"
-          },
-          "height": {
-            "type": "number",
-            "format": "double"
-          },
-          "area": {
-            "type": "number",
-            "format": "double"
-          },
-          "minX": {
-            "type": "number",
-            "format": "double"
-          },
-          "maxX": {
-            "type": "number",
-            "format": "double"
-          },
-          "minY": {
-            "type": "number",
-            "format": "double"
-          },
-          "maxY": {
-            "type": "number",
-            "format": "double"
-          },
-          "diameter": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "Geometry": {
-        "type": "object",
-        "properties": {
-          "envelope": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "factory": {
-            "$ref": "#/components/schemas/GeometryFactory"
-          },
-          "userData": {
-            "type": "object"
-          },
-          "length": {
-            "type": "number",
-            "format": "double"
-          },
-          "empty": {
-            "type": "boolean"
-          },
-          "valid": {
-            "type": "boolean"
-          },
-          "geometryType": {
-            "type": "string"
-          },
-          "srid": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "numGeometries": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "coordinate": {
-            "$ref": "#/components/schemas/Coordinate"
-          },
-          "coordinates": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Coordinate"
-            }
-          },
-          "numPoints": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rectangle": {
-            "type": "boolean"
-          },
-          "area": {
-            "type": "number",
-            "format": "double"
-          },
-          "centroid": {
-            "$ref": "#/components/schemas/Point"
-          },
-          "interiorPoint": {
-            "$ref": "#/components/schemas/Point"
-          },
-          "dimension": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "boundary": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "envelopeInternal": {
-            "$ref": "#/components/schemas/Envelope"
-          },
-          "simple": {
-            "type": "boolean"
-          },
-          "boundaryDimension": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "precisionModel": {
-            "$ref": "#/components/schemas/PrecisionModel"
-          }
-        }
-      },
-      "GeometryFactory": {
-        "type": "object",
-        "properties": {
-          "precisionModel": {
-            "$ref": "#/components/schemas/PrecisionModel"
-          },
-          "coordinateSequenceFactory": {
-            "$ref": "#/components/schemas/CoordinateSequenceFactory"
-          },
-          "srid": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "InstanceDto": {
-        "required": [
-          "comment",
-          "instanceId",
-          "name",
-          "status",
-          "version"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
-          },
-          "publishedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "geometryContentType": {
-            "type": "string"
-          },
-          "instanceId": {
-            "type": "string"
-          },
-          "keywords": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "PROVISIONAL",
-              "RELEASED",
-              "DEPRECATED",
-              "DELETED"
-            ]
-          },
-          "organizationId": {
-            "type": "string"
-          },
-          "unlocode": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "endpointUri": {
-            "type": "string"
-          },
-          "endpointType": {
-            "type": "string"
-          },
-          "mmsi": {
-            "type": "string"
-          },
-          "imo": {
-            "type": "string"
-          },
-          "serviceType": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "instanceAsXml": {
-            "$ref": "#/components/schemas/XmlDto"
-          },
-          "instanceAsDoc": {
-            "$ref": "#/components/schemas/DocDto"
-          },
-          "ledgerRequestId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "ledgerRequestStatus": {
-            "type": "string",
-            "enum": [
-              "INACTIVE",
-              "CREATED",
-              "VETTING",
-              "VETTED",
-              "REQUESTING",
-              "SUCCEEDED",
-              "FAILED",
-              "REJECTED"
-            ]
-          },
-          "docIds": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          "implementsServiceDesign": {
-            "type": "string"
-          },
-          "implementsServiceDesignVersion": {
-            "type": "string"
-          }
-        }
-      },
-      "Point": {
-        "type": "object",
-        "properties": {
-          "envelope": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "factory": {
-            "$ref": "#/components/schemas/GeometryFactory"
-          },
-          "userData": {
-            "type": "object"
-          },
-          "coordinates": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Coordinate"
-            }
-          },
-          "empty": {
-            "type": "boolean"
-          },
-          "x": {
-            "type": "number",
-            "format": "double"
-          },
-          "y": {
-            "type": "number",
-            "format": "double"
-          },
-          "geometryType": {
-            "type": "string"
-          },
-          "coordinate": {
-            "$ref": "#/components/schemas/Coordinate"
-          },
-          "numPoints": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dimension": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "boundary": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "simple": {
-            "type": "boolean"
-          },
-          "boundaryDimension": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "coordinateSequence": {
-            "$ref": "#/components/schemas/CoordinateSequence"
-          },
-          "length": {
-            "type": "number",
-            "format": "double"
-          },
-          "valid": {
-            "type": "boolean"
-          },
-          "srid": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "numGeometries": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rectangle": {
-            "type": "boolean"
-          },
-          "area": {
-            "type": "number",
-            "format": "double"
-          },
-          "centroid": {
-            "$ref": "#/components/schemas/Point"
-          },
-          "interiorPoint": {
-            "$ref": "#/components/schemas/Point"
-          },
-          "envelopeInternal": {
-            "$ref": "#/components/schemas/Envelope"
-          },
-          "precisionModel": {
-            "$ref": "#/components/schemas/PrecisionModel"
-          }
-        }
-      },
-      "PrecisionModel": {
-        "type": "object",
-        "properties": {
-          "scale": {
-            "type": "number",
-            "format": "double"
-          },
-          "type": {
-            "$ref": "#/components/schemas/Type"
-          },
-          "floating": {
-            "type": "boolean"
-          },
-          "maximumSignificantDigits": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "offsetX": {
-            "type": "number",
-            "format": "double"
-          },
-          "offsetY": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "Type": {
-        "type": "object"
-      },
-      "DtColumn": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "searchable": {
-            "type": "boolean"
-          },
-          "orderable": {
-            "type": "boolean"
-          },
-          "search": {
-            "$ref": "#/components/schemas/DtSearch"
-          }
-        }
-      },
-      "DtOrder": {
-        "type": "object",
-        "properties": {
-          "column": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "dir": {
-            "type": "string",
-            "enum": [
-              "asc",
-              "desc"
-            ]
-          }
-        }
-      },
-      "DtPagingRequest": {
-        "type": "object",
-        "properties": {
-          "start": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "length": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "draw": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "order": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DtOrder"
-            }
-          },
-          "columns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DtColumn"
-            }
-          },
-          "search": {
-            "$ref": "#/components/schemas/DtSearch"
-          },
-          "springbootSort": {
-            "$ref": "#/components/schemas/Sort"
-          }
-        }
-      },
-      "DtSearch": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          },
-          "regexp": {
-            "type": "string"
-          }
-        }
-      },
-      "Sort": {
-        "type": "object",
-        "properties": {
-          "empty": {
-            "type": "boolean"
-          },
-          "sorted": {
-            "type": "boolean"
-          },
-          "unsorted": {
-            "type": "boolean"
-          }
-        }
-      },
-      "DtPageInstanceDtDto": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InstanceDtDto"
-            }
-          },
-          "recordsFiltered": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "recordsTotal": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "draw": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "InstanceDtDto": {
-        "required": [
-          "comment",
-          "instanceId",
-          "name",
-          "status",
-          "version"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "version": {
-            "type": "string"
-          },
-          "publishedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "geometryContentType": {
-            "type": "string"
-          },
-          "instanceId": {
-            "type": "string"
-          },
-          "keywords": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "PROVISIONAL",
-              "RELEASED",
-              "DEPRECATED",
-              "DELETED"
-            ]
-          },
-          "organizationId": {
-            "type": "string"
-          },
-          "unlocode": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "endpointUri": {
-            "type": "string"
-          },
-          "endpointType": {
-            "type": "string"
-          },
-          "mmsi": {
-            "type": "string"
-          },
-          "imo": {
-            "type": "string"
-          },
-          "serviceType": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "instanceAsXml": {
-            "$ref": "#/components/schemas/XmlDto"
-          },
-          "instanceAsDocId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "instanceAsDocName": {
-            "type": "string"
-          },
-          "ledgerRequestId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "ledgerRequestStatus": {
-            "type": "string",
-            "enum": [
-              "INACTIVE",
-              "CREATED",
-              "VETTING",
-              "VETTED",
-              "REQUESTING",
-              "SUCCEEDED",
-              "FAILED",
-              "REJECTED"
-            ]
-          },
-          "docIds": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          "implementsServiceDesign": {
-            "type": "string"
-          },
-          "implementsServiceDesignVersion": {
-            "type": "string"
-          }
-        }
-      },
-      "DocDtDto": {
-        "required": [
-          "mimetype",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "mimetype": {
-            "type": "string"
-          },
-          "filecontentContentType": {
-            "type": "string"
-          },
-          "instanceId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "DtPageDocDtDto": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DocDtDto"
-            }
-          },
-          "recordsFiltered": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "recordsTotal": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "draw": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Pageable": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "minimum": 0,
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32"
-          },
-          "sort": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      }
-```      
+![MSR Data Model UML Diagram](materials/umldiagram.svg)  
 
 ### Service internal data model (Optional)
 <!--
