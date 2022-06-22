@@ -10,7 +10,6 @@ titlepage-text-color: "476E7D"
 footer-center: "G-1128 MSR Service Specification"
 toc: true
 toc-own-page: true
-code-block-font-size: \small
 ...
 
 # Service specification for the MCP Service Registry (MSR)
@@ -298,20 +297,25 @@ for the identification.
 In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
+
+\small
 ```
   <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
   <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
   <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
   <IPSS> ::= pchar *(pchar / "/")
 ```
+\normalize
 
 For a service document, the MRN system is defined as follows:
-```
-  <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
-  <ORG> ::= pchar *(pchar / "/")
-  <G1128-TYPE> ::= "instance" | "specification" | "design"
-  <SERVICE-NAME> ::= pchar *(pchar / "/")
-```
+
+<pre>
+  <code style="font-size:12px">
+    &lt;MSR-IPSS&gt; ::= &lt;ORG&gt; ":" &lt;G1128-TYPE&gt; ":" &lt;SERVICE-NAME&gt;
+    &lt;ORG&gt; ::= pchar *(pchar / "/")
+    &lt;G1128-TYPE&gt; ::= "instance" | "specification" | "design"
+  </code>
+</pre>
 
 The ```ORG``` section represents an organization ID assigned by MIR, 
 ```<G1128-TYPE>``` represents the type of the documentation, i.e. specification,
@@ -433,16 +437,18 @@ Operational Node  | Remarks
 ------------------|---------
 Service Consumer  | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services
 
-#### Operational activities (Optional)
+<!-- #### Operational activities (Optional) -->
 <!--
     Optional. If an operational model exists and provides sufficient details 
     about operational activities, then this section shall include a mapping of 
     the service to the relevant operational activities.
 -->
 
+<!--
 Operational Activity  | Remarks
 ----------------------|---------
 TBD                   |
+-->
 
 ## Service overview
 <!--
@@ -472,7 +478,7 @@ The elements in this view are all usually created by an UML modelling tool.
 
 <!--
     Describe the interfaces of the service including the selected Message 
-    Exchange Pattern (MEP) by using an UML diagram5 that illustrates the service
+    Exchange Pattern (MEP) by using an UML diagrams that illustrates the service
     interfaces definitions and operations and in tabular form.
     
     It is also recommended to describe the considerations resulting in the 
@@ -511,19 +517,13 @@ the Service. A service provides at least one service interface. An example
 diagram and corresponding table is given below.
 
 ## Service data model
-
 <!--
     It is recommended to visualise the data structures by using UML diagrams.
     The full information model (logical data structure) shall be shown using
     diagram(s) and explanatory tables (see below).
--->
 
-This section describes the information model, i.e., the logical data structures
-to be exchanged between providers and consumers of the service.
+    Example of an UML diagram:
 
-Example of an UML diagram:
-
-<!--
     It is mandatory to give a description of each entity item (class), its
     attributes and the associations between entity items after each diagram
     showing data items.
@@ -545,11 +545,22 @@ Example of an UML diagram:
     traces to an external model.
 -->
 
-#### Data Models
+This section describes the information model, i.e., the logical data structures
+to be exchanged between providers and consumers of the service.  As suggested by
+the IALA G-1128 guideline, the data structure of the MSR implementation are 
+visualised in the following UML digram.
 
-![MSR Data Model UML Diagram](materials/umldiagram.png)  
+![MSR Service Data Model Diagram](materials/umldiagram.png)  
 
-### Service internal data model (Optional)
+As demonstrated by the previous diagram, there are four main data structure
+employed by the MSR:
+* The Instance Model
+* The Xml Model
+* The Doc Model
+* The LedgerRequest Model
+
+Each has its own unique purpose and should be used accordingly.
+<!-- ### Service internal data model &#40;Optional -->
 <!--
     Optionally, this section may provide a description of the internal data
     model, as it seems appropriate to the service provider and/or the service
@@ -558,8 +569,6 @@ Example of an UML diagram:
     the service.  However, it should be considered just as an example – it is
     not an authoritative part of the service specification.
 -->
-
-To be written
 
 ## Service interface specifications
 
