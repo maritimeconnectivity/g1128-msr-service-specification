@@ -305,7 +305,7 @@ follows:
   <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
   <IPSS> ::= pchar *(pchar / "/")
 ```
-\normalize
+\normalsize
 
 For a service document, the MRN system is defined as follows:
 
