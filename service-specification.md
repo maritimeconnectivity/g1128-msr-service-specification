@@ -1,5 +1,6 @@
 ---
 titlepage: true
+toc: true
 toc-own-page: true
 title: "Service specification for the MCP Service Registry (MSR)"
 author: [MCP Consortium]
@@ -8,8 +9,6 @@ keywords: [maritime, technical, service, registry, MCP, MSR]
 logo: "materials/mcplogo.png"
 titlepage-text-color: "476E7D"
 footer-center: "G-1128 MSR Service Specification"
-toc: true
-toc-own-page: true
 ...
 
 # Service specification for the MCP Service Registry (MSR)
@@ -273,6 +272,7 @@ directly to the IEC 63173-2 ED1 standard, more widely known as SECOM.
 SECOM already defines a mechanism for service discovery and this should be 
 employed by the MSR. Apart from the requirements set by SECOM however, the
 following additional aspects need to be satisfied:
+
 * Only organisations that are registered in a MIR instance (see details on
   “Vetting procedure for organisations joining MCP instances”; Document ID: MCP
   Gen 5) are allowed to submit service descriptions (any level, i.e. service
@@ -300,22 +300,20 @@ follows:
 
 \small
 ```
-  <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
-  <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
-  <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
-  <IPSS> ::= pchar *(pchar / "/")
+<MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
+<MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
+<IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
+<IPSS> ::= pchar *(pchar / "/")
 ```
 \normalsize
 
 For a service document, the MRN system is defined as follows:
 
-<pre>
-  <code style="font-size:12px">
-    &lt;MSR-IPSS&gt; ::= &lt;ORG&gt; ":" &lt;G1128-TYPE&gt; ":" &lt;SERVICE-NAME&gt;
-    &lt;ORG&gt; ::= pchar *(pchar / "/")
-    &lt;G1128-TYPE&gt; ::= "instance" | "specification" | "design"
-  </code>
-</pre>
+```
+<MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
+<ORG> ::= pchar *(pchar / "/")
+<G1128-TYPE> ::= "instance" | "specification" | "design"
+```
 
 The ```ORG``` section represents an organization ID assigned by MIR, 
 ```<G1128-TYPE>``` represents the type of the documentation, i.e. specification,
