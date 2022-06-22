@@ -547,7 +547,7 @@ Example of an UML diagram:
 
 #### Data Models
 
-![MSR Data Model UML Diagram](materials/umldiagram.svg)  
+![MSR Data Model UML Diagram](materials/umldiagram.png)  
 
 ### Service internal data model (Optional)
 <!--
@@ -702,8 +702,14 @@ necessarily known at the time, when the service is designed.
     documents.
 -->
 
-Most of terms in the context of MCP can be found in the terminology page of the
-online documentation of MCP 
+The definitions of terms used in this IALA Guideline can be found in the 
+International Dictionary of Marine Aids to Navigation (IALA Dictionary) at 
+http://www.iala-aism.org/wiki/dictionary and were checked as correct at the time
+of going to print. Where conflict arises, the IALA Dictionary shall be 
+considered as the authoritative source of definitions used in IALA documents.
+
+Most other terms in the context of MCP can be found in the terminology page of
+the online documentation of MCP
 (https://docs.maritimeconnectivity.net/en/latest/terminology.html).
 
 ### Terminology
@@ -716,15 +722,12 @@ MSR     | Maritime Service Registry
 MIR     | Maritime Identity Registry
 MRN     | Maritime Resource Name
 
-### Terminology
-Persons producing the Technical Service are invited to provide a list of
-acronyms as appropriate.
-
-Acronym | Meaning
----     | ---
+## Acronyms
+Acronum | Mearning
+---     | --- 
 MSR     | Maritime Service Registry
 MIR     | Maritime Identity Registry
-MRN     | Maritime Resource Name
+MRN     |   Maritime Resource Name
 
 ## References
 <!--
