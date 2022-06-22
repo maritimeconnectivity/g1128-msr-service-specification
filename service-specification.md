@@ -8,6 +8,8 @@ keywords: [maritime, technical, service, registry, MCP, MSR]
 logo: "materials/mcplogo.png"
 titlepage-text-color: "476E7D"
 footer-center: "G-1128 MSR Service Specification"
+toc: true
+toc-own-page: true
 ...
 
 # Service specification for the MCP Service Registry (MSR)
@@ -82,7 +84,8 @@ providers to describe their service in the format of G-1128.
     description shall be provided, where the realisation of the service with a 
     dedicated technology shall be described.
     
-    This section shall be replaced by a suitable description of the purpose.
+    This section shall be replaced by a suitable description of the purpose. For
+    instance:
 -->
 
 The MSR is an implementation of service management concept which was given from
@@ -102,20 +105,24 @@ criteria including the coverage area of interest.
 ### Intended readership
 <!--
   This service specification template is intended to be read by service 
-  architects who shall produce service A description. This section shall 
-  describe the intended readers. e.g.: 
+  architects who shall produce service descriptions.
+
+  This section shall describe the intended readers. e.g.:
 -->
 
 This service specification is primarily intended to be read by architects,
-system engineers and developers in charge of developing and operating an MSR
-instance. Furthermore, this service specification is intended to be read by
-enterprise architects, service architects, information architects, system 
-engineers and developers in pursuing architecting, design and development
-activities of related e-Navigation services.
+system engineers and developers in charge of developing and operating an 
+instance of the MSR service.
+
+Furthermore, this service specification is intended to be read by enterprise 
+architects, service architects, information architects, system engineers and 
+developers in pursuing architecting, design and development activities of 
+other related e-Navigation services.
 
 ### Inputs from other sources
 <!--
   This section lists previous work on the subject covered by this document.
+
   Special emphasis shall be put on what has been reused from other (already
   finished) projects. 
 -->
@@ -126,7 +133,8 @@ EfficienSea2 and Sea Traffic Management.
 
 ## Service identification
 
-A unique identification of the service is given below.
+The purpose of this section is to provide a unique identification of the service
+and describe where the service is in terms of the engineering lifecycle.
 
 <!-- Table below shall be completed. -->
 
@@ -181,19 +189,20 @@ Status        | Provisional
         * Information exchange requirements.
 -->
 
-This section describes the context of the MSR from an operational perspective.
+This section describes the context of the service from an operational 
+perspective.
 
-The main intention is to provide a description on how the MSR supports the 
-interaction among the operational nodes. In this case, these are the service 
-consumers and service providers that use the MSR. The MSR acts as a trustworthy 
-information provider to the service consumers, from which they can acquire a 
-list of services that conform to a set of selection criteria. For service 
-providers the MSR facilitates the dissemination of their service information 
-and an access point where the relevant information is successfully registered.
+The main purpose of this section is to provide a description on how the MSR 
+supports the interaction among the operational nodes. In this case, these are 
+the ***service consumers*** and ***service providers*** that use the MSR. The
+MSR acts as a trustworthy information provider to the service consumers, from 
+which they can acquire a list of services that conform to a set of selection 
+criteria. For service providers the MSR facilitates the dissemination of their 
+service information and an access point where the relevant information is 
+successfully registered. An example of this whole process can be seen in
+the @fig:msrcontext.
 
-![service management concept](materials/example.png)
-
-*Service Registration/Discoverability Concept (based on the IALA G-1128 specification)*
+![MSR Service Registration/Discoverability Concept](materials/mcpcontext.png) {#fig:msrcontext}
 
 Another operational node to be taken into account is the MSR itself. More
 specifically, multiple MSR instances that may exist independently of each other.
