@@ -139,7 +139,7 @@ and describe where the service is in terms of the engineering lifecycle.
 <!-- Table below shall be completed. -->
 
  Attribute    | Content                                                                                                                                                                                                             |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
  Name         | Maritime Service Registry (MSR)                                                                                                                                                                                     |
  ID           | urn:mrn:mcp:service:mcc:mcc:specification:msr                                                                                                                                                                       |
  Version      | 0.0.1                                                                                                                                                                                                               |
@@ -298,7 +298,6 @@ for the identification.
 In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
-
 ```
 <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
 <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
@@ -307,14 +306,13 @@ follows:
 ```
 
 For a service document, the MRN system is defined as follows:
-
 ```
 <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
 <ORG> ::= pchar *(pchar / "/")
 <G1128-TYPE> ::= "instance" | "specification" | "design"
 ```
 
-The ```ORG``` section represents an organization ID assigned by MIR, 
+The ```<ORG>``` section represents an organization ID assigned by MIR, 
 ```<G1128-TYPE>``` represents the type of the documentation, i.e. specification,
 design, or instance, and ```<SERVICE-NAME>``` can be any specific string 
 representing a unique identifier of a service.
@@ -372,7 +370,7 @@ The following tables define additional requirements for the XYZ service.
 The table below lists applicable existing requirements for the MSR service.
 
  Requirement Id | Requirement Name | Requirement Text                                                                                                   | References |
-|----------------|------------------|-------------------------------------------------------------------------------------------------------------------|------------|
+|---------------|------------------|--------------------------------------------------------------------------------------------------------------------|------------|
  MSR-NFR001     | Authenticity     | The service consumers must be able to verify the authenticity of the received data                                 |            |
  MSR-NFR002     | Integrity        | It must be clear to both service providers and consumers whether changes have been made to the registered services |            |
  MSR-NFR003     | Availability     | The service must be available at least at a 99% availability rate                                                  |            |
@@ -380,14 +378,14 @@ The table below lists applicable existing requirements for the MSR service.
 The tables below define additional non-functional requirements for the MSR service.
 
  Requirement Id   | MSR-NFR004                                                                                            |
-|------------------|------------------------------------------------------------------------------------------------------|
+|-----------------|-------------------------------------------------------------------------------------------------------|
  Requirement Name | Performance                                                                                           |
  Requirement Text | The service must respond to a request in a timely fashion and not allow any HTTP call to timeout      | 
  Rationale        | Performance, especially in terms of service discoverability is crucial for a smooth service provision |
  Author           | GRAD                                                                                                  |
 
  Requirement Id   | MSR-NFR005                                                                                                                                                                       |
-|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
  Requirement Name | Modularity                                                                                                                                                                       |
  Requirement Text | The services architecture must be constructed in such a way that individual functionality can be extended, modified or deleted, without changing the basic service architecture. |
  Rationale        | The MSR should be easily upgradable to ensure future operations                                                                                                                  |
@@ -397,7 +395,7 @@ The tables below define additional non-functional requirements for the MSR servi
 
 Inter-compatibility with the other MCP components, namely the MCP Identity
 Registry (MIR) and the MCP Messaging Service (MMS) should be ensured. In
-regards to different versions, the MSR should make clear which MCP version it
+regard to different versions, the MSR should make clear which MCP version it
 supports and if more than one.
 
 #### Relevant industrial standards
