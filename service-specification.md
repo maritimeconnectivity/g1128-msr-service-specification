@@ -669,51 +669,51 @@ parameter.
 -->
 
 <!-- Spacing: | --- | --- | -->
-| Element Name | Description |
-| --- | --- |
+| Element Name      | Description                                                         |
+|-------------------|---------------------------------------------------------------------|
 | SearhFilterObject | The object contains information on the search filters to be applied |
 
-\vspace*{-1cm}
+\vspace*{-0.9cm}
 
 <!-- Spacing: | --- | --- | --- | --- | -->
-| -   | Attribute Name | Type            | Description                                         |
-| --- | --- | --- | --- |
-|     | query          | String          | The query string in a Lucene query format           |
+|     | Attribute Name | Type   | Description                               |
+|-----|----------------|--------|-------------------------------------------|
+|     | query          | String | The query string in a Lucene query format |
 
 \vspace*{-0.9cm}
 
 <!-- Spacing: | --- | --- | --- | -->
-| --  | Tracing Information Name | Value                                    |
-| --- | --- | --- |
-|     | External Model Trace     | SECOM SearchFilterObject query parameter |
+|        | Tracing Information Name | Value                                    |
+|--------|--------------------------|------------------------------------------|
+|        | External Model Trace     | SECOM SearchFilterObject query parameter |
 
-\vspace*{-0.8cm}
-
-<!-- Spacing: | --- | --- | --- | --- | -->
-| -   | Attribute Name | Type            | Description                                         |
-| --- | --- | --- | --- |
-|     | geometry       | String          | The geometry filter in either WKT or GeoJSON format |
-
-\vspace*{-0.7cm}
-
-<!-- Spacing: | --- | --- | --- | -->
-| --  | Tracing Information Name | Value                                    |
-| --- | --- | --- |
-|     | External Model Trace     | SECOM SearchFilterObject query parameter |
-
-\vspace*{-0.6cm}
+\vspace*{-0.9cm}
 
 <!-- Spacing: | --- | --- | --- | --- | -->
-| -   | Attribute Name | Type            | Description                                         |
-| --- | --- | --- | --- |
-|     | freetext       | String          | A simple freetext filter to match any indexed value |
+|     | Attribute Name | Type   | Description                                         |
+|-----|----------------|--------|-----------------------------------------------------|
+|     | geometry       | String | The geometry filter in either WKT or GeoJSON format |
 
-\vspace*{-0.5cm}
+\vspace*{-0.9cm}
 
 <!-- Spacing: | --- | --- | --- | -->
-| --  | Tracing Information Name | Value                                    |
-|-----|--------------------------|------------------------------------------|
-|     | External Model Trace     | SECOM SearchFilterObject query parameter |
+|        | Tracing Information Name | Value                                    |
+|--------|--------------------------|------------------------------------------|
+|        | External Model Trace     | SECOM SearchFilterObject query parameter |
+
+\vspace*{-0.9cm}
+
+<!-- Spacing: | --- | --- | --- | --- | -->
+|     | Attribute Name | Type   | Description                                         |
+|-----|----------------|--------|-----------------------------------------------------|
+|     | freetext       | String | A simple freetext filter to match any indexed value |
+
+\vspace*{-0.9cm}
+
+<!-- Spacing: | --- | --- | --- | -->
+|        | Tracing Information Name | Value                                    |
+|--------|--------------------------|------------------------------------------|
+|        | External Model Trace     | SECOM SearchFilterObject query parameter |
 
 ## Service dynamic behaviour
 <!--
