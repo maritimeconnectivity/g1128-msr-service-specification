@@ -680,34 +680,35 @@ parameter.
 | --- | --- | --- | --- |
 |     | query          | String          | The query string in a Lucene query format           |
 
-\vspace*{-1cm}
+\vspace*{-0.9cm}
 
 <!-- Spacing: | --- | --- | --- | -->
 | --  | Tracing Information Name | Value                                    |
 | --- | --- | --- |
 |     | External Model Trace     | SECOM SearchFilterObject query parameter |
 
-\vspace*{-1cm}
+\vspace*{-0.8cm}
 
 <!-- Spacing: | --- | --- | --- | --- | -->
 | -   | Attribute Name | Type            | Description                                         |
 | --- | --- | --- | --- |
 |     | geometry       | String          | The geometry filter in either WKT or GeoJSON format |
-\vspace*{-1cm}
+
+\vspace*{-0.7cm}
 
 <!-- Spacing: | --- | --- | --- | -->
 | --  | Tracing Information Name | Value                                    |
 | --- | --- | --- |
 |     | External Model Trace     | SECOM SearchFilterObject query parameter |
 
-\vspace*{-1cm}
+\vspace*{-0.6cm}
 
 <!-- Spacing: | --- | --- | --- | --- | -->
 | -   | Attribute Name | Type            | Description                                         |
 | --- | --- | --- | --- |
 |     | freetext       | String          | A simple freetext filter to match any indexed value |
 
-\vspace*{-1cm}
+\vspace*{-0.5cm}
 
 <!-- Spacing: | --- | --- | --- | -->
 | --  | Tracing Information Name | Value                                    |
