@@ -528,7 +528,7 @@ service interfaces definitions and operations and in tabular form.
 | LedgerRequestsInterface       | Provided                                   | getLedgerRequest \newline createLedgerRequest \newline deleteLedgerRequest          |
 | LedgerRequestStatusInterface  | Provided                                   | updateLedgerRequestStatus                                                           |
 
-## Service data model
+## Service Data Model
 <!--
     It is recommended to visualise the data structures by using UML diagrams.
     The full information model (logical data structure) shall be shown using
@@ -604,7 +604,7 @@ is provided for each Service Interface. The Service Interface specification
 covers only the static design description while the dynamic design (behaviour) 
 is described in section D 5.
 
-### Service interface "searchServiceInterface"
+### Service interface "SearchServiceInterface"
 <!--
     Please explain the purpose, message exchange pattern and architecture of 
     the Interface.
@@ -614,7 +614,7 @@ is described in section D 5.
     sections.
 -->
 
-The ***searchServiceInterface*** interface is mandated by SECOM to allow service
+The ***SearchServiceInterface*** interface is mandated by SECOM to allow service
 consumers to use a SECOM-compliant Service Registry. Since the MSR 
 implementation aspires to be a fully SECOM-compliant service, it is mandatory
 that this interface is implemented as required.
@@ -626,12 +626,15 @@ that this interface is implemented as required.
     the operation description taken from the UML modelling tool.
 -->
 
-The interface's ***searchService*** operation is implemented following the REST 
-methodology and receives a *SearhFilterObject* object, which contains all the 
-necessary parameter required to identify a set of matching registered services.
-The MSR will respond with a list of matching services, encoded into 
-*SearchObjectResult* objects. The internal structure of both the 
-*SearhFilterObject* and *SearchObjectResult* is governed by the SECOM standard.
+The purpose of the interface's ***searchService*** operation is to allow service
+consumers to query the MSR about instances of e-Navigation services with 
+specific properties, i.e. able to produce a compatible IALA S-100 data product 
+dataset. It is implemented following the REST methodology and receives a 
+*SearhFilterObject* object, which contains all the necessary parameter required
+to identify a set of matching registered services. The MSR will respond with a
+list of matching services, encoded into *SearchObjectResult* objects, in a paged
+response. The internal structure of both the *SearhFilterObject* and 
+*SearchObjectResult* is governed by the SECOM standard.
 
 ##### Operation functionality
 <!--
@@ -668,52 +671,149 @@ parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- | -->
-| Element Name      | Description                                                         |
-|-------------------|---------------------------------------------------------------------|
-| SearhFilterObject | The object contains information on the search filters to be applied |
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in)   | Encoding | Mult. | Description                                                         |
+|---|---|---|---------|
+| SearhFilterObject | JSON    | 1     | The object contains information on the search filters to be applied |
 
-\vspace*{-0.9cm}
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                                                                                  |
+|---|---|---|---------|
+| SearhFilterObject | JSON     | 0..*  | A list of instances, matching the requested criteria, encoded as per the SECOM documentation |
 
-<!-- Spacing: | --- | --- | --- | --- | -->
-|     | Attribute Name | Type   | Description                               |
-|-----|----------------|--------|-------------------------------------------|
-|     | query          | String | The query string in a Lucene query format |
+### Service interface "InstanceInterface"
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
 
-\vspace*{-0.9cm}
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
 
-<!-- Spacing: | --- | --- | --- | -->
-|        | Tracing Information Name | Value                                    |
-|--------|--------------------------|------------------------------------------|
-|        | External Model Trace     | SECOM SearchFilterObject query parameter |
+The ***InstanceInterface*** interface allows service providers to interact with
+the MSR in order to retrieve and manipulate the data on the registered service
+instances. A service provider should only be able to access information about 
+all registered service instances but should only be allowed to alter/delete
+data related to services it provides. MSR administrator users however, are
+allowed to perform any data modifications.
 
-\vspace*{-0.9cm}
+#### Operation "getInstances"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
 
-<!-- Spacing: | --- | --- | --- | --- | -->
-|     | Attribute Name | Type   | Description                                         |
-|-----|----------------|--------|-----------------------------------------------------|
-|     | geometry       | String | The geometry filter in either WKT or GeoJSON format |
+The purpose of the interface's ***getInstances*** operation is to enable service
+providers to access a complete list of the registered service instances, without
+calling the more specialised but also expensive SearchService interface. It is
+implemented following the REST methodology and receives no inputs object. The 
+MSR will respond with a list of all Instance objects, in a paged response. The
+internal structure the Instance is provided in more detail in the 
+[Service Data Model](#service-data-model) section.
 
-\vspace*{-0.9cm}
+##### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
 
-<!-- Spacing: | --- | --- | --- | -->
-|        | Tracing Information Name | Value                                    |
-|--------|--------------------------|------------------------------------------|
-|        | External Model Trace     | SECOM SearchFilterObject query parameter |
+Upon receiving a request to retrieve all registered instances, the service
+will access its database to retrieve and package the full list of Instance 
+objects into a paged response. Only the results of the page that has been 
+selected by the service consumers are returned. The service providers can 
+navigate to other pages by repeating the same search query, with a difference
+page index parameter.
 
-\vspace*{-0.9cm}
+##### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
 
-<!-- Spacing: | --- | --- | --- | --- | -->
-|     | Attribute Name | Type   | Description                                         |
-|-----|----------------|--------|-----------------------------------------------------|
-|     | freetext       | String | A simple freetext filter to match any indexed value |
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
 
-\vspace*{-0.9cm}
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
 
-<!-- Spacing: | --- | --- | --- | -->
-|        | Tracing Information Name | Value                                    |
-|--------|--------------------------|------------------------------------------|
-|        | External Model Trace     | SECOM SearchFilterObject query parameter |
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                             |
+|---|---|---|---------| 
+| page           | Integer  | 0..1  | The number of the page the results to be returned       |
+| pageSize       | Integer  | 0..1  | The maximum size of each page that contains the results |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)  | Encoding | Mult. | Description                                                                                 |
+|---|---|---|---------| 
+| Instance           | JSON     | 0..*  | A list of instances, matching the requested criteria, encoded as per the service data model |
+
+#### Operation "getInstance"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***getInstance*** operation is to enable service
+providers to access a the information of a single registered service instance. 
+It is implemented following the REST methodology and receives the ID of the
+in Instance to be retrieved as an input argument. The MSR will respond with the
+Instance object identified by the provided ID, if that is found. The internal 
+structure the Instance is provided in more detail in the 
+[Service Data Model](#service-data-model) section.
+
+##### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve all registered instances, the service
+will access its database to locate, retrieve and package the Instance object that
+matches the provided ID. If the ID is not located, for example because it has 
+been selected by mistake, then the service make that clear in the response 
+generated.
+
+##### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                             |
+|----------------|----------|---|---------------------------------------------------------| 
+| instanceId     | Long     | 0..1  | The ID of the Instance object to be retrieved           |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                                      |
+|---|---|---|---------|
+| Instance          | JSON     | 0..1  | The Instance object that matches the provided ID |
+
 
 ## Service dynamic behaviour
 <!--
