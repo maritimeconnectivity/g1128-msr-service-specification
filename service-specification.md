@@ -139,6 +139,7 @@ and describe where the service is in terms of the engineering lifecycle.
 
 <!-- Table below shall be completed. -->
 
+<!-- Spacing: |--- | --------- | -->
 | Attribute    | Content                                                                                                                                                                                                             |
 |--- | --------- |
 | Name         | Maritime Service Registry (MSR)                                                                                                                                                                                     |
@@ -347,6 +348,7 @@ as well as the uniqueness of an MRN at the database level.
 
 The table below lists applicable existing requirements for the MSR service.
 
+<!-- Spacing: | --- | --- | ------ | --- | -->
 | Requirement Id | Requirement Name                 | Requirement Text                                | References |
 | --- | --- | ------ | --- |
 | MSR-FR001      | Service Registration             | Allow the registrations of new service          |            |
@@ -356,6 +358,7 @@ The table below lists applicable existing requirements for the MSR service.
 
 The following tables define additional requirements for the XYZ service.
 
+<!-- Spacing: | --- | --------- | -->
 | Requirement Id   | MSR-FR005                                                                           | 
 | --- | --------- |
 | Requirement Name | G-1128 Support                                                                      |
@@ -363,6 +366,7 @@ The following tables define additional requirements for the XYZ service.
 | Rationale        | G-1128 standardizes the description of e-Navigation service instances               |
 |  Author          | GRAD                                                                                |
 
+<!-- Spacing: | --- | --------- | -->
 | Requirement Id   | MSR-FR006                                                                    |
 | --- | --------- |
 | Requirement Name | Service Instance Documentation                                               |
@@ -374,6 +378,7 @@ The following tables define additional requirements for the XYZ service.
 
 The table below lists applicable existing requirements for the MSR service.
 
+<!-- Spacing: | --- | --- | ------ | --- | -->
 | Requirement Id | Requirement Name | Requirement Text                                                                                                     | References |
 | --- | --- | ------ | --- |
 | MSR-NFR001     | Authenticity    | The service consumers must be able to verify the authenticity of the received data.                                   |            |
@@ -382,6 +387,7 @@ The table below lists applicable existing requirements for the MSR service.
 
 The tables below define additional non-functional requirements for the MSR service.
 
+<!-- Spacing: | --- | --------- | -->
 | Requirement Id   | MSR-NFR004                                                                                             |
 | --- | --------- |
 | Requirement Name | Performance                                                                                            |
@@ -389,6 +395,7 @@ The tables below define additional non-functional requirements for the MSR servi
 | Rationale        | Performance, especially in terms of service discoverability is crucial for a smooth service provision. |
 |  Author          | GRAD                                                                                                   |
 
+<!-- Spacing: | --- | --------- | -->
 | Requirement Id   | MSR-NFR005                                                                                                                                                                       |
 | --- | --------- |
 | Requirement Name | Modularity                                                                                                                                                                       |
@@ -427,12 +434,14 @@ The following tables describe the operational nodes of the service.
 
 ##### Operational nodes providing the MSR service
 
+<!-- Spacing: | --- | --------- | -->
 | Operational Node  | Remarks                                                                                                                    | 
 | --- | --------- |
 |  Service Provider | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services. |
 
 ##### Operational nodes consuming the MSR service
 
+<!-- Spacing: | --- | --------- | -->
 | Operational Node | Remarks                                                                                                                                  | 
 | --- | --------- |
 | Service Consumer | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services. |
@@ -444,6 +453,7 @@ The following tables describe the operational nodes of the service.
     the service to the relevant operational activities.
 -->
 
+<!-- Spacing: | --- | --- | -->
 <!--
 | Operational Activity  | Remarks |
 | --- | --- |
@@ -727,6 +737,7 @@ the online documentation of MCP
 Persons producing the Technical Service are invited to add definitions to the
 following list as appropriate.
 
+<!-- Spacing: | --- | --------- | -->
 | Term | Definition                 |
 | --- | --------- |
 | MSR  | Maritime Service Registry  |
@@ -734,6 +745,8 @@ following list as appropriate.
 |  MRN | Maritime Resource Name     |
 
 ## Acronyms
+
+<!-- Spacing: | --- | --------- | -->
 | Acronum | Mearning                   |
 | --- | --------- |
 | MSR     | Maritime Service Registry  |
