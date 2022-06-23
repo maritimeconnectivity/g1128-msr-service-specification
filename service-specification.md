@@ -138,15 +138,15 @@ and describe where the service is in terms of the engineering lifecycle.
 
 <!-- Table below shall be completed. -->
 
- Attribute    | Content                                                                                                                                                                                                             |
-|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
- Name         | Maritime Service Registry (MSR)                                                                                                                                                                                     |
- ID           | urn:mrn:mcp:service:mcc:mcc:specification:msr                                                                                                                                                                       |
- Version      | 0.0.1                                                                                                                                                                                                               |
- Description  | A service registry acting as a reference point to provide information on the registered services and thus to improve the visibility and accessibility of available information and services in the maritime domain. |
- Keywords     | service, registry, discoverability, specification, G-1128, technical                                                                                                                                                |
- Architect(s) | MCC MSR WG                                                                                                                                                                                                          |
- Status       | Provisional                                                                                                                                                                                                         |
+Attribute | Content
+---|---
+Name | Maritime Service Registry (MSR)
+ID | urn:mrn:mcp:service:mcc:mcc:specification:msr
+Version | 0.0.1
+Description | A service registry acting as a reference point to provide information on the registered services and thus to improve the visibility and accessibility of available information and services in the maritime domain.
+Keywords | service, registry, discoverability, specification, G-1128, technical
+Architect(s) | MCC MSR WG
+Status | Provisional
 
 ## Operational Context
 <!--
@@ -299,17 +299,17 @@ In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
 ```
-<MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
-<MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
-<IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
-<IPSS> ::= pchar *(pchar / "/")
+  <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
+  <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
+  <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
+  <IPSS> ::= pchar *(pchar / "/")
 ```
 
 For a service document, the MRN system is defined as follows:
 ```
-<MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
-<ORG> ::= pchar *(pchar / "/")
-<G1128-TYPE> ::= "instance" | "specification" | "design"
+  <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
+  <ORG> ::= pchar *(pchar / "/")
+  <G1128-TYPE> ::= "instance" | "specification" | "design"
 ```
 
 The ```<ORG>``` section represents an organization ID assigned by MIR, 
@@ -369,11 +369,11 @@ The following tables define additional requirements for the XYZ service.
 
 The table below lists applicable existing requirements for the MSR service.
 
- Requirement Id | Requirement Name | Requirement Text                                                                                                   | References |
-|---------------|------------------|--------------------------------------------------------------------------------------------------------------------|------------|
- MSR-NFR001     | Authenticity     | The service consumers must be able to verify the authenticity of the received data                                 |            |
- MSR-NFR002     | Integrity        | It must be clear to both service providers and consumers whether changes have been made to the registered services |            |
- MSR-NFR003     | Availability     | The service must be available at least at a 99% availability rate                                                  |            |
+Requirement Id | Requirement Name | Requirement Text | References
+---|---|---|---
+MSR-NFR001 | Authenticity | The service consumers must be able to verify the authenticity of the received data                                 |
+MSR-NFR002 | Integrity | It must be clear to both service providers and consumers whether changes have been made to the registered services |
+MSR-NFR003 | Availability | The service must be available at least at a 99% availability rate                                                  |
 
 The tables below define additional non-functional requirements for the MSR service.
 
