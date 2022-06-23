@@ -562,9 +562,7 @@ to be exchanged between providers and consumers of the service.  As suggested by
 the IALA G-1128 guideline, the data structure of the MSR implementation are 
 visualised in the following UML digram.
 
-![MSR Service Data Model Diagram](materials/umldiagram.png)  
-
-As demonstrated by the previous diagram, there are four main data structure
+As demonstrated by the displayed diagram, there are four main data structure
 employed by the MSR:
 
 * The Instance Model
@@ -573,7 +571,10 @@ employed by the MSR:
 * The LedgerRequest Model
 
 Each has its own unique purpose and should be used accordingly.
-<!-- ### Service internal data model &#40;Optional -->
+
+![MSR Service Data Model Diagram](materials/umldiagram.png)
+
+<!-- ### Service internal data model (Optional) -->
 <!--
     Optionally, this section may provide a description of the internal data
     model, as it seems appropriate to the service provider and/or the service
@@ -603,7 +604,7 @@ is provided for each Service Interface. The Service Interface specification
 covers only the static design description while the dynamic design (behaviour) 
 is described in section D 5.
 
-### Service interface <INTERFACE NAME>
+### Service interface "searchServiceInterface"
 <!--
     Please explain the purpose, message exchange pattern and architecture of 
     the Interface.
@@ -613,16 +614,24 @@ is described in section D 5.
     sections.
 -->
 
-To be written
+The ***searchServiceInterface*** interface is mandated by SECOM to allow service
+consumers to use a SECOM-compliant Service Registry. Since the MSR 
+implementation aspires to be a fully SECOM-compliant service, it is mandatory
+that this interface is implemented as required.
 
-#### Operation <OPERATION NAME>
+#### Operation "searchService"
 <!--
     Give an overview of the operation: Include here a textual description of
     the operation functionality. In most situations this will be the same as
     the operation description taken from the UML modelling tool.
 -->
 
-To be written
+The interface's ***searchService*** operation is implemented following the REST 
+methodology and receives a *SearhFilterObject* object, which contains all the 
+necessary parameter required to identify a set of matching registered services.
+The MSR will respond with a list of matching services, encoded into 
+*SearchObjectResult* objects. The internal structure of both the 
+*SearhFilterObject* and *SearchObjectResult* is governed by the SECOM standard.
 
 ##### Operation functionality
 <!--
@@ -630,20 +639,25 @@ To be written
     output from the input payload.
 -->
 
-To be written
+Upon receiving a request with a valid *SearhFilterObject* payload, the service 
+will first determine which of the applicable search filters are to be applied.
+Then the applicable filters are matched against the indexed database fields of
+the registered services instances and the results are gathered and returned as
+a paged response. Only the results of the page that has been selected by the
+service consumers are returned. The service consumers can navigate to other
+pages by repeating the same search query, with a difference page index 
+parameter.
 
 ##### Operation parameters
 <!--
-    Describe the logical data structure of input and output parameters of the
-    operation (payload) by using an explanatory table (see below) and
-    optionally UML diagrams (which are usually sub-sets of the service data
-    model described in previous section above).
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
 
-    Figure 3 shows an example of a UML diagram (subset of the service data
+    Figure 9 shows an example of a UML diagram (subset of the service data 
     model, related to one operation).
--->
 
-<!--
     It is mandatory to provide a table with a clear description of each service
     operation parameter and the information about which data types defined in
     the service data mode are used by the service operation in its input and
@@ -654,7 +668,51 @@ To be written
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-To be written
+<!-- Spacing: | --- | --- | -->
+| Element Name | Description |
+| --- | --- |
+| SearhFilterObject | The object contains information on the search filters to be applied |
+
+\vspace*{-1cm}
+
+<!-- Spacing: | --- | --- | --- | --- | -->
+| -   | Attribute Name | Type            | Description                                         |
+| --- | --- | --- | --- |
+|     | query          | String          | The query string in a Lucene query format           |
+
+\vspace*{-1cm}
+
+<!-- Spacing: | --- | --- | --- | -->
+| --  | Tracing Information Name | Value                                    |
+| --- | --- | --- |
+|     | External Model Trace     | SECOM SearchFilterObject query parameter |
+
+\vspace*{-1cm}
+
+<!-- Spacing: | --- | --- | --- | --- | -->
+| -   | Attribute Name | Type            | Description                                         |
+| --- | --- | --- | --- |
+|     | geometry       | String          | The geometry filter in either WKT or GeoJSON format |
+\vspace*{-1cm}
+
+<!-- Spacing: | --- | --- | --- | -->
+| --  | Tracing Information Name | Value                                    |
+| --- | --- | --- |
+|     | External Model Trace     | SECOM SearchFilterObject query parameter |
+
+\vspace*{-1cm}
+
+<!-- Spacing: | --- | --- | --- | --- | -->
+| -   | Attribute Name | Type            | Description                                         |
+| --- | --- | --- | --- |
+|     | freetext       | String          | A simple freetext filter to match any indexed value |
+
+\vspace*{-1cm}
+
+<!-- Spacing: | --- | --- | --- | -->
+| --  | Tracing Information Name | Value                                    |
+|-----|--------------------------|------------------------------------------|
+|     | External Model Trace     | SECOM SearchFilterObject query parameter |
 
 ## Service dynamic behaviour
 <!--
@@ -670,6 +728,7 @@ To be written
         * Interaction diagrams;
         * State machine diagrams.
 -->
+
 A description should be given.
 
 ### Service interface <INTERFACE NAME>
@@ -683,9 +742,20 @@ A description should be given.
 
 ### Service orchestration (Optional)
 <!--
-This section shall be provided, if the composition of the service and/or the relation to other services (e.g., which other services are used to provide this service; which other services are intended to use this service) is deemed relevant for the service specification.
-An example sequence diagram is given below. This very simple example indicates that the AddressForPersionLookupService (i.e., the service that is being described in this Service Specification Document) acts as a consumer of a “notifyAddressChange” operation of another service, called “AddressForPersionService”. Note that the other service needs to be described by its own Service Specification Document; a reference to that document shall be added here).
+  This section shall be provided, if the composition of the service and/or the 
+  relation to other services (e.g., which other services are used to provide this
+  service; which other services are intended to use this service) is deemed 
+  relevant for the service specification.
+
+  An example sequence diagram is given below. This very simple example indicates
+  that the AddressForPersionLookupService (i.e., the service that is being 
+  described in this Service Specification Document) acts as a consumer of a 
+  “notifyAddressChange” operation of another service, called 
+  “AddressForPersionService”. Note that the other service needs to be described by
+  its own Service Specification Document; a reference to that document shall be
+  added here).
 -->
+
 A description should be given.
 
 ## Service provisioning (Optional)
@@ -734,6 +804,7 @@ the online documentation of MCP
 (https://docs.maritimeconnectivity.net/en/latest/terminology.html).
 
 ### Terminology
+
 Persons producing the Technical Service are invited to add definitions to the
 following list as appropriate.
 
