@@ -300,6 +300,7 @@ In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
 
+\vspace*{-1cm}
 ```{.markdown caption="MCP MRN Scheme Rules"}
   <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
   <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
@@ -309,6 +310,7 @@ follows:
 
 For a service document, the MRN system is defined as follows:
 
+\vspace*{-1cm}
 ```{.markdown caption="MSR Service Document MRN-IPSS definition"}
   <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
   <ORG> ::= pchar *(pchar / "/")
@@ -503,17 +505,18 @@ service interfaces definitions and operations and in tabular form.
 
 ![MSR Interface Definition diagram](materials/interfacedefinitions.png)
 
-| Service Interface             | Role (from service provider point of view) | Service Operation                                        | 
+<!-- Spacing: | --- | --- | --- | -->
+| Service Interface             | Role (from service provider point of view) | Service Operation                                                                   | 
 | --- | --- | --- |
-| SearchServiceInterface        | Provided                                   | searchService                                            |
-| InstanceInterface             | Provided                                   | getInstance createInstance updateInstance deleteInstance |
-| InstanceStatusInterface       | Provided                                   | updateInstanceStatus                                     |
-| InstanceLedgerStatusInterface | Provided                                   | updateInstanceLedgerStatus                               |
-| XmlInterface                  | Provided                                   | getXmls getXml createXml UpdateXml deleteXml             |
-| XmlValidationInterface        | Provided                                   | validateXml                                              |
-| DocInterface                  | Provided                                   | getDocs getDoc createDoc UpdateDoc deleteDoc             |
-| LedgerRequestsInterface       | Provided                                   | getLedgerRequest createLedgerRequest deleteLedgerRequest |
-| LedgerRequestStatusInterface  | Provided                                   | updateLedgerRequestStatus                                |
+| SearchServiceInterface        | Provided                                   | searchService                                                                       |
+| InstanceInterface             | Provided                                   | getInstance \newline createInstance \newline updateInstance \newline deleteInstance |
+| InstanceStatusInterface       | Provided                                   | updateInstanceStatus                                                                |
+| InstanceLedgerStatusInterface | Provided                                   | updateInstanceLedgerStatus                                                          |
+| XmlInterface                  | Provided                                   | getXmls \newline getXml \newline createXml \newline UpdateXml \newline deleteXml    |
+| XmlValidationInterface        | Provided                                   | validateXml                                                                         |
+| DocInterface                  | Provided                                   | getDocs \newline getDoc \newline createDoc \newline UpdateDoc \newline deleteDoc    |
+| LedgerRequestsInterface       | Provided                                   | getLedgerRequest \newline createLedgerRequest \newline deleteLedgerRequest          |
+| LedgerRequestStatusInterface  | Provided                                   | updateLedgerRequestStatus                                                           |
 
 ## Service data model
 <!--
