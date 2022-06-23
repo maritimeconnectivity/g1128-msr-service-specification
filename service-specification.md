@@ -9,7 +9,7 @@ keywords: [maritime, technical, service, registry, MCP, MSR]
 logo: "materials/mcplogo.png"
 titlepage-text-color: "476E7D"
 footer-center: "G-1128 MSR Service Specification"
-code-block-font-size: \tiny
+code-block-font-size: \small
 ...
 
 # Service specification for the MCP Service Registry (MSR)
@@ -371,11 +371,11 @@ The following tables define additional requirements for the XYZ service.
 
 The table below lists applicable existing requirements for the MSR service.
 
- Requirement Id | Requirement Name | Requirement Text                                                                                                   | References |
-|---------------|------------------|--------------------------------------------------------------------------------------------------------------------|------------|
- MSR-NFR001     | Authenticity     | The service consumers must be able to verify the authenticity of the received data                                 |            |
- MSR-NFR002     | Integrity        | It must be clear to both service providers and consumers whether changes have been made to the registered services |            |
- MSR-NFR003     | Availability     | The service must be available at least at a 99% availability rate                                                  |            |
+ Requirement Id                | Requirement Name              | Requirement Text                                                                                                   | References |
+|------------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|
+ MSR-NFR001                    | Authenticity                  | The service consumers must be able to verify the authenticity of the received data                                 |            |
+ MSR-NFR002                    | Integrity                     | It must be clear to both service providers and consumers whether changes have been made to the registered services |            |
+ MSR-NFR003                    | Availability                  | The service must be available at least at a 99% availability rate                                                  |            |
 
 The tables below define additional non-functional requirements for the MSR service.
 
