@@ -61,7 +61,7 @@ jobs:
       - name: Export a PDF from markdown
         uses: Ender-events/pandoc@master
         with:
-          args: '-s -o service-specification.pdf service-specification.md --from markdown --template eisvogel --listings --data-dir public/'
+          args: '-s -o service-specification.pdf service-specification.md --from markdown --template eisvogel --data-dir public/'
 
       - name: Create Release
         id: create_release

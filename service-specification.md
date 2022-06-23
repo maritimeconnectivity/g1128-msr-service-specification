@@ -9,7 +9,7 @@ keywords: [maritime, technical, service, registry, MCP, MSR]
 logo: "materials/mcplogo.png"
 titlepage-text-color: "476E7D"
 footer-center: "G-1128 MSR Service Specification"
-code-block-font-size: \small
+code-block-font-size: \footnotesize
 ...
 
 # Service specification for the MCP Service Registry (MSR)
@@ -138,15 +138,15 @@ and describe where the service is in terms of the engineering lifecycle.
 
 <!-- Table below shall be completed. -->
 
-Attribute | Content |
----|---|
-Name | Maritime Service Registry (MSR) |
-ID | urn:mrn:mcp:service:mcc:mcc:specification:msr |
-Version | 0.0.1 |
-Description | A service registry acting as a reference point to provide information on the registered services and thus to improve the visibility and accessibility of available information and services in the maritime domain. |
-Keywords | service, registry, discoverability, specification, G-1128, technical |
-Architect(s) | MCC MSR WG |
-Status | Provisional |
+Attribute | Content
+---|---------
+Name | Maritime Service Registry (MSR)
+ID | urn:mrn:mcp:service:mcc:mcc:specification:msr
+Version | 0.0.1
+Description | A service registry acting as a reference point to provide information on the registered services and thus to improve the visibility and accessibility of available information and services in the maritime domain.
+Keywords | service, registry, discoverability, specification, G-1128, technical
+Architect(s) | MCC MSR WG
+Status | Provisional
 
 ## Operational Context
 <!--
@@ -344,54 +344,54 @@ as well as the uniqueness of an MRN at the database level.
 
 The table below lists applicable existing requirements for the MSR service.
 
- Requirement Id | Requirement Name                 | Requirement Text                                | References |
-|---------------|----------------------------------|-------------------------------------------------|------------|
- MSR-FR001      | Service Registration             | Allow the registrations of new service          |            |
- MSR-FR002      | Service Registration Update      | Allow updates on an existing registrations      |            |
- MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing registrations |            | 
- MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM  |            |
+Requirement Id | Requirement Name | Requirement Text | References 
+---|---|---------|---
+MSR-FR001 | Service Registration | Allow the registrations of new service        | 
+MSR-FR002 | Service Registration Update | Allow updates on an existing registrations    | 
+MSR-FR003 | Service Registration Cancelation | Allow the deletion of an existing registrations | 
+MSR-FR004 | Service Discoverability | Allow services to be discoverable as per SECOM |
 
 The following tables define additional requirements for the XYZ service.
 
- Requirement Id   | MSR-FR005                                                                          |
-|------------------|-----------------------------------------------------------------------------------|
- Requirement Name | G-1128 Support                                                                     |
- Requirement Text | Support the registration of services using the G-1128 Service Instance XML schemas |
- Rationale        | G-1128 standardizes the description of e-Navigation service instances              |
- Author           | GRAD                                                                               |            
+Requirement Id | MSR-FR005 
+---|---------
+Requirement Name | G-1128 Support
+Requirement Text | Support the registration of services using the G-1128 Service Instance XML schemas
+Rationale        | G-1128 standardizes the description of e-Navigation service instances
+Author           | GRAD     
 
- Requirement Id  | MSR-FR006                                                                     |
-|-----------------|------------------------------------------------------------------------------|
- Requirement Name | Service Instance Documentation                                               |
- Requirement Text | Support multiple to documents to be attached to a service registration       |
- Rationale       | Multiple documentation sources are frequently required to describe a service  |
- Author          | GRAD                                                                          |
+Requirement Id | MSR-FR006
+---|---------
+Requirement Name | Service Instance Documentation
+Requirement Text | Support multiple to documents to be attached to a service registration
+Rationale        | Multiple documentation sources are frequently required to describe a service
+Author           | GRAD
 
 #### Non-Functional Requirements
 
 The table below lists applicable existing requirements for the MSR service.
 
- Requirement Id                | Requirement Name              | Requirement Text                                                                                                   | References |
-|------------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|
- MSR-NFR001                    | Authenticity                  | The service consumers must be able to verify the authenticity of the received data                                 |            |
- MSR-NFR002                    | Integrity                     | It must be clear to both service providers and consumers whether changes have been made to the registered services |            |
- MSR-NFR003                    | Availability                  | The service must be available at least at a 99% availability rate                                                  |            |
+Requirement Id | Requirement Name | Requirement Text | References
+---|---|---------|---
+ MSR-NFR001 | Authenticity | The service consumers must be able to verify the authenticity of the received data | 
+ MSR-NFR002 | Integrity | It must be clear to both service providers and consumers whether changes have been made to the registered services | 
+ MSR-NFR003 | Availability | The service must be available at least at a 99% availability rate | 
 
 The tables below define additional non-functional requirements for the MSR service.
 
- Requirement Id   | MSR-NFR004                                                                                            |
-|-----------------|-------------------------------------------------------------------------------------------------------|
- Requirement Name | Performance                                                                                           |
- Requirement Text | The service must respond to a request in a timely fashion and not allow any HTTP call to timeout      | 
- Rationale        | Performance, especially in terms of service discoverability is crucial for a smooth service provision |
- Author           | GRAD                                                                                                  |
+Requirement Id | MSR-NFR004
+---|---------
+Requirement Name | Performance                                                                                           |
+Requirement Text | The service must respond to a request in a timely fashion and not allow any HTTP call to timeout      | 
+Rationale        | Performance, especially in terms of service discoverability is crucial for a smooth service provision |
+Author           | GRAD                                                                                                  |
 
- Requirement Id   | MSR-NFR005                                                                                                                                                                       |
-|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
- Requirement Name | Modularity                                                                                                                                                                       |
- Requirement Text | The services architecture must be constructed in such a way that individual functionality can be extended, modified or deleted, without changing the basic service architecture. |
- Rationale        | The MSR should be easily upgradable to ensure future operations                                                                                                                  |
- Author           | GRAD                                                                                                                                                                             |
+Requirement Id | MSR-NFR005
+---|---------
+Requirement Name | Modularity
+Requirement Text | The services architecture must be constructed in such a way <br/>that individual functionality can be extended, modified or deleted, without changing the basic service architecture.
+Rationale        | The MSR should be easily upgradable to ensure future operations
+Author           | GRAD
 
 ### Other constraints
 
@@ -424,15 +424,15 @@ The following tables describe the operational nodes of the service.
 
 ##### Operational nodes providing the MSR service
 
- Operational Node | Remarks                                                                                                                   |
-|------------------|--------------------------------------------------------------------------------------------------------------------------|
- Service Provider | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services |
+Operational Node | Remarks 
+---|---------
+Service Provider | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services.
 
 ##### Operational nodes consuming the MSR service
 
- Operational Node | Remarks                                                                                                                                 |
-|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------|
- Service Consumer | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services |
+Operational Node | Remarks
+---|---------
+Service Consumer | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services.
 
 <!-- #### Operational activities (Optional) -->
 <!--
@@ -442,9 +442,9 @@ The following tables describe the operational nodes of the service.
 -->
 
 <!--
- Operational Activity  | Remarks |
-|----------------------|---------|
- TBD                   |         |
+Operational Activity  | Remarks |
+---|---
+TBD |
 -->
 
 ## Service overview
@@ -502,17 +502,17 @@ service interfaces definitions and operations and in tabular form.
 
 ![MSR Interface Definition diagram](materials/interfacedefinitions.png)
 
- Service Interface              | Role (from service provider point of view) | Service Operation              |
-|-------------------------------|--------------------------------------------|--------------------------------|
- SearchServiceInterface         | Provided                                   | searchService                  |
- InstanceInterface              | Provided                                   | getInstance<br/>createInstance |
- InstanceStatusInterface        | Provided                                   |                                |
- InstanceLedgerStatusInterface  | Provided                                   |                                |
- XmlInterface                   | Provided                                   |                                |
- XmlValidationInterface         | Provided                                   |                                |
- DocInterface                   | Provided                                   |                                |
- LedgerRequestsInterface        | Provided                                   |                                |
- LedgerRequestStatusInterface   | Provided                                   |                                |
+ Service Interface | Role (from service provider point of view) | Service Operation 
+--- | --- | ---
+SearchServiceInterface        | Provided | searchService
+InstanceInterface             | Provided | getInstance<br/>createInstance 
+InstanceStatusInterface       | Provided | 
+InstanceLedgerStatusInterface | Provided |
+XmlInterface                  | Provided |
+XmlValidationInterface        | Provided |
+DocInterface                  | Provided |
+LedgerRequestsInterface       | Provided |
+LedgerRequestStatusInterface  | Provided |
 
 ## Service data model
 <!--
@@ -569,7 +569,6 @@ Each has its own unique purpose and should be used accordingly.
 -->
 
 ## Service interface specifications
-
 <!--
     The static interface description is vital since it describes how the 
     interfaces shall be constructed.
@@ -723,18 +722,18 @@ the online documentation of MCP
 Persons producing the Technical Service are invited to add definitions to the
 following list as appropriate.
 
-Term    | Definition
----     | ---
-MSR     | Maritime Service Registry
-MIR     | Maritime Identity Registry
-MRN     | Maritime Resource Name
+Term | Definition
+--- | ---------
+MSR | Maritime Service Registry
+MIR | Maritime Identity Registry
+MRN | Maritime Resource Name
 
 ## Acronyms
 Acronum | Mearning
----     | --- 
-MSR     | Maritime Service Registry
-MIR     | Maritime Identity Registry
-MRN     |   Maritime Resource Name
+--- | --------- 
+MSR | Maritime Service Registry
+MIR | Maritime Identity Registry
+MRN | Maritime Resource Name
 
 ## References
 <!--
