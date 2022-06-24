@@ -268,7 +268,7 @@ will be required from the service provider.
 Service discoverability is intended to facilitate the dissemination of the 
 e-Navigation service information. As such, the employed mechanism should follow
 the most widely-used set of standards, which in the maritime domain related 
-directly to the IEC 63173-2 ED1 standard, more widely known as SECOM. 
+directly to the IEC 63173-2 ED1 standard [5], more widely known as SECOM. 
 
 SECOM already defines a mechanism for service discovery and this should be 
 employed by the MSR. Apart from the requirements set by SECOM however, the
@@ -321,7 +321,7 @@ Wildcard searches should also be supported.
 #### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
-the MRN scheme [5] for the identification of service documents. G-1128 clearly 
+the MRN scheme [6] for the identification of service documents. G-1128 clearly 
 mentions MRN as a unique identifier scheme. A service provider should follow the
 MRN scheme of the MCP Identity Service provider (who operates a MIR) that they
 belong. There is a possibility of having more than one MRN of a service document
@@ -658,7 +658,7 @@ that this interface is implemented as required.
 
 The purpose of the interface's ***searchService*** operation is to allow service
 consumers to query the MSR about instances of e-Navigation services with 
-specific properties, i.e. able to produce a compatible IALA S-100 [6] data 
+specific properties, i.e. able to produce a compatible IALA S-100 [7] data 
 product dataset. It is implemented following the REST methodology and receives a 
 *SearhFilterObject* object, which contains all the necessary parameter required
 to identify a set of matching registered services. The MSR will respond with a
@@ -959,12 +959,12 @@ in the response generated.
 
 <!-- Spacing: |---|---|---|---------| -->
 | Parameter (in) | Encoding | Mult. | Description                                                           |
-|---|---|---|-----------------------------------------------------------------------| 
+ |---|---|---|---------|
 | instance       | Instance | 1     | The Instance object to be updated with all mandatory fields populated |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out) | Encoding | Mult. | Description                          |
-|---|---|---|--------------------------------------|
+|---|---|---|---------|
 | Instance          | JSON     | 1     | The Instance object that was updated |
 
 ### Operation "deleteInstance"
@@ -1099,7 +1099,7 @@ necessarily known at the time, when the service is designed.
 -->
 
 The definitions of terms used in this IALA Guideline can be found in the 
-International Dictionary of Marine Aids to Navigation (IALA Dictionary) [7] and
+International Dictionary of Marine Aids to Navigation (IALA Dictionary) [8] and
 were checked as correct at the time of going to print. Where conflict arises, 
 the IALA Dictionary shall be  considered as the authoritative source of 
 definitions used in IALA documents.
@@ -1115,7 +1115,7 @@ following list as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
 | Term                      | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --- | --------- |
 | Service Registry          | An application that acts as an access point where the relevant information about available maritime services can be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Service Provider          | Any entity that provides a maritime service to a certain customer group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | Service Consumer          | Any entity that has an interest in acquiring information from maritime services.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
@@ -1135,7 +1135,7 @@ acronyms as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
 | Acronum | Mearning                                                                          |
-| --- |-----------------------------------------------------------------------------------|
+| --- | --------- |
 | IALA    | International Association of Marine Aids to Navigation and Lighthouse Authorities |
 | IMO     | International Maritime Organization                                               |
 | MCC     | Maritime Connectivity platform Consortium                                         |
@@ -1154,11 +1154,12 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \\ https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf
 2. Maritime Connectivity Platform, https://maritimeconnectivity.net/
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/
 4. EfficienSea2 Project, https://efficiensea2.org/
-5. IALA Maritime Resource Name (MRN) Registry, https://www.iala-aism.org/technical/data-modelling/mrn/
-6. S-100 Universal Hydrographic Data Model, https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4
-7. IALA International Dictionary of Marine Aids to Navigation, http://www.iala-aism.org/wiki/dictionary
+5. IEC 63173-2 - Maritime navigation and radiocommunication equipment and systems. Data interface Part 2. Secure exchange and communication of S-100 based products (SECOM)
+6. IALA Maritime Resource Name (MRN) Registry, https://www.iala-aism.org/technical/data-modelling/mrn/
+7. S-100 Universal Hydrographic Data Model, https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4
+8. IALA International Dictionary of Marine Aids to Navigation, http://www.iala-aism.org/wiki/dictionary
 
