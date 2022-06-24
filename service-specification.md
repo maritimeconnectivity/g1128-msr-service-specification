@@ -285,9 +285,9 @@ following additional aspects need to be satisfied:
 * Requirements on service provider authentication and service consumer
   authentication is entirely up to the service provider.
 
-In terms of the discoverability, this is provided using a query operation. A
-query is a just character string broken up into terms and operators. There are
-two types of terms: Single Terms and Phrases.
+In terms of the discoverability mechanism, this should be provided using a query
+operation. A query is a just character string broken up into terms and 
+operators. There are two types of terms: Single Terms and Phrases.
 
 * A Single Term is a single word such as "test" or "hello".
 * A Phrase is a group of words surrounded by double quotes such as "keyword1 
@@ -296,26 +296,26 @@ keyword 2".
 Multiple terms can be combined together with Boolean operators (e.g. AND, OR) to
 form a more complex query. A search can be performed either specify a field,
 or use the default field. The field names and default field is implementation
-specific. MSR supports searching in any field by typing the field name followed
-by a colon ":" and then the appropriate term. An example of a query, assuming
-there are two terms included in it is the following:
+specific. An MSR should support searching in any field by typing the field name
+followed by a colon ":" and then the appropriate term. An example of a query,
+assuming there are two terms included in it is the following:
 
-\vspace*{-1cm}
-```{.jql caption="MCP MRN Scheme Rules"}
+\vspace*{-0.8cm}
+```{.jql caption="MSR query format example"}
 instanceId:"usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
 ```
 
 If the *instanceId* is the default field, then field indicator is not required:
 
-\vspace*{-1cm}
-```{.jql caption="MCP MRN Scheme Rules"}
+\vspace*{-0.8cm}
+```{.jql caption="MSR query format example with default field"}
 "usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
 ```
 
 Wildcard searches should also be supported. 
 
 * To perform a single character wildcard search use the "?" symbol.
-* To perform a multiple character wildcard search use the "*" symbo
+* To perform a multiple character wildcard search use the "*" symbol.
 
 #### MRN of Service Documents for Identification
 
@@ -330,7 +330,7 @@ In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
 
-\vspace*{-1cm}
+\vspace*{-0.8cm}
 ```{.markdown caption="MCP MRN Scheme Rules"}
 <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
 <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "msr" | mms" |
@@ -340,7 +340,7 @@ follows:
 
 For a service document, the MRN system is defined as follows:
 
-\vspace*{-1cm}
+\vspace*{-0.8cm}
 ```{.markdown caption="MSR Service Document MRN-IPSS definition"}
 <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
 <ORG> ::= pchar *(pchar / "/")
@@ -380,10 +380,10 @@ The table below lists applicable existing requirements for the MSR service.
 <!-- Spacing: | --- | --- | ------ | --- | -->
 | Requirement Id | Requirement Name                 | Requirement Text                                | References |
 | --- | --- | ------ | --- |
-| MSR-FR001      | Service Registration             | Allow the registrations of new service          |            |
-| MSR-FR002      | Service Registration Update      | Allow updates on an existing registrations      |            |
-| MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing registrations |            |
-| MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM  |            |
+| MSR-FR001      | Service Registration             | Allow the registrations of new service          | MCC MSR WG |
+| MSR-FR002      | Service Registration Update      | Allow updates on an existing registrations      | MCC MSR WG  |
+| MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing registrations | MCC MSR WG  |
+| MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM  | MCC MSR WG  |
 
 The following tables define additional requirements for the XYZ service.
 
@@ -410,9 +410,9 @@ The table below lists applicable existing requirements for the MSR service.
 <!-- Spacing: | --- | --- | ------ | --- | -->
 | Requirement Id | Requirement Name | Requirement Text                                                                                                     | References |
 | --- | --- | ------ | --- |
-| MSR-NFR001     | Authenticity    | The service consumers must be able to verify the authenticity of the received data.                                   |            |
-| MSR-NFR002     | Integrity       | It must be clear to both service providers and consumers whether changes have been made to the registered services.   |            |
-|  MSR-NFR003    | Availability    | The service must be available at least at a 99% availability rate.                                                    |            |
+| MSR-NFR001     | Authenticity    | The service consumers must be able to verify the authenticity of the received data.                                   | MCC MSR WG |
+| MSR-NFR002     | Integrity       | It must be clear to both service providers and consumers whether changes have been made to the registered services.   | MCC MSR WG |
+|  MSR-NFR003    | Availability    | The service must be available at least at a 99% availability rate.                                                    | MCC MSR WG |
 
 The tables below define additional non-functional requirements for the MSR service.
 
@@ -446,7 +446,7 @@ supports and if more than one.
     include, for example, OGC, WFS, WMS, etc.
 -->
 
-Apart from SECOM, there are no such relevant industrial standards found.
+Apart from SECOM, there are no other relevant industrial standards found.
 
 ### Operational nodes
 <!--
@@ -672,8 +672,15 @@ response. The internal structure of both the *SearhFilterObject* and
 -->
 
 Upon receiving a request with a valid *SearhFilterObject* payload, the service 
-will first determine which of the applicable search filters are to be applied.
-Then the applicable filters are matched against the indexed database fields of
+will first determine which of the applicable search filters are to be applied. 
+This operation includes parsing the query character string *SearhFilterObject* 
+field, if that has been populated. This should be processed according to the
+rules outlined in the [Service Discoverability](#service-discoverability) 
+section. The parsing output should then be combined with the additional 
+*SearhFilterObject* fields to generate the complete set of search filters to be
+applied.
+
+The applicable filters are then matched against the indexed database fields of
 the registered services instances and the results are gathered and returned as
 a paged response. Only the results of the page that has been selected by the
 service consumers are returned. The service consumers can navigate to other
@@ -736,11 +743,11 @@ allowed to perform any data modifications.
 
 The purpose of the interface's ***getInstances*** operation is to enable service
 providers to access a complete list of the registered service instances, without
-calling the more specialised but also expensive SearchService interface. It is
-implemented following the REST methodology and receives no inputs object. The 
-MSR will respond with a list of all Instance objects, in a paged response. The
-internal structure the Instance is provided in more detail in the 
-[Service Data Model](#service-data-model) section.
+calling the more specialised but also expensive (resource-wise) SearchService
+interface. It is implemented following the REST methodology and receives no 
+inputs object. The MSR will respond with a list of all Instance objects, in a
+paged response. The internal structure the Instance is provided in more detail
+in the [Service Data Model](#service-data-model) section.
 
 #### Operation functionality
 <!--

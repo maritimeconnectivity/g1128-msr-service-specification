@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-06-23T09:17:02.060Z" agent="5.0 (X11)" etag="urevCarAhNkzqaKXYDAU" version="20.0.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-06-23T19:43:18.103Z" agent="5.0 (X11)" etag="Xr2kHHUWYkLW5yXC-Rcc" version="20.0.3" type="github">
   <diagram name="Page-1" id="58cdce13-f638-feb5-8d6f-7d28b1aa9fa0">
     <mxGraphModel dx="1422" dy="1643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
@@ -61,7 +61,7 @@
         <mxCell id="tsz4WT_P7tJj26BBKG4R-42" value="SearchServiceInterface" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;glass=0;fillColor=#fff2cc;gradientDirection=east;strokeColor=#000000;gradientColor=#ffffff;" parent="1" vertex="1">
           <mxGeometry x="880" y="-360" width="690" height="52" as="geometry" />
         </mxCell>
-        <mxCell id="tsz4WT_P7tJj26BBKG4R-44" value="+ searchService(in searchServiceObj: SearchServiceObject, in page: Integer, in pageSize: Integer): List&lt;SearchObjectResult&gt;" style="text;strokeColor=none;fillColor=#fff2cc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;glass=0;gradientColor=#ffffff;gradientDirection=east;strokeWidth=1;" parent="tsz4WT_P7tJj26BBKG4R-42" vertex="1">
+        <mxCell id="tsz4WT_P7tJj26BBKG4R-44" value="+ searchService(in searchFilterObject: SearchFilterObject, in page: Integer, in pageSize: Integer): List&lt;SearchObjectResult&gt;" style="text;strokeColor=none;fillColor=#fff2cc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;glass=0;gradientColor=#ffffff;gradientDirection=east;strokeWidth=1;" parent="tsz4WT_P7tJj26BBKG4R-42" vertex="1">
           <mxGeometry y="26" width="690" height="26" as="geometry" />
         </mxCell>
         <mxCell id="bbpTMCwPWstrY-ZhsCIW-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="tsz4WT_P7tJj26BBKG4R-49">
