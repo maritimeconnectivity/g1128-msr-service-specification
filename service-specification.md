@@ -334,7 +334,7 @@ follows:
 \vspace*{-0.9cm}
 ```{.markdown caption="MCP MRN Scheme Rules"}
 <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
-<MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "msr" | mms" |
+<MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "msr" | "mms" |
 <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
 <IPSS> ::= pchar *(pchar / "/")
 ```
@@ -1031,8 +1031,16 @@ make that clear in the response generated.
 -->
 
 The ***InstanceStatusInterface*** interface allows service providers to 
-manipulate the status of their registered service Instances. The status of each
-Instance is restricted to the options specified in the IALA G-1128 guideline.
+manipulate the status of their registered service Instances. The status value of
+each Instance is restricted to the options specified in the IALA G-1128 
+guideline. As per the enumeration displayed in the UML diagram of the
+[Service Data Model](#service-data-model) section:
+
+* PROVISIONAL
+* RELEASED
+* DEPRECATED
+* DELETED
+
 A service provider should only be able to access/alter information only on
 the services Instances it provides. MSR administrator users however, are
 allowed to perform any data modifications.
@@ -1048,7 +1056,7 @@ The purpose of the interface's ***updateInstanceStatus*** operation is to allow
 service providers to update the status of the Instances they provide. It is
 implemented following the REST methodology and receives as input the ID of the
 Instance whose status will be updated, as well as the new applicable Instance
-status. The MSR will respond with the outcome of the update operation, if
+Status value. The MSR will respond with the outcome of the update operation, if
 successful or not.
 
 #### Operation functionality
@@ -1057,12 +1065,11 @@ successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve all registered instances, the service
-will access its database to retrieve and package the full list of Instance
-objects into a paged response. Only the results of the page that has been
-selected by the service consumers are returned. The service providers can
-navigate to other pages by repeating the same search query, with a difference
-page index parameter.
+Upon receiving a request to update a service Instance status, the service will
+access its database to validate that the Instance ID provided is indeed valid. 
+If that is the case, the status of the retrieved Instance entry will be updated.
+The MSR will finally respond with the outcome of the update operation, if
+successful or not.
 
 #### Operation parameters
 <!--
@@ -1085,15 +1092,115 @@ page index parameter.
 -->
 
 <!-- Spacing: |---|---|---|---------| -->
-| Parameter   | Encoding | Mult | Description                                             |
+| Parameter      | Encoding       | Mult | Description                                                 |
 |---|---|---|---------|
-| page        | Integer  | 0..1 | The number of the page the results to be returned       |
-| pageSize    | Integer  | 0..1 | The maximum size of each page that contains the results |
+| instanceId     | Long           | 1    | The ID of the Instance for which the status will be updated |
+| instanceStatus | InstanceStatus | 1    | The new value for the status of the selected Instance       |
 
 <!-- Spacing: |---|---|---|---------| -->
-| Return Type (out) | Encoding | Mult.  | Description                                                                                 |
+| Return Type (out)     | Encoding | Mult. | Description                          |
 |---|---|---|---------|
-| Instance          | JSON     | 0..*   | A list of instances, matching the requested criteria, encoded as per the service data model |
+| result from operation | none     | 1     | The result of the deletion operation |
+
+## Service interface "InstanceLedgerStatusInterface"
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
+
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
+
+The ***InstanceStatusInterface*** interface allows service providers to
+manipulate the ledger status of their registered service Instances. This is
+an optional interface meaning, it is only required if the MSR is connected to 
+a global ledger service. This will make the registered services globally
+available and discoverable by other MSR instances.
+
+The status of each Instance is restricted to the options specified by the ledger
+service provider. As a guideline, the UML diagram in the 
+[Service Data Model](#service-data-model) section provides the following
+options:
+
+* INACTIVE
+* CREATED
+* VETTING
+* VETTED
+* REQUESTING
+* SUCCEEDED
+* FAILED
+* RJECTED
+
+A service provider should only be able to access/alter information only on
+the services Instances it provides. MSR administrator users however, are
+allowed to perform any data modifications.
+
+### Operation "updateInstanceLedgerStatus" (Optional)
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***updateInstanceLedgerStatus*** operation is to
+allow service providers to further register a provided service Instance to the
+MSR global ledger, if that functionality is supported. The operation is 
+implemented following the REST methodology and receives as input the ID of the
+Instance whose ledger status will be updated, as well as the new applicable
+Ledger Request Status value. The MSR will respond with the outcome of the update
+operation, if successful or not.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to update a service Instance ledger status, the service
+will access its database to validate that the Instance ID provided is indeed
+valid. If that is the case, the MSR will return a response to the initial 
+request and at the same time perform a new ledger status request the global
+ledger service to update its own Instance status value, for the specified
+Instance entry. After a successful response from the ledger, the MSR will update
+its own copy of the Instance based on the received response. 
+
+The process described above is executed in an asynchronous manner, meaning the
+original request to the MSR will be answered before the ledger service is
+updated. Service providers can be informed on the final outcome of the
+operation once this is completed by looking at the changes in the local MSR
+ledger status.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter            | Encoding            | Mult | Description                                                        |
+|---|---|---|---------|
+| instanceId           | Long                | 1    | The ID of the Instance for which the ledger status will be updated |
+| instanceLedgerStatus | LedgerRequestStatus | 1    | The new value for the ledger status of the selected Instance       |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)     | Encoding | Mult. | Description                          |
+|---|---|---|---------|
+| result from operation | none     | 1     | The result of the deletion operation |
 
 # Service dynamic behaviour
 <!--
@@ -1228,12 +1335,12 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \break https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf
-2. Maritime Connectivity Platform, https://maritimeconnectivity.net/
-3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/
-4. EfficienSea2 Project, https://efficiensea2.org/
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \break [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/\breakMSCResolutions/MSC.467(101).pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf)
+2. Maritime Connectivity Platform, [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
+3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
+4. EfficienSea2 Project, [https://efficiensea2.org/](https://efficiensea2.org/)
 5. IEC 63173-2 - Maritime navigation and radiocommunication equipment and systems. Data interface Part 2. Secure exchange and communication of S-100 based products (SECOM)
-6. IALA Maritime Resource Name (MRN) Registry, https://www.iala-aism.org/technical/data-modelling/mrn/
-7. S-100 Universal Hydrographic Data Model, https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4
-8. IALA International Dictionary of Marine Aids to Navigation, http://www.iala-aism.org/wiki/dictionary
+6. IALA Maritime Resource Name (MRN) Registry, [https://www.iala-aism.org/technical/data-modelling/mrn/](https://www.iala-aism.org/technical/data-modelling/mrn/)
+7. S-100 Universal Hydrographic Data Model, [https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4](https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4)
+8. IALA International Dictionary of Marine Aids to Navigation, [http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
 
