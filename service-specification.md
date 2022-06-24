@@ -300,14 +300,14 @@ specific. An MSR should support searching in any field by typing the field name
 followed by a colon ":" and then the appropriate term. An example of a query,
 assuming there are two terms included in it is the following:
 
-\vspace*{-0.8cm}
+\vspace*{-0.9cm}
 ```{.jql caption="MSR query format example"}
 instanceId:"usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
 ```
 
 If the *instanceId* is the default field, then field indicator is not required:
 
-\vspace*{-0.8cm}
+\vspace*{-0.9cm}
 ```{.jql caption="MSR query format example with default field"}
 "usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
 ```
@@ -330,7 +330,7 @@ In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in “MCC Identity Management and Security Identity Management” as
 follows:
 
-\vspace*{-0.8cm}
+\vspace*{-0.9cm}
 ```{.markdown caption="MCP MRN Scheme Rules"}
 <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
 <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "msr" | mms" |
@@ -340,7 +340,7 @@ follows:
 
 For a service document, the MRN system is defined as follows:
 
-\vspace*{-0.8cm}
+\vspace*{-0.9cm}
 ```{.markdown caption="MSR Service Document MRN-IPSS definition"}
 <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
 <ORG> ::= pchar *(pchar / "/")
@@ -783,15 +783,16 @@ page index parameter.
 -->
 
 <!-- Spacing: |---|---|---|---------| -->
-| Parameter (in) | Encoding | Mult. | Description                                             |
-|---|---|---|---------| 
-| page           | Integer  | 0..1  | The number of the page the results to be returned       |
-| pageSize       | Integer  | 0..1  | The maximum size of each page that contains the results |
+| Parameter   | Encoding | Mult | Description                                             |
+|---|---|---|---------|
+| page        | Integer  | 0..1 | The number of the page the results to be returned       |
+| pageSize    | Integer  | 0..1 | The maximum size of each page that contains the results |
+
 
 <!-- Spacing: |---|---|---|---------| -->
-| Return Type (out)  | Encoding | Mult. | Description                                                                                 |
-|---|---|---|---------| 
-| Instance           | JSON     | 0..*  | A list of instances, matching the requested criteria, encoded as per the service data model |
+| Return Type (out) | Encoding | Mult.  | Description                                                                                 |
+|---|---|---|---------|
+| Instance          | JSON     | 0..*   | A list of instances, matching the requested criteria, encoded as per the service data model |
 
 ### Operation "getInstance"
 <!--
@@ -848,7 +849,176 @@ generated.
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out) | Encoding | Mult. | Description                                      |
 |---|---|---|---------|
-| Instance          | JSON     | 0..1  | The Instance object that matches the provided ID |
+| Instance          | JSON     | 1     | The Instance object that matches the provided ID |
+
+### Operation "createInstance"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***createInstance*** operation is to enable
+service providers to create new entries of registered service Instances. It is
+implemented following the REST methodology and receives a populated Instance 
+object that contains all the mandatory information. The MSR will respond with
+a copy of the Instance object created, including  its assigned ID. The  internal
+structure the Instance is provided in more detail in the 
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to create a new registered Instance record, the service
+will access validate the provided Instance fields, and depending on a
+successful outcome, will persist the data in its database. If an error occurs
+while persisting the provided Instance object, then the service make that clear
+in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                           |
+|---|---|---|---------| 
+| instance       | Instance | 1     | The Instance object to be created with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                                                     |
+|---|---|---|---------|
+| Instance          | JSON     | 1     | The Instance object that was created along with its assigned ID |
+
+
+### Operation "updateInstance"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***updateInstance*** operation is to enable
+service providers to update existing entries of registered service Instances.
+It is implemented following the REST methodology and receives a populated
+Instance object that contains all the mandatory information. The MSR will
+respond with a copy of the Instance object created, including its assigned ID.
+The internal structure the Instance is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to update an existing registered Instance record, the
+service will validate the provided Instance fields, and depending on a 
+successful outcome, will persist the data in its database. If an error occurs
+while persisting the provided Instance object, then the service make that clear
+in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                           |
+|---|---|---|-----------------------------------------------------------------------| 
+| instance       | Instance | 1     | The Instance object to be updated with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                          |
+|---|---|---|--------------------------------------|
+| Instance          | JSON     | 1     | The Instance object that was updated |
+
+### Operation "deleteInstance"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***deleteInstance*** operation is to enable
+service providers to delete existing entries of registered service instances. It
+is implemented following the REST methodology and receives as an input the ID of
+the registered Instance to be deleted. The MSR will respond with the outcome of
+the deletion operation, if successful or not.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to delete an existing registered Instance record, the
+service will validate the respective entry indeed exists in its database. If an
+error occurs while deleting the identified Instance object, then the service 
+make that clear in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                          |
+|---|---|---|---------|
+| instanceId     | Long     | 1     | The ID of the instance to be deleted |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)     | Encoding | Mult. | Description                          |
+|---|---|---|---------|
+| result from operation | none     | 1     | The result of the deletion operation |
 
 # Service dynamic behaviour
 <!--
@@ -876,7 +1046,7 @@ A description should be given.
 
 A description should be given.
 
-## Service orchestration (Optional)
+<!-- ## Service orchestration (Optional) -->
 <!--
   This section shall be provided, if the composition of the service and/or the 
   relation to other services (e.g., which other services are used to provide this
@@ -891,8 +1061,6 @@ A description should be given.
   its own Service Specification Document; a reference to that document shall be
   added here).
 -->
-
-A description should be given.
 
 # Service provisioning (Optional)
 <!--
@@ -945,20 +1113,33 @@ Persons producing the Technical Service are invited to add definitions to the
 following list as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
-| Term | Definition                 |
-| --- | --------- |
-| MSR  | Maritime Service Registry  |
-| MIR  | Maritime Identity Registry |
-|  MRN | Maritime Resource Name     |
+| Term                    | Definition                                                                                                                  |
+!-- Spacing: | --- | --------- | -->
+| Service Registry        | An application that acts as an access point where the relevant information about available maritime services can be found.  |
+| Service Provider        | Any entity that provides a maritime service to a certain customer group                                                     |
+| Service Consumer        | Any entity that has an interest in acquiring information from maritime services                                             |
+| Service Discoverability | The process of identifying availabily resources providing maritime information                                              |
+| Instance                | A single resource being made available to service consumers, providing maritime information                                 |
+| Interface               | A functional element of a maritime service, that allows a set of operations, accessing and/or altering maritime information |
+| Operation               | An action on an interface of accessing or altering the available maritime information                                       |
+| Request                 | A formal user (service provider or consumer) request for maritime information new to be provided/altered                    |
+| Response                | A formal service reply on a request for maritime information new to be provided/altered                                     |
 
 # Acronyms
 
 <!-- Spacing: | --- | --------- | -->
-| Acronum | Mearning                   |
-| --- | --------- |
-| MSR     | Maritime Service Registry  |
-| MIR     | Maritime Identity Registry |
-|  MRN    | Maritime Resource Name     |
+| Acronum | Mearning                                                                          |
+|---------|-----------------------------------------------------------------------------------|
+| IALA    | International Association of Marine Aids to Navigation and Lighthouse Authorities |
+| IMO     | International Maritime Organization                                               |
+| MCP     | Maritime Connectivity Platform                                                    |
+| MCC     | Maritime Connectivity platform Consortium                                         |
+| MSR     | Maritime Service Registry                                                         |
+| MIR     | Maritime Identity Registry                                                        |
+| MRN     | Maritime Resource Name                                                            |
+| REST    | Representational State Transfer                                                   |
+| SECOM   | Secure Communication (IEC 63173-2)                                                |
+| MRN     | Maritime Resource Name                                                            |
 
 # References
 <!--
