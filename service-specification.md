@@ -1114,7 +1114,7 @@ following list as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
 | Term                    | Definition                                                                                                                  |
-!-- Spacing: | --- | --------- | -->
+| --- | --------- |
 | Service Registry        | An application that acts as an access point where the relevant information about available maritime services can be found.  |
 | Service Provider        | Any entity that provides a maritime service to a certain customer group                                                     |
 | Service Consumer        | Any entity that has an interest in acquiring information from maritime services                                             |
