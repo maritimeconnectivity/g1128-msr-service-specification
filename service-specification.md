@@ -745,10 +745,11 @@ allowed to perform any data modifications.
 The purpose of the interface's ***getInstances*** operation is to enable service
 providers to access a complete list of the registered service instances, without
 calling the more specialised but also expensive (resource-wise) SearchService
-interface. It is implemented following the REST methodology and receives no 
-inputs object. The MSR will respond with a list of all Instance objects, in a
-paged response. The internal structure the Instance is provided in more detail
-in the [Service Data Model](#service-data-model) section.
+interface. It is implemented following the REST methodology and receives only a
+page number and a page size as input parameters. The MSR will respond with a 
+list of all Instance objects, in a paged response. The internal structure the
+Instance is provided in more detail in the
+[Service Data Model](#service-data-model) section.
 
 #### Operation functionality
 <!--
@@ -790,9 +791,9 @@ page index parameter.
 | pageSize    | Integer  | 0..1 | The maximum size of each page that contains the results |
 
 <!-- Spacing: |---|---|---|---------| -->
-| Return Type (out) | Encoding | Mult.  | Description                                                                                 |
+| Return Type (out) | Encoding | Mult.  | Description                                                                                       |
 |---|---|---|---------|
-| Instance          | JSON     | 0..*   | A list of instances, matching the requested criteria, encoded as per the service data model |
+| Instance          | JSON     | 0..*   | A paged list of instances, matching the requested criteria, encoded as per the service data model |
 
 ### Operation "getInstance"
 <!--
@@ -802,10 +803,10 @@ page index parameter.
 -->
 
 The purpose of the interface's ***getInstance*** operation is to enable service
-providers to access a the information of a single registered service instance. 
+providers to access the information of a single registered service instance. 
 It is implemented following the REST methodology and receives the ID of the
-in Instance to be retrieved as an input argument. The MSR will respond with the
-Instance object identified by the provided ID, if that is found. The internal 
+Instance to be retrieved as an input argument. The MSR will respond with the
+Instance object identified by the provided ID, if that is found. The internal
 structure the Instance is provided in more detail in the 
 [Service Data Model](#service-data-model) section.
 
@@ -815,11 +816,11 @@ structure the Instance is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve all registered instances, the service
-will access its database to locate, retrieve and package the Instance object that
-matches the provided ID. If the ID is not located, for example because it has 
-been selected by mistake, then the service make that clear in the response 
-generated.
+Upon receiving a request to retrieve a specific registered instances, the
+service will access its database to locate, retrieve and package the Instance
+object that matches the provided ID. If the ID is not located, for example
+because it has  been selected by mistake, then the service make that clear in
+the response generated.
 
 #### Operation parameters
 <!--
@@ -843,7 +844,7 @@ generated.
 
 <!-- Spacing: |---|---|---|---------| -->
 | Parameter (in) | Encoding | Mult. | Description                                             |
-|---|---|---|---------| 
+|---|---|---|---------|
 | instanceId     | Long     | 1     | The ID of the Instance object to be retrieved           |
 
 <!-- Spacing: |---|---|---|---------| -->
@@ -860,10 +861,10 @@ generated.
 
 The purpose of the interface's ***createInstance*** operation is to enable
 service providers to create new entries of registered service Instances. It is
-implemented following the REST methodology and receives a populated Instance 
-object that contains all the mandatory information. The MSR will respond with
-a copy of the Instance object created, including  its assigned ID. The  internal
-structure the Instance is provided in more detail in the 
+implemented following the REST methodology and receives as an input a populated
+Instance object that contains all the mandatory information. The MSR will 
+respond with a copy of the Instance object created, including its assigned ID.
+The internal structure the Instance is provided in more detail in the 
 [Service Data Model](#service-data-model) section.
 
 #### Operation functionality
@@ -900,8 +901,8 @@ in the response generated.
 
 <!-- Spacing: |---|---|---|---------| -->
 | Parameter (in) | Encoding | Mult. | Description                                                           |
-|---|---|---|---------| 
-| instance       | Instance | 1     | The Instance object to be created with all mandatory fields populated |
+|---|---|---|---------|
+| instance       | JSON     | 1     | The Instance object to be created with all mandatory fields populated |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out) | Encoding | Mult. | Description                                                     |
@@ -918,10 +919,10 @@ in the response generated.
 
 The purpose of the interface's ***updateInstance*** operation is to enable
 service providers to update existing entries of registered service Instances.
-It is implemented following the REST methodology and receives a populated
-Instance object that contains all the mandatory information. The MSR will
-respond with a copy of the Instance object created, including its assigned ID.
-The internal structure the Instance is provided in more detail in the
+It is implemented following the REST methodology and receives as an input a
+populated Instance object that contains all the mandatory information. The MSR
+will respond with a copy of the Instance object created, including its assigned 
+ID. The internal structure the Instance is provided in more detail in the
 [Service Data Model](#service-data-model) section.
 
 #### Operation functionality
@@ -958,8 +959,8 @@ in the response generated.
 
 <!-- Spacing: |---|---|---|---------| -->
 | Parameter (in) | Encoding | Mult. | Description                                                           |
- |---|---|---|---------|
-| instance       | Instance | 1     | The Instance object to be updated with all mandatory fields populated |
+|---|---|---|---------|
+| instance       | JSON     | 1     | The Instance object to be updated with all mandatory fields populated |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out) | Encoding | Mult. | Description                          |
@@ -1013,7 +1014,7 @@ make that clear in the response generated.
 <!-- Spacing: |---|---|---|---------| -->
 | Parameter (in) | Encoding | Mult. | Description                          |
 |---|---|---|---------|
-| instanceId     | Long     | 1     | The ID of the instance to be deleted |
+| instanceId     | Long     | 1     | The ID of the Instance to be deleted |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
@@ -1196,6 +1197,324 @@ MSR ledger status.
 |---|---|---|---------|
 | instanceId          | Long                | 1    | The ID of the Instance for which the ledger status will be updated |
 | ledgerRequestStatus | LedgerRequestStatus | 1    | The new value for the ledger status of the selected Instance       |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)     | Encoding | Mult. | Description                          |
+|---|---|---|---------|
+| result from operation | none     | 1     | The result of the deletion operation |
+
+## Service interface "XmlInterface"
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
+
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
+
+The ***XmlInterface*** interface allows service providers and consumers to
+interact with the MSR in order to retrieve and manipulate the data on the
+registered service instance XML documents. A service provider should only be
+able to access information about all registered service instances but should
+only be allowed to alter/delete data related to services it provides. Service
+consumers should only be allowed access operation to XML documents of the
+discovered instances. MSR administrator users however, are allowed to perform
+any data modifications.
+
+### Operation "getXmls"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***getXmls*** operation is to enable service
+providers and consumers to access a complete list of the registered service
+instance XML documents directly. It is implemented following the REST 
+methodology and receives only a page number and page size as input parameters.
+The MSR will respond with a list of all Xml objects, in a paged response. The
+internal structure the Xml object is provided in more detail in the 
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve all available XML documents, the service
+will access its database to retrieve and package the full list of Xml
+objects into a paged response. Only the results of the page that has been
+selected by the service consumers are returned. The service providers can
+navigate to other pages by repeating the same search query, with a difference
+page index parameter.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter   | Encoding | Mult | Description                                             |
+|---|---|---|---------|
+| page        | Integer  | 0..1 | The number of the page the results to be returned       |
+| pageSize    | Integer  | 0..1 | The maximum size of each page that contains the results |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult.  | Description                                                                                 |
+|---|---|---|---------|
+| Xml               | JSON     | 0..*   | A paged list of xml, matching the requested criteria, encoded as per the service data model |
+
+### Operation "getXml"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***getXml*** operation is to enable service
+providers and consumers to access the information of a single XML document. It
+is implemented following the REST methodology and receives the ID of the Xml to
+be retrieved as an input argument. The MSR will respond with the Xml object
+identified by the provided ID, if that is found. The internal structure the
+Xml object is provided in more detail in the 
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve an XML document, the service will access
+its database to locate, retrieve and package the Xml object that matches the
+provided ID. If the ID is not located, for example because it has been selected
+by mistake, then the service make that clear in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                              |
+|---|---|---|---------|
+| xmlId          | Long     | 1     | The ID of the Xml object to be retrieved |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)  | Encoding | Mult. | Description                                      |
+|---|---|---|---------|
+| Xml                | JSON     | 1     | The Xml object that matches the provided ID |
+
+### Operation "createXml"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The XML documents of the registered service are normally uploaded onto the MSR
+as part of the [InstanceInterface createInstance](#create-instance) operation.
+Therefore, it is highly unlikely that the ***createXml*** operation should ever
+be required by any service provider, while it should not be allowed for any
+service consumers. The main purpose of the interface's ***createXml*** operation
+to allow the system administrators to correct issues related to the registered
+Instances XML documents. It is implemented following the REST methodology and
+receives as an input a populated Xml object that contains all the mandatory
+information, including the applicable registered service Instance ID. The MSR
+will respond with a copy of the Xml object created, including its assigned ID.
+The internal structure the Instance is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to create a new Xml record, the service will access
+validate the provided Xml object fields, and depending on a successful outcome,
+will persist the data in its database. If an error occurs while persisting the
+provided Instance object, then the service make that clear in the response
+generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                      |
+|---|---|---|---------|
+| xml            | JSON     | 1     | The Xml object to be created with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                                                |
+|---|---|---|---------|
+| Xml               | JSON     | 1     | The Xml object that was created along with its assigned ID |
+
+
+### Operation "updateXml"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The XML documents of the registered service are normally uploaded onto the MSR
+as part of the [InstanceInterface createInstance](#create-instance) operation.
+Therefore, it is highly unlikely that the ***updateXml*** operation should ever
+be required by any service provider, while it should not be allowed for any
+service consumers. The main purpose of the interface's ***updateXml*** operation
+to allow the system administrators to correct issues related to the registered
+Instances XML documents. It is implemented following the REST methodology and
+receives as an input a populated Xml object that contains all the mandatory
+information. The MSR will respond with a copy of the Xml object updated. The
+internal structure the Instance is provided in more detail in the 
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to update an existing Xml record, the service will
+validate the provided Xml object fields, and depending on a successful outcome,
+will persist the data in its database. If an error occurs while persisting the
+provided Instance object, then the service make that clear in the response
+generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                      |
+|---|---|---|---------|
+| xml            | JSON     | 1     | The Xml object to be updated with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                     |
+|---|---|---|---------|
+| Xml               | JSON     | 1     | The Xml object that was updated |
+
+### Operation "deleteXml"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The XML documents of the registered service are normally uploaded onto the MSR
+as part of the [InstanceInterface createInstance](#create-instance) operation.
+Therefore, it is highly unlikely that the ***deleteXml*** operation should ever
+be required by any service provider, while it should not be allowed for any
+service consumers. The main purpose of the interface's ***deleteXml*** operation
+to allow the system administrators to correct issues related to the registered
+Instances XML documents. It is implemented following the REST methodology and
+receives as an input the ID of the Xml object to be deleted. The MSR will
+respond with a copy of the Xml object updated. The internal structure
+the Xml is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to delete an existing Xml record, the service will
+validate the respective entry indeed exists in its database. If an error occurs
+while deleting the identified Instance object, then the service make that clear
+in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                     |
+|---|---|---|---------|
+| xmlId          | Long     | 1     | The ID of the Xml to be deleted |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
