@@ -1160,16 +1160,16 @@ operation, if successful or not.
 Upon receiving a request to update a service Instance ledger status, the service
 will access its database to validate that the Instance ID provided is indeed
 valid. If that is the case, the MSR will return a response to the initial 
-request and at the same time perform a new ledger status request the global
+request and at the same time can perform a new ledger status request the global
 ledger service to update its own Instance status value, for the specified
 Instance entry. After a successful response from the ledger, the MSR will update
 its own copy of the Instance based on the received response. 
 
-The process described above is executed in an asynchronous manner, meaning the
-original request to the MSR will be answered before the ledger service is
-updated. Service providers can be informed on the final outcome of the
-operation once this is completed by looking at the changes in the local MSR
-ledger status.
+The process of contacting the ledger described above, is executed in an 
+asynchronous manner, meaning the original request to the MSR will be answered
+before the ledger service is updated. Service providers will only be informed on
+the final outcome once this is completed by looking at the changes in the local
+MSR ledger status.
 
 #### Operation parameters
 <!--
@@ -1192,10 +1192,10 @@ ledger status.
 -->
 
 <!-- Spacing: |---|---|---|---------| -->
-| Parameter            | Encoding            | Mult | Description                                                        |
+| Parameter           | Encoding            | Mult | Description                                                        |
 |---|---|---|---------|
-| instanceId           | Long                | 1    | The ID of the Instance for which the ledger status will be updated |
-| instanceLedgerStatus | LedgerRequestStatus | 1    | The new value for the ledger status of the selected Instance       |
+| instanceId          | Long                | 1    | The ID of the Instance for which the ledger status will be updated |
+| ledgerRequestStatus | LedgerRequestStatus | 1    | The new value for the ledger status of the selected Instance       |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
@@ -1335,7 +1335,7 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \break [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/\breakMSCResolutions/MSC.467(101).pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf)
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \break [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/ MSCResolutions/MSC.467(101).pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf)
 2. Maritime Connectivity Platform, [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
 4. EfficienSea2 Project, [https://efficiensea2.org/](https://efficiensea2.org/)
