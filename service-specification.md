@@ -1113,17 +1113,17 @@ Persons producing the Technical Service are invited to add definitions to the
 following list as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
-| Term                    | Definition                                                                                                                  |
+| Term                    | Definition                                                                                                                   |
 | --- | --------- |
-| Service Registry        | An application that acts as an access point where the relevant information about available maritime services can be found.  |
-| Service Provider        | Any entity that provides a maritime service to a certain customer group                                                     |
-| Service Consumer        | Any entity that has an interest in acquiring information from maritime services                                             |
-| Service Discoverability | The process of identifying availabily resources providing maritime information                                              |
-| Instance                | A single resource being made available to service consumers, providing maritime information                                 |
-| Interface               | A functional element of a maritime service, that allows a set of operations, accessing and/or altering maritime information |
-| Operation               | An action on an interface of accessing or altering the available maritime information                                       |
-| Request                 | A formal user (service provider or consumer) request for maritime information new to be provided/altered                    |
-| Response                | A formal service reply on a request for maritime information new to be provided/altered                                     |
+| Service Registry        | An application that acts as an access point where the relevant information about available maritime services can be found.   |
+| Service Provider        | Any entity that provides a maritime service to a certain customer group.                                                     |
+| Service Consumer        | Any entity that has an interest in acquiring information from maritime services.                                             |
+| Service Discoverability | The process of identifying availabily resources providing maritime information.                                              |
+| Instance                | A single resource being made available to service consumers, providing maritime information.                                 |
+| Interface               | A functional element of a maritime service, that allows a set of operations, accessing and/or altering maritime information. |
+| Operation               | An action on an interface of accessing or altering the available maritime information                                        |
+| Request                 | A formal user (service provider or consumer) request for maritime information new to be provided/altered.                    |
+| Response                | A formal service reply on a request for maritime information new to be provided/altered.                                     |
 
 # Acronyms
 
