@@ -789,7 +789,6 @@ page index parameter.
 | page        | Integer  | 0..1 | The number of the page the results to be returned       |
 | pageSize    | Integer  | 0..1 | The maximum size of each page that contains the results |
 
-
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                 |
 |---|---|---|---------|
@@ -1021,6 +1020,81 @@ make that clear in the response generated.
 |---|---|---|---------|
 | result from operation | none     | 1     | The result of the deletion operation |
 
+## Service interface "InstanceStatusInterface"
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
+
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
+
+The ***InstanceStatusInterface*** interface allows service providers to 
+manipulate the status of their registered service Instances. The status of each
+Instance is restricted to the options specified in the IALA G-1128 guideline.
+A service provider should only be able to access/alter information only on
+the services Instances it provides. MSR administrator users however, are
+allowed to perform any data modifications.
+
+### Operation "updateInstanceStatus"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***updateInstanceStatus*** operation is to allow
+service providers to update the status of the Instances they provide. It is
+implemented following the REST methodology and receives as input the ID of the
+Instance whose status will be updated, as well as the new applicable Instance
+status. The MSR will respond with the outcome of the update operation, if
+successful or not.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve all registered instances, the service
+will access its database to retrieve and package the full list of Instance
+objects into a paged response. Only the results of the page that has been
+selected by the service consumers are returned. The service providers can
+navigate to other pages by repeating the same search query, with a difference
+page index parameter.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter   | Encoding | Mult | Description                                             |
+|---|---|---|---------|
+| page        | Integer  | 0..1 | The number of the page the results to be returned       |
+| pageSize    | Integer  | 0..1 | The maximum size of each page that contains the results |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult.  | Description                                                                                 |
+|---|---|---|---------|
+| Instance          | JSON     | 0..*   | A list of instances, matching the requested criteria, encoded as per the service data model |
+
 # Service dynamic behaviour
 <!--
     This section describes the interactive behaviour between service interfaces
@@ -1134,7 +1208,7 @@ Persons producing the Technical Service are invited to provide a list of
 acronyms as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
-| Acronum | Mearning                                                                          |
+| Acronym | Mearning                                                                          |
 | --- | --------- |
 | IALA    | International Association of Marine Aids to Navigation and Lighthouse Authorities |
 | IMO     | International Maritime Organization                                               |
@@ -1154,7 +1228,7 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \\ https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \break https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf
 2. Maritime Connectivity Platform, https://maritimeconnectivity.net/
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/
 4. EfficienSea2 Project, https://efficiensea2.org/
