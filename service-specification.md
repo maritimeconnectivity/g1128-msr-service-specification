@@ -1129,7 +1129,7 @@ following list as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
 | Acronum | Mearning                                                                          |
-|---------|-----------------------------------------------------------------------------------|
+ | --- | --------- |
 | IALA    | International Association of Marine Aids to Navigation and Lighthouse Authorities |
 | IMO     | International Maritime Organization                                               |
 | MCP     | Maritime Connectivity Platform                                                    |
