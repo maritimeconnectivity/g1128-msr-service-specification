@@ -13,10 +13,7 @@ code-block-font-size: \footnotesize
 listings-disable-line-numbers: true
 ...
 
-# Service specification for the MCP Service Registry (MSR)
-<!-- Hey it is comment! This must be seen only at the source code editing.  -->
-
-## Introduction
+# Introduction
 
 In IMO resolution MSC.467(101) “Guidance on the Definition and Harmonization of
 the Format and Structure of Maritime Services in the Context of e-Navigation”,
@@ -37,7 +34,7 @@ The Technical Services in the resolution are also defined on three levels
 following the same structure as G-1128, where MSR supervises all service
 providers to describe their service in the format of G-1128.
 
-### Purpose
+## Purpose
 <!--
     This template shall support the service architects in creating a description
     of the services (put down in writing) at a high level of abstraction,
@@ -103,7 +100,7 @@ end-point locations. It can therefore be seen as a sophisticated yellow pages
 phone book. A registry can be searched using a wide variety of different
 criteria including the coverage area of interest.
 
-### Intended readership
+## Intended readership
 <!--
   This service specification template is intended to be read by service 
   architects who shall produce service descriptions.
@@ -120,7 +117,7 @@ architects, service architects, information architects, system engineers and
 developers in pursuing architecting, design and development activities of 
 other related e-Navigation services.
 
-### Inputs from other sources
+## Inputs from other sources
 <!--
   This section lists previous work on the subject covered by this document.
 
@@ -132,7 +129,7 @@ The service management concept originally given from the IALA G-1128
 specification was given and implemented throughout previous projects such as
 EfficienSea2 and Sea Traffic Management.
 
-## Service identification
+# Service identification
 
 The purpose of this section is to provide a unique identification of the service
 and describe where the service is in terms of the engineering lifecycle.
@@ -150,7 +147,7 @@ and describe where the service is in terms of the engineering lifecycle.
 | Architect(s) | MCC MSR WG                                                                                                                                                                                                          |
 | Status       | Provisional                                                                                                                                                                                                         |
 
-## Operational Context
+# Operational Context
 <!--
     The operational context description shall be based on the description of the
     operational model, consisting of a structure of operational nodes and
@@ -218,7 +215,7 @@ decisions are therefore left to the MSR service developers/providers.
 
 More detailed descriptions on the basic operational aspects can be found below.
 
-##### Service Registration
+#### Service Registration
 
 An MSR instance provider is naturally only accountable towards its own users, as
 defined by any Service Level Agreements (SLAs) present. Hence, in regard to 
@@ -265,7 +262,7 @@ registrations. In those cases, the XML schema of the service instance
 specification can be omitted and only the mandatory fields of a registration
 will be required from the service provider.
 
-##### Service Discoverability
+#### Service Discoverability
 
 Service discoverability is intended to facilitate the dissemination of the 
 e-Navigation service information. As such, the employed mechanism should follow
@@ -288,7 +285,7 @@ following additional aspects need to be satisfied:
 * Requirements on service provider authentication and service consumer
   authentication is entirely up to the service provider.
 
-##### MRN of Service Documents for Identification
+#### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
 the MRN scheme for the identification of service documents. G-1128 clearly 
@@ -328,7 +325,7 @@ More detailed description of the syntax is given in the referenced document.
 Governance of MRN of service documents is a responsibility of an MSR provider, 
 as well as the uniqueness of an MRN at the database level.
 
-### Functional and non-functional requirements
+## Functional and non-functional requirements
 <!--
     This section lists all (functional and non-functional) requirements 
     applicable to the service being described. A tabular list of requirements 
@@ -344,7 +341,7 @@ as well as the uniqueness of an MRN at the database level.
     service specification document.
 -->
 
-#### Functional Requirements
+### Functional Requirements
 
 The table below lists applicable existing requirements for the MSR service.
 
@@ -403,14 +400,14 @@ The tables below define additional non-functional requirements for the MSR servi
 | Rationale        | The MSR should be easily upgradable to ensure future operations.                                                                                                                 |
 |  Author          | GRAD                                                                                                                                                                             |
 
-### Other constraints
+## Other constraints
 
 Inter-compatibility with the other MCP components, namely the MCP Identity
 Registry (MIR) and the MCP Messaging Service (MMS) should be ensured. In
 regard to different versions, the MSR should make clear which MCP version it
 supports and if more than one.
 
-#### Relevant industrial standards
+### Relevant industrial standards
 <!--
     List in this section the relevant industrial standards (if any) for the
     exchange of this type of data and or this type of service.  These may
@@ -419,7 +416,7 @@ supports and if more than one.
 
 Apart from SECOM, there are no such relevant industrial standards found.
 
-#### Operational nodes
+### Operational nodes
 <!--
     If an operational model exists in external documents, then this section just
     shows the Service to Nodes mapping by providing three tables, as described
@@ -432,14 +429,14 @@ Apart from SECOM, there are no such relevant industrial standards found.
 
 The following tables describe the operational nodes of the service.
 
-##### Operational nodes providing the MSR service
+#### Operational nodes providing the MSR service
 
 <!-- Spacing: | --- | --------- | -->
 | Operational Node  | Remarks                                                                                                                    | 
 | --- | --------- |
 |  Service Provider | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services. |
 
-##### Operational nodes consuming the MSR service
+#### Operational nodes consuming the MSR service
 
 <!-- Spacing: | --- | --------- | -->
 | Operational Node | Remarks                                                                                                                                  | 
@@ -460,7 +457,7 @@ The following tables describe the operational nodes of the service.
 | TBD                   |         |
 -->
 
-## Service overview
+# Service overview
 <!--
     This section aims at providing an overview of the main elements of the
     service.  The elements in this view are all usually created by an UML
@@ -484,7 +481,7 @@ The following tables describe the operational nodes of the service.
 This section aims at providing an overview of the main elements of the service.
 The elements in this view are all usually created by an UML modelling tool.
 
-### Service interfaces
+## Service interfaces
 
 <!--
     Describe the interfaces of the service including the selected Message 
@@ -528,7 +525,7 @@ service interfaces definitions and operations and in tabular form.
 | LedgerRequestsInterface       | Provided                                   | getLedgerRequest \newline createLedgerRequest \newline deleteLedgerRequest          |
 | LedgerRequestStatusInterface  | Provided                                   | updateLedgerRequestStatus                                                           |
 
-## Service Data Model
+# Service Data Model
 <!--
     It is recommended to visualise the data structures by using UML diagrams.
     The full information model (logical data structure) shall be shown using
@@ -584,7 +581,7 @@ Each has its own unique purpose and should be used accordingly.
     not an authoritative part of the service specification.
 -->
 
-## Service interface specifications
+# Service interface specifications
 <!--
     The static interface description is vital since it describes how the 
     interfaces shall be constructed.
@@ -604,7 +601,7 @@ is provided for each Service Interface. The Service Interface specification
 covers only the static design description while the dynamic design (behaviour) 
 is described in section D 5.
 
-### Service interface "SearchServiceInterface"
+## Service interface "SearchServiceInterface"
 <!--
     Please explain the purpose, message exchange pattern and architecture of 
     the Interface.
@@ -651,7 +648,7 @@ service consumers are returned. The service consumers can navigate to other
 pages by repeating the same search query, with a difference page index 
 parameter.
 
-##### Operation parameters
+#### Operation parameters
 <!--
     Describe the logical data structure of input and output parameters of the 
     operation (payload) by using an explanatory table (see below) and optionally
@@ -681,7 +678,7 @@ parameter.
 |---|---|---|---------|
 | SearhFilterObject | JSON     | 0..*  | A list of instances, matching the requested criteria, encoded as per the SECOM documentation |
 
-### Service interface "InstanceInterface"
+## Service interface "InstanceInterface"
 <!--
     Please explain the purpose, message exchange pattern and architecture of 
     the Interface.
@@ -698,7 +695,7 @@ all registered service instances but should only be allowed to alter/delete
 data related to services it provides. MSR administrator users however, are
 allowed to perform any data modifications.
 
-#### Operation "getInstances"
+### Operation "getInstances"
 <!--
     Give an overview of the operation: Include here a textual description of
     the operation functionality. In most situations this will be the same as
@@ -713,7 +710,7 @@ MSR will respond with a list of all Instance objects, in a paged response. The
 internal structure the Instance is provided in more detail in the 
 [Service Data Model](#service-data-model) section.
 
-##### Operation functionality
+#### Operation functionality
 <!--
     Describe the functionality of the operation, i.e. how does it produce the
     output from the input payload.
@@ -726,7 +723,7 @@ selected by the service consumers are returned. The service providers can
 navigate to other pages by repeating the same search query, with a difference
 page index parameter.
 
-##### Operation parameters
+#### Operation parameters
 <!--
     Describe the logical data structure of input and output parameters of the 
     operation (payload) by using an explanatory table (see below) and optionally
@@ -757,7 +754,7 @@ page index parameter.
 |---|---|---|---------| 
 | Instance           | JSON     | 0..*  | A list of instances, matching the requested criteria, encoded as per the service data model |
 
-#### Operation "getInstance"
+### Operation "getInstance"
 <!--
     Give an overview of the operation: Include here a textual description of
     the operation functionality. In most situations this will be the same as
@@ -772,7 +769,7 @@ Instance object identified by the provided ID, if that is found. The internal
 structure the Instance is provided in more detail in the 
 [Service Data Model](#service-data-model) section.
 
-##### Operation functionality
+#### Operation functionality
 <!--
     Describe the functionality of the operation, i.e. how does it produce the
     output from the input payload.
@@ -784,7 +781,7 @@ matches the provided ID. If the ID is not located, for example because it has
 been selected by mistake, then the service make that clear in the response 
 generated.
 
-##### Operation parameters
+#### Operation parameters
 <!--
     Describe the logical data structure of input and output parameters of the 
     operation (payload) by using an explanatory table (see below) and optionally
@@ -806,16 +803,15 @@ generated.
 
 <!-- Spacing: |---|---|---|---------| -->
 | Parameter (in) | Encoding | Mult. | Description                                             |
-|----------------|----------|---|---------------------------------------------------------| 
-| instanceId     | Long     | 0..1  | The ID of the Instance object to be retrieved           |
+|---|---|---|---------| 
+| instanceId     | Long     | 1     | The ID of the Instance object to be retrieved           |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out) | Encoding | Mult. | Description                                      |
 |---|---|---|---------|
 | Instance          | JSON     | 0..1  | The Instance object that matches the provided ID |
 
-
-## Service dynamic behaviour
+# Service dynamic behaviour
 <!--
     This section describes the interactive behaviour between service interfaces
     (interaction specification) and, if required, between different services
@@ -832,7 +828,7 @@ generated.
 
 A description should be given.
 
-### Service interface <INTERFACE NAME>
+## Service interface <INTERFACE NAME>
 <!--
     Include some information about the dynamic aspects of the service
     interface; each operation shall be exposed on at least one diagram.
@@ -841,7 +837,7 @@ A description should be given.
 
 A description should be given.
 
-### Service orchestration (Optional)
+## Service orchestration (Optional)
 <!--
   This section shall be provided, if the composition of the service and/or the 
   relation to other services (e.g., which other services are used to provide this
@@ -859,7 +855,7 @@ A description should be given.
 
 A description should be given.
 
-## Service provisioning (Optional)
+# Service provisioning (Optional)
 <!--
     This section shall describe the way services are planned to be provided and
     consumed.  It is labelled optional since one of the key aspects of
@@ -884,7 +880,7 @@ separating the definition of services from their implementation. This means
 that a service can be provided in several different contexts that are not
 necessarily known at the time, when the service is designed.
 
-## Definitions
+# Definitions
 <!--
     The definitions of terms used in this IALA Guideline can be found in the
     International Dictionary of Marine Aids to Navigation (IALA Dictionary) at
@@ -904,7 +900,7 @@ Most other terms in the context of MCP can be found in the terminology page of
 the online documentation of MCP
 (https://docs.maritimeconnectivity.net/en/latest/terminology.html).
 
-### Terminology
+## Terminology
 
 Persons producing the Technical Service are invited to add definitions to the
 following list as appropriate.
@@ -916,7 +912,7 @@ following list as appropriate.
 | MIR  | Maritime Identity Registry |
 |  MRN | Maritime Resource Name     |
 
-## Acronyms
+# Acronyms
 
 <!-- Spacing: | --- | --------- | -->
 | Acronum | Mearning                   |
@@ -925,7 +921,7 @@ following list as appropriate.
 | MIR     | Maritime Identity Registry |
 |  MRN    | Maritime Resource Name     |
 
-## References
+# References
 <!--
     This section shall include all references used when designing the service.
     Specifically, the applicable steering and requirements documents shall be
