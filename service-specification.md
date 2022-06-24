@@ -201,7 +201,7 @@ service information and an access point where the relevant information is
 successfully registered. An example of this whole process can be seen in
 the @fig:msrcontext.
 
-![MSR Service Registration/Discoverability Concept](materials/mcpcontext.png)
+![MSR Service Registration/Discoverability Concept](materials/mcpcontext.drawio.png)
 
 Another operational node to be taken into account is the MSR itself. More
 specifically, multiple MSR instances that may exist independently of each other.
@@ -542,7 +542,7 @@ This section describes the interfaces of the service including the selected
 Message Exchange Pattern (MEP) by using UML diagrams that illustrates the 
 service interfaces definitions and operations and in tabular form.
 
-![MSR Interface Definition diagram](materials/interfacedefinitions.png)
+![MSR Interface Definition diagram](materials/interfacedefinitions.drawio.png)
 
 <!-- Spacing: | --- | --- | --- | -->
 | Service Interface             | Role (from service provider point of view) | Service Operation                                                                   | 
