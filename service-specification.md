@@ -16,23 +16,24 @@ listings-disable-line-numbers: true
 # Introduction
 
 In IMO resolution MSC.467(101) “Guidance on the Definition and Harmonization of
-the Format and Structure of Maritime Services in the Context of e-Navigation”,
-IMO defines Maritime Services and Technical Services in the context of
+the Format and Structure of Maritime Services in the Context of e-Navigation”
+[1], IMO defines Maritime Services and Technical Services in the context of
 e-Navigation. In this resolution, the Maritime Services are on the highest 
 level, describing a service in an entirely non-technical manner. One or more
 Technical Services are associated with a Maritime Service, and these Technical
 Services are the ones defining the actual information exchange needed to take
 place in order to carry our a Maritime Service.
 
-The Maritime Service Registry, or MSR for short, assumes the role of a general 
-registry for Technical Services. It provides a reference point to the most
-relevant information and the respective end-points of the registered services 
-and thus to improve the accessibility of available services in the maritime 
-domain.
+The Maritime Service Registry [2], or MSR for short, assumes the role of a
+general  registry for Technical Services. It provides a reference point to the
+most relevant information and the respective end-points of the registered  
+services and thus to improve the accessibility of available services in the  
+maritime domain.
 
 The Technical Services in the resolution are also defined on three levels
-following the same structure as G-1128, where MSR supervises all service
-providers to describe their service in the format of G-1128.
+following the same structure as in IALA G-1128 [3] guideline, where MSR 
+supervises all service providers to describe their service in the format of 
+G-1128.
 
 ## Purpose
 <!--
@@ -87,7 +88,7 @@ providers to describe their service in the format of G-1128.
 -->
 
 The MSR is an implementation of service management concept which was given from
-the IALA G-1128 specification. The main tasks of MSR are the registration of 
+the IALA G-1128 guideline. The main tasks of MSR are the registration of 
 Technical Services by a service provider and the provision of a discovery 
 mechanism for the registered services, so that any service consumer can identify
 available services and gain access. 
@@ -125,9 +126,9 @@ other related e-Navigation services.
   finished) projects. 
 -->
 
-The service management concept originally given from the IALA G-1128 
-specification was given and implemented throughout previous projects such as
-EfficienSea2 and Sea Traffic Management.
+The service management concept originally given from the IALA G-1128
+guideline was given and implemented throughout previous projects such as
+EfficienSea2 [4] and Sea Traffic Management.
 
 # Service identification
 
@@ -218,7 +219,7 @@ More detailed descriptions on the basic operational aspects can be found below.
 #### Service Registration
 
 An MSR instance provider is naturally only accountable towards its own users, as
-defined by any Service Level Agreements (SLAs) present. Hence, in regard to 
+defined by any Service Level Agreement (SLA) present. Hence, in regard to 
 service registration, an MSR instance should be able to work independently.
 
 Many services registered to an MSR might be local, i.e. will only be 
@@ -320,7 +321,7 @@ Wildcard searches should also be supported.
 #### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
-the MRN scheme for the identification of service documents. G-1128 clearly 
+the MRN scheme [5] for the identification of service documents. G-1128 clearly 
 mentions MRN as a unique identifier scheme. A service provider should follow the
 MRN scheme of the MCP Identity Service provider (who operates a MIR) that they
 belong. There is a possibility of having more than one MRN of a service document
@@ -657,8 +658,8 @@ that this interface is implemented as required.
 
 The purpose of the interface's ***searchService*** operation is to allow service
 consumers to query the MSR about instances of e-Navigation services with 
-specific properties, i.e. able to produce a compatible IALA S-100 data product 
-dataset. It is implemented following the REST methodology and receives a 
+specific properties, i.e. able to produce a compatible IALA S-100 [6] data 
+product dataset. It is implemented following the REST methodology and receives a 
 *SearhFilterObject* object, which contains all the necessary parameter required
 to identify a set of matching registered services. The MSR will respond with a
 list of matching services, encoded into *SearchObjectResult* objects, in a paged
@@ -1098,10 +1099,10 @@ necessarily known at the time, when the service is designed.
 -->
 
 The definitions of terms used in this IALA Guideline can be found in the 
-International Dictionary of Marine Aids to Navigation (IALA Dictionary) at 
-http://www.iala-aism.org/wiki/dictionary and were checked as correct at the time
-of going to print. Where conflict arises, the IALA Dictionary shall be 
-considered as the authoritative source of definitions used in IALA documents.
+International Dictionary of Marine Aids to Navigation (IALA Dictionary) [7] and
+were checked as correct at the time of going to print. Where conflict arises, 
+the IALA Dictionary shall be  considered as the authoritative source of 
+definitions used in IALA documents.
 
 Most other terms in the context of MCP can be found in the terminology page of
 the online documentation of MCP
@@ -1113,33 +1114,38 @@ Persons producing the Technical Service are invited to add definitions to the
 following list as appropriate.
 
 <!-- Spacing: | --- | --------- | -->
-| Term                    | Definition                                                                                                                   |
-| --- | --------- |
-| Service Registry        | An application that acts as an access point where the relevant information about available maritime services can be found.   |
-| Service Provider        | Any entity that provides a maritime service to a certain customer group.                                                     |
-| Service Consumer        | Any entity that has an interest in acquiring information from maritime services.                                             |
-| Service Discoverability | The process of identifying availabily resources providing maritime information.                                              |
-| Instance                | A single resource being made available to service consumers, providing maritime information.                                 |
-| Interface               | A functional element of a maritime service, that allows a set of operations, accessing and/or altering maritime information. |
-| Operation               | An action on an interface of accessing or altering the available maritime information                                        |
-| Request                 | A formal user (service provider or consumer) request for maritime information new to be provided/altered.                    |
-| Response                | A formal service reply on a request for maritime information new to be provided/altered.                                     |
+| Term                      | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Service Registry          | An application that acts as an access point where the relevant information about available maritime services can be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Service Provider          | Any entity that provides a maritime service to a certain customer group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Service Consumer          | Any entity that has an interest in acquiring information from maritime services.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| External Data Model       | Describes the semantics of the ‘maritime world’ (or a significant part thereof) by defining data structures and their relations. This could be at logical level (e.g. in UML) or at physical level (e.g. in XSD schema definitions), as for example standard data models, or S-100 based data produce specifications.                                                                                                                                                                                                                                                                                                                                                                               |
+| Message Exchange Pattern  | Describes the principles two different parts of a message passing system (in our case: the service provider and the service consumer) interact and communicate with each other. \newline Examples:  \newline In the Request/Response MEP, the service consumer sends a request to the service provider to obtain certain information; the service provider provides the requested information in a dedicated response. \newline In the Publish/Subscribe MEP, the service consumer establishes a subscription with the service provider to obtain certain information; the service provider publishes information (either in regular intervals or upon change) to all subscribed service consumers. |
+| Service Discoverability   | The process of identifying availabily resources providing maritime information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Instance                  | A single resource being made available to service consumers, providing maritime information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Interface                 | A functional element of a maritime service, that allows a set of operations, accessing and/or altering maritime information.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Operation                 | An action on an interface of accessing or altering the available maritime information                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Request                   | A formal user (service provider or consumer) request for maritime information new to be provided/altered.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Response                  | A formal service reply on a request for maritime information new to be provided/altered.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 # Acronyms
 
+Persons producing the Technical Service are invited to provide a list of
+acronyms as appropriate.
+
 <!-- Spacing: | --- | --------- | -->
 | Acronum | Mearning                                                                          |
- | --- | --------- |
+| --- |-----------------------------------------------------------------------------------|
 | IALA    | International Association of Marine Aids to Navigation and Lighthouse Authorities |
 | IMO     | International Maritime Organization                                               |
-| MCP     | Maritime Connectivity Platform                                                    |
 | MCC     | Maritime Connectivity platform Consortium                                         |
-| MSR     | Maritime Service Registry                                                         |
+| MCP     | Maritime Connectivity Platform                                                    |
 | MIR     | Maritime Identity Registry                                                        |
 | MRN     | Maritime Resource Name                                                            |
+| MSR     | Maritime Service Registry                                                         |
 | REST    | Representational State Transfer                                                   |
 | SECOM   | Secure Communication (IEC 63173-2)                                                |
-| MRN     | Maritime Resource Name                                                            |
+| SLA     | Service Level Agreement                                                           |
 
 # References
 <!--
@@ -1148,6 +1154,11 @@ following list as appropriate.
     listed.
 -->
 
-1. IALA Guideline - G1128 THE SPECIFICATION OF e-NAVIGATION TECHNICAL SERVICES
-2. http://mrnregistry.org/
-3. S-100 Universal Hydrographic Data Model, http://www.iho.int/iho_pubs/standard/S-100/S-100_Ed_2/S_100_V2.0.0_June-2015.pdf
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf
+2. Maritime Connectivity Platform, https://maritimeconnectivity.net/
+3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/
+4. EfficienSea2 Project, https://efficiensea2.org/
+5. IALA Maritime Resource Name (MRN) Registry, https://www.iala-aism.org/technical/data-modelling/mrn/
+6. S-100 Universal Hydrographic Data Model, https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4
+7. IALA International Dictionary of Marine Aids to Navigation, http://www.iala-aism.org/wiki/dictionary
+
