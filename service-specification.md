@@ -285,6 +285,38 @@ following additional aspects need to be satisfied:
 * Requirements on service provider authentication and service consumer
   authentication is entirely up to the service provider.
 
+In terms of the discoverability, this is provided using a query operation. A
+query is a just character string broken up into terms and operators. There are
+two types of terms: Single Terms and Phrases.
+
+* A Single Term is a single word such as "test" or "hello".
+* A Phrase is a group of words surrounded by double quotes such as "keyword1 
+keyword 2".
+
+Multiple terms can be combined together with Boolean operators (e.g. AND, OR) to
+form a more complex query. A search can be performed either specify a field,
+or use the default field. The field names and default field is implementation
+specific. MSR supports searching in any field by typing the field name followed
+by a colon ":" and then the appropriate term. An example of a query, assuming
+there are two terms included in it is the following:
+
+\vspace*{-1cm}
+```{.jql caption="MCP MRN Scheme Rules"}
+instanceId:"usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
+```
+
+If the *instanceId* is the default field, then field indicator is not required:
+
+\vspace*{-1cm}
+```{.jql caption="MCP MRN Scheme Rules"}
+"usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
+```
+
+Wildcard searches should also be supported. 
+
+* To perform a single character wildcard search use the "?" symbol.
+* To perform a multiple character wildcard search use the "*" symbo
+
 #### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
@@ -300,19 +332,19 @@ follows:
 
 \vspace*{-1cm}
 ```{.markdown caption="MCP MRN Scheme Rules"}
-  <MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
-  <MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "mms" |
-  <IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
-  <IPSS> ::= pchar *(pchar / "/")
+<MCP-MRN> ::= "urn" ":" "mrn" ":" "mcp" ":" <MCP-TYPE> ":" <IPID> ":" <IPSS>
+<MCP-TYPE> ::= "device" | "org" | "user" | "vessel" | "service" | "mir" | "msr" | mms" |
+<IPID> ::= <CountryCode> | (alphanum) 0*20(alphanum / "-") (alphanum)
+<IPSS> ::= pchar *(pchar / "/")
 ```
 
 For a service document, the MRN system is defined as follows:
 
 \vspace*{-1cm}
 ```{.markdown caption="MSR Service Document MRN-IPSS definition"}
-  <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
-  <ORG> ::= pchar *(pchar / "/")
-  <G1128-TYPE> ::= "instance" | "specification" | "design"
+<MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
+<ORG> ::= pchar *(pchar / "/")
+<G1128-TYPE> ::= "instance" | "specification" | "design"
 ```
 
 The ```<ORG>``` section represents an organization ID assigned by MIR, 
