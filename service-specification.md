@@ -1271,10 +1271,10 @@ page index parameter.
 -->
 
 <!-- Spacing: |---|---|---|---------| -->
-| Parameter   | Encoding | Mult | Description                                             |
+| Parameter   | Encoding   | Mult | Description                                             |
 |---|---|---|---------|
-| page        | Integer  | 0..1 | The number of the page the results to be returned       |
-| pageSize    | Integer  | 0..1 | The maximum size of each page that contains the results |
+| page        | QueryParam | 0..1 | The number of the page the results to be returned       |
+| pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                 |
@@ -1328,9 +1328,9 @@ by mistake, then the service make that clear in the response generated.
 -->
 
 <!-- Spacing: |---|---|---|---------| -->
-| Parameter (in) | Encoding | Mult. | Description                              |
+| Parameter (in) | Encoding  | Mult. | Description                              |
 |---|---|---|---------|
-| xmlId          | Long     | 1     | The ID of the Xml object to be retrieved |
+| xmlId          | PathParam | 1     | The ID of the Xml object to be retrieved |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out)  | Encoding | Mult. | Description                                      |
@@ -1354,7 +1354,7 @@ Instances XML documents. It is implemented following the REST methodology and
 receives as an input a populated Xml object that contains all the mandatory
 information, including the applicable registered service Instance ID. The MSR
 will respond with a copy of the Xml object created, including its assigned ID.
-The internal structure the Instance is provided in more detail in the
+The internal structure the Xml object is provided in more detail in the
 [Service Data Model](#service-data-model) section.
 
 #### Operation functionality
@@ -1366,8 +1366,7 @@ The internal structure the Instance is provided in more detail in the
 Upon receiving a request to create a new Xml record, the service will access
 validate the provided Xml object fields, and depending on a successful outcome,
 will persist the data in its database. If an error occurs while persisting the
-provided Instance object, then the service make that clear in the response
-generated.
+provided Xml object, then the service make that clear in the response generated.
 
 #### Operation parameters
 <!--
@@ -1428,7 +1427,7 @@ internal structure the Instance is provided in more detail in the
 Upon receiving a request to update an existing Xml record, the service will
 validate the provided Xml object fields, and depending on a successful outcome,
 will persist the data in its database. If an error occurs while persisting the
-provided Instance object, then the service make that clear in the response
+provided Xml object, then the service make that clear in the response
 generated.
 
 #### Operation parameters
@@ -1488,7 +1487,7 @@ the Xml is provided in more detail in the
 
 Upon receiving a request to delete an existing Xml record, the service will
 validate the respective entry indeed exists in its database. If an error occurs
-while deleting the identified Instance object, then the service make that clear
+while deleting the identified Xml object, then the service make that clear
 in the response generated.
 
 #### Operation parameters
@@ -1512,9 +1511,328 @@ in the response generated.
 -->
 
 <!-- Spacing: |---|---|---|---------| -->
-| Parameter (in) | Encoding | Mult. | Description                     |
+| Parameter (in) | Encoding  | Mult. | Description                     |
 |---|---|---|---------|
-| xmlId          | Long     | 1     | The ID of the Xml to be deleted |
+| xmlId          | PathParam | 1     | The ID of the Xml to be deleted |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)     | Encoding | Mult. | Description                          |
+|---|---|---|---------|
+| result from operation | none     | 1     | The result of the deletion operation |
+
+## Service interface "DocInterface"
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
+
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
+
+The ***DocInterface*** interface allows service providers and consumers to
+interact with the MSR in order to retrieve and manipulate the data on the
+registered service instance Doc documents. A service provider should only be
+able to access information about all registered service instances but should
+only be allowed to alter/delete data related to services it provides. Service
+consumers should only be allowed access operation to Doc documents of the
+discovered instances. MSR administrator users however, are allowed to perform
+any data modifications.
+
+### Operation "getDocs"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***getDocs*** operation is to enable service
+providers and consumers to access a complete list of the registered service
+instance Doc documents directly. It is implemented following the REST
+methodology and receives only a page number and page size as input parameters.
+The MSR will respond with a list of all Doc objects, in a paged response. The  
+internal structure the Doc object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve all available documents, the service will
+access its database to retrieve and package the full list of Doc objects into a
+paged response. Only the results of the page that has been selected by the
+service consumers are returned. The service providers can navigate to other
+pages by repeating the same search query, with a difference page index
+parameter.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter   | Encoding   | Mult | Description                                             |
+|---|---|---|---------|
+| page        | QueryParam | 0..1 | The number of the page the results to be returned       |
+| pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult.  | Description                                                                                   |
+|---|---|---|---------|
+| Doc               | JSON     | 0..*   | A paged list of Doc objects, matching the requested criteria, encoded as per the service data model |
+
+### Operation "getDoc"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***getDoc*** operation is to enable service
+providers and consumers to access the information of a single Doc document. It
+is implemented following the REST methodology and receives the ID of the Doc to
+be retrieved as an input argument. The MSR will respond with the Doc object 
+identified by the provided ID, if that is found. The internal structure the
+Doc object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve a Doc document, the service will access its
+database to locate, retrieve and package the Doc object that matches the 
+provided ID. If the ID is not located, for example because it has been selected
+by mistake, then the service make that clear in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding  | Mult. | Description                              |
+|---|---|---|---------|
+| docId          | PathParam | 1     | The ID of the Doc object to be retrieved |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                                 |
+|---|---|---|---------|
+| Doc               | JSON     | 1     | The Doc object that matches the provided ID |
+
+### Operation "createDoc"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The relevant documents of a registered service are normally uploaded onto
+the MSR as part of the [InstanceInterface createInstance](#create-instance)
+operation. However, additional documents describing a service instance could
+be required, results in a service instance being associated with more than one
+documents. The main purpose of the interface's ***createDoc*** operation is
+to allow the service providers to upload more Doc documents at a later stage, 
+after a service has already been registered with the MSR. It is implemented
+following the REST methodology and receives as an input a populated Doc object
+that contains all the mandatory information, including the applicable 
+registered service Instance ID. The MSR will respond with a copy of the Doc
+object created, including its assigned ID. The internal structure the Doc is
+provided in more detail in the [Service Data Model](#service-data-model)
+section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to create a new Doc record, the service will access
+validate the provided Doc object fields, and depending on a successful outcome,
+will persist the data in its database. If an error occurs while persisting the
+provided Doc object, then the service make that clear in the response
+generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                      |
+|---|---|---|---------|
+| doc            | JSON     | 1     | The Doc object to be created with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)  | Encoding | Mult. | Description                                              |
+|---|---|---|---------|
+| Doc                | JSON     | 1     | The Doc object that was created along with its assigned ID |
+
+
+### Operation "updateDoc"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The relevant documents of a registered service are normally uploaded onto
+the MSR as part of the [InstanceInterface createInstance](#create-instance)
+operation. However, additional documents describing a service instance could
+be required, results in a service instance being associated with more than one
+documents. The main purpose of the interface's ***updateDoc*** operation is
+to allow the service providers to update the Doc documents of a service
+instance, after a service has already been registered with the MSR. It is
+implemented following the REST methodology and receives as an input a populated
+Doc object that contains all the mandatory information. The MSR will respond
+with a copy of the Doc object updated. The internal structure the Doc object is
+provided in more detail in the [Service Data Model](#service-data-model)
+section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to update an existing Doc record, the service will
+validate the provided Doc object fields, and depending on a successful outcome,
+will persist the data in its database. If an error occurs while persisting the
+provided Doc object, then the service make that clear in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                      |
+|---|---|---|---------|
+| doc            | JSON     | 1     | The Doc object to be updated with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                   |
+|---|---|---|---------|
+| Doc               | JSON     | 1     | The Doc object that was updated |
+
+### Operation "deleteDoc"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The relevant documents of a registered service are normally uploaded onto
+the MSR as part of the [InstanceInterface createInstance](#create-instance)
+operation. However, additional documents describing a service instance could
+be required, results in a service instance being associated with more than one
+documents. The main purpose of the interface's ***deleteDoc*** operation is
+to allow the service provider to remove documents already uploaded for a
+registered service instance. It is implemented following the REST methodology
+and receives as an input the ID of the Doc object to be deleted. The MSR will
+respond with a copy of the Doc object updated. The internal structure
+the Xml is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to delete an existing Doc record, the service will
+validate the respective entry indeed exists in its database. If an error occurs
+while deleting the identified Doc object, then the service make that clear
+in the response generated.
+
+#### Operation parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding  | Mult. | Description                   |
+|---|---|---|---------|
+| docId            | PathParam | 1     | The ID of the Doc to be deleted |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
