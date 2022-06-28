@@ -1731,10 +1731,10 @@ Doc object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve a Doc document, the service will access its
-database to locate, retrieve and package the Doc object that matches the 
-provided ID. If the ID is not located, for example because it has been selected
-by mistake, the service will make that clear in the response generated.
+Upon receiving a request to retrieve a specific Doc document, the service will
+access its database to locate, retrieve and package the Doc object that matches 
+the provided ID. If the ID is not located, for example because it has been 
+selected by mistake, the service will make that clear in the response generated.
 
 #### Operation Parameters
 <!--
@@ -1907,7 +1907,7 @@ the REST methodology and receives as an input the ID of the Doc object to be
 deleted. The MSR will respond with the outcome of the deletion operation,
 whether successful or not.
 
-#### Operation functionality
+#### Operation Functionality
 <!--
     Describe the functionality of the operation, i.e. how does it produce the
     output from the input payload.
@@ -1918,7 +1918,319 @@ validate the respective entry indeed exists in its database. If an error occurs
 while deleting the identified Doc object, the service will make that clear
 in the response generated.
 
-#### Operation parameters
+#### Operation Parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding  | Mult. | Description                   |
+|---|---|---|---------|
+| docId            | PathParam | 1     | The ID of the Doc to be deleted |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)     | Encoding | Mult. | Description                          |
+|---|---|---|---------|
+| result from operation | none     | 1     | The result of the deletion operation |
+
+## Service Interface "LedgerRequestInterface"
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
+
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
+
+The ***LedgerRequestInterface*** interface allows service providers to
+communicate with the global MSR ledger service, if that is available, in order
+to request an update on the global registration status of a registered service
+Instance. A Service provider should only be allowed to alter data related to the
+services it provides. MSR administrator users however, are allowed to perform
+any data modifications.
+
+### Operation "getLedgerRequests"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***getLedgerRequests*** operation is to enable
+service providers to access a complete list of the global MSR ledger service 
+registration requests directly. It is implemented following the REST methodology
+and receives only a page number and page size as input parameters. The MSR will
+respond with a list of all LedgerRequest objects, in a paged response. The
+internal structure of the LedgerRequest object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation Functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve all available LedgerRequest entries, the
+service will access its database to retrieve and package the full list of
+LedgerRequest objects into a paged response. Only the results of the page that
+has been selected by the service consumers are returned. Navigation to other
+pages can be achieved by repeating the same search query, with a difference page
+index parameter.
+
+#### Operation Parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter   | Encoding   | Mult | Description                                             |
+|---|---|---|---------|
+| page        | QueryParam | 0..1 | The number of the page the results to be returned       |
+| pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)  | Encoding | Mult.  | Description                                                                                            |
+|---|---|---|---------|
+| LedgerRequest      | JSON     | 0..*   | A paged list of LedgerRequest objects, matching the requested criteria, structured as per the service data model |
+
+### Operation "getLedgerRequest"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***getLedgerRequest*** operation is to enable
+service providers to access the information of a single getLedgerRequest entry.
+It is implemented following the REST methodology and receives the ID of the
+LedgerRequest to be retrieved as an input argument. The MSR will respond with
+the LedgerRequest object identified by the provided ID, if that is found. The
+internal structure of the LedgerRequest object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
+
+#### Operation Functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to retrieve a specific LedgerRequest entry, the service
+will access its database to locate, retrieve and package the LedgerRequest
+object that matches the provided ID. If the ID is not located, for example
+because it has been selected by mistake, the service will make that clear in the
+response generated.
+
+#### Operation Parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in)  | Encoding  | Mult. | Description                              |
+|---|---|---|---------|
+| ledgerRequestId | PathParam | 1     | The ID of the LedgerRequest object to be retrieved |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                                 |
+|---|---|---|---------|
+| LedgerRequest     | JSON     | 1     | The LedgerRequest object that matches the provided ID |
+
+### Operation "createLedgerRequest"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+After a service Instance has been registered locally in an MSR, if the current
+implementation supports a connection to a global MSR ledger service, the
+Instance can be made available to other supported MSRs. This is done by
+performing a ledger request to the global MSR ledger service, usually by the
+[InstanceInterface updateInstanceLedgerStatus](#operation-updateinstanceledgerstatus)
+operation. Alternatively the ***createLedgerRequest*** operation can be used.
+This is implemented following the REST methodology and receives as an input a
+populated LedgerRequest object that contains all the mandatory information,
+including the applicable registered service Instance ID. The MSR will respond
+with a copy of the LedgerRequest object created, including its assigned ID.
+The internal structure of the LedgerRequest object is provided in more detail 
+in the [Service Data Model](#service-data-model) section.
+
+#### Operation Functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to create a new Doc record, the service will access
+validate the provided Doc object fields, and depending on a successful outcome,
+will persist the data in its database. If an error occurs while persisting the
+provided Doc object, the service will make that clear in the response generated.
+
+#### Operation Parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                      |
+|---|---|---|---------|
+| doc            | JSON     | 1     | The Doc object to be created with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)  | Encoding | Mult. | Description                                              |
+|---|---|---|---------|
+| Doc                | JSON     | 1     | The Doc object that was created along with its assigned ID |
+
+### Operation "updateLedgerRequestStatus"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The relevant documents of a registered service are normally updated on the MSR
+as part of the [InstanceInterface createInstance](#operation-updateinstance)
+operation. However, additional documents describing a service Instance could
+be required, resulting in a service Instance being associated with more than one
+documents. The main purpose of the interface's ***updateDoc*** operation is
+to allow the service providers to update the Doc documents of a service
+Instance, after a service has already been registered with the MSR. It is
+implemented following the REST methodology and receives as an input a populated
+Doc object that contains all the mandatory information. The MSR will respond
+with a copy of the Doc object updated. The internal structure of the Doc object
+is provided in more detail in the [Service Data Model](#service-data-model)
+section.
+
+#### Operation Functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to update an existing Doc record, the service will
+validate the provided Doc object fields, and depending on a successful outcome,
+will persist the data in its database. If an error occurs while persisting the
+provided Doc object, the service will make that clear in the response generated.
+
+#### Operation Parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in) | Encoding | Mult. | Description                                                      |
+|---|---|---|---------|
+| doc            | JSON     | 1     | The Doc object to be updated with all mandatory fields populated |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                   |
+|---|---|---|---------|
+| Doc               | JSON     | 1     | The Doc object that was updated |
+
+### Operation "deleteLedgerRequest"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+It has been mentioned previously, that additional documents describing a service
+Instance could be required, resulting in a service Instance being associated
+with more than one documents. The main purpose of the interface's
+***deleteDoc*** operation is to allow the service provider to remove documents
+already uploaded for a registered service Instance. It is implemented following
+the REST methodology and receives as an input the ID of the Doc object to be
+deleted. The MSR will respond with the outcome of the deletion operation,
+whether successful or not.
+
+#### Operation Functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to delete an existing Doc record, the service will
+validate the respective entry indeed exists in its database. If an error occurs
+while deleting the identified Doc object, the service will make that clear
+in the response generated.
+
+#### Operation Parameters
 <!--
     Describe the logical data structure of input and output parameters of the 
     operation (payload) by using an explanatory table (see below) and optionally
@@ -2081,7 +2393,7 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \newline [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions...](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf)
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \newline [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467\(101\).pdf)
 2. Maritime Connectivity Platform, [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
 4. EfficienSea2 Project, [https://efficiensea2.org/](https://efficiensea2.org/)
