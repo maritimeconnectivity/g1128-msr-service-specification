@@ -1544,6 +1544,94 @@ in the response generated.
 |---|---|---|---------|
 | result from operation | none     | 1     | The result of the deletion operation |
 
+## Service Interface "XmlValidationInterface"
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
+
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
+
+The ***XmlValidationInterface*** interface allows service providers to validate
+whether the XML service Instance specifications to be uploaded to the MSR are
+indeed valid. The composition of the correct G-1128 specifications could be seen
+as cumbersome task, this interface intends to alleviate some of the complexities
+by automatically parsing the provided XML and reporting back any errors that
+were detected.
+
+### Operation "validateXml"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+The purpose of the interface's ***validateXml*** operation is to allow
+service providers to perform the actual validation task for their G-1128 XML
+specification schemas.
+
+Although only the G-1128 Instance Specification documentation is actually
+mandatory for an MSR implementation, this interface can allow the verification
+of all three levels of G-1128 specifications. These are modeled  by the
+***G1128Schemas*** enumeration, found in the
+[Service Data Model](#service-data-model) section.
+
+* SERVICE
+* DESIGN
+* INSTANCE
+
+The operation is implemented following the REST methodology and receives as an
+input the G1128Schemas type to be used for the validation and the XML input to
+be validated.
+
+#### Operation Functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to validate an XML input based on a G-1128 schema
+specification, the service will access its database to retrieve the requested
+G-1128 schema. Afterwards it will attempt to parse the provided XML input using
+the detected schema. The MSR will finally respond with the outcome of the
+parsing operation, if successful or not. When the validation process is
+completed successfully, the response will contain the unmarshalled XML object
+encoded using JSON. If any errors have been detected, they will be described as
+clearly as possible in the error response.
+
+#### Operation Parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter | Encoding  | Mult | Description                                                           |
+|---|---|---|---------|
+| schema    | PathParam | 1    | The the ID of the G-1128 schema to be used for the validation         |
+| xml       | XML       | 1    | The XML input to be validated against the G-1128 schema specification |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out) | Encoding | Mult. | Description                                                             |
+|---|---|---|---------|
+| Object            | JSON     | 1     | The umarshalled object generated after the successful parsing operation |
+
 ## Service Interface "DocInterface"
 <!--
     Please explain the purpose, message exchange pattern and architecture of 
@@ -1860,7 +1948,7 @@ in the response generated.
 |---|---|---|---------|
 | result from operation | none     | 1     | The result of the deletion operation |
 
-# Service dynamic behaviour
+# Service Dynamic Behaviour
 <!--
     This section describes the interactive behaviour between service interfaces
     (interaction specification) and, if required, between different services
@@ -1877,7 +1965,7 @@ in the response generated.
 
 A description should be given.
 
-## Service interface <INTERFACE NAME>
+## Service Interface <INTERFACE NAME>
 <!--
     Include some information about the dynamic aspects of the service
     interface; each operation shall be exposed on at least one diagram.
@@ -1902,7 +1990,7 @@ A description should be given.
   added here).
 -->
 
-# Service provisioning (Optional)
+# Service Provisioning (Optional)
 <!--
     This section shall describe the way services are planned to be provided and
     consumed.  It is labelled optional since one of the key aspects of
@@ -1993,7 +2081,7 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions...](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf)
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \newline [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions...](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf)
 2. Maritime Connectivity Platform, [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
 4. EfficienSea2 Project, [https://efficiensea2.org/](https://efficiensea2.org/)
