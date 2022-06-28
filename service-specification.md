@@ -2325,16 +2325,82 @@ process has been completed.
         * State machine diagrams.
 -->
 
-A description should be given.
+This section describes the interactive behaviour between service interfaces
+(interaction specification) and, if required, between different services
+(orchestration).
 
-## Service Interface <INTERFACE NAME>
+## Service Interface "SearchServiceInterface"
 <!--
     Include some information about the dynamic aspects of the service
     interface; each operation shall be exposed on at least one diagram.
     An example sequence diagram is shown in Figure 4.
 -->
 
-A description should be given.
+As described in the
+[SearchService Interface](#service-interface-searchserviceinterface) section, the
+MSR service discovery operation is performed through a simple REST call, using
+the POST HTTP method. The service consumer can then get the response which 
+contains all discovered registered service Instances which match the provided
+criteria.
+
+![MSR SearchService Interface Operation Sequence Diagram](materials/searchserviceintseqdiagram.drawio.png)
+
+## Service Interface "InstanceInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[Instance Interface](#service-interface-instanceinterface) section, the
+MSR Instance manipulation operations are performed through a simple REST calls.
+The service providers can then get the responses on the requested operations.
+
+![MSR Instance Interface Operation Sequence Diagram](materials/instanceintseqdiagram.drawio.png)
+
+## Service Interface "XmlInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[Xml Interface](#service-interface-xmlinterface) section, the
+MSR Xml manipulation operations are performed through a simple REST calls.
+The service providers can then get the responses on the requested operations.
+
+![MSR Xml Interface Operation Sequence Diagram](materials/xmlintseqdiagram.drawio.png)
+
+## Service Interface "DocInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[Doc Interface](#service-interface-docinterface) section, the
+MSR Doc manipulation operations are performed through a simple REST calls.
+The service providers can then get the responses on the requested operations.
+
+![MSR Doc Interface Operation Sequence Diagram](materials/docintseqdiagram.drawio.png)
+
+## Service Interface "LedgerRequestInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[LedgerRequest Interface](#service-interface-ledgerrequestinterface) section,
+the MSR LedgerRequest manipulation operations are performed through a simple
+REST calls. The service providers can then get the responses on the requested
+operations.
+
+![MSR LedgerRequest Interface Operation Sequence Diagram](materials/ledgerrequestintseqdiagram.drawio.png)
 
 <!-- ## Service orchestration (Optional) -->
 <!--
@@ -2458,12 +2524,19 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, [https://wwwcdn.imo.org/](https://wwwcdn.imo.org/)
-2. Maritime Connectivity Platform, [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
-3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
-4. EfficienSea2 Project, [https://efficiensea2.org/](https://efficiensea2.org/)
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
+[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/)
+2. Maritime Connectivity Platform, 
+[https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
+3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 
+[https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
+4. EfficienSea2 Project, 
+[https://efficiensea2.org/](https://efficiensea2.org/)
 5. IEC 63173-2 - Maritime navigation and radiocommunication equipment and systems. Data interface Part 2. Secure exchange and communication of S-100 based products (SECOM)
-6. IALA Maritime Resource Name (MRN) Registry, [https://www.iala-aism.org/technical/data-modelling/mrn/](https://www.iala-aism.org/technical/data-modelling/mrn/)
-7. S-100 Universal Hydrographic Data Model, [https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4](https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4)
-8. IALA International Dictionary of Marine Aids to Navigation, [http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
+6. IALA Maritime Resource Name (MRN) Registry, 
+[https://www.iala-aism.org/technical/data-modelling/mrn/](https://www.iala-aism.org/technical/data-modelling/mrn/)
+7. S-100 Universal Hydrographic Data Model, 
+[https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4](https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4)
+8. IALA International Dictionary of Marine Aids to Navigation, 
+[http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
 
