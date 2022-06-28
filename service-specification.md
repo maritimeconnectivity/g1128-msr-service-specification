@@ -1175,9 +1175,9 @@ The purpose of the interface's ***updateInstanceLedgerStatus*** operation is to
 allow service providers to further register a provided service Instance to the
 MSR global ledger, if that functionality is supported. The operation is 
 implemented following the REST methodology and receives as input the ID of the
-Instance of which the global ledger status will be updated, as well as the new
-applicable LedgerRequestStatus value. The MSR will respond with the outcome of
-the update operation, if successful or not.
+Instance of which the global registration status will be updated, as well as the
+new applicable LedgerRequestStatus value. The MSR will respond with the outcome
+of the update operation, if successful or not.
 
 #### Operation Functionality
 <!--
@@ -1196,8 +1196,8 @@ will update its own local copy of the Instance based on the received response.
 The process of contacting the MSR global ledger service described above, is
 executed in an asynchronous manner, meaning the original request to the MSR will
 be answered before the global ledger service is updated. Service providers will
-only be informed on the final outcome, once this hs been completed. This can be
-done by looking at the changes in the local MSR ledger status.
+only be informed on the final outcome, once this asynchronous process has been
+completed.
 
 #### Operation Parameters
 <!--
@@ -1390,7 +1390,7 @@ in the [Service Data Model](#service-data-model) section.
     output from the input payload.
 -->
 
-Upon receiving a request to create a new Xml record, the service will access
+Upon receiving a request to create a new Xml record, the service will access and
 validate the provided Xml object fields, and depending on a successful outcome,
 will persist the data in its database. If an error occurs while persisting the
 provided Xml object, the service will make that clear in the response generated.
@@ -1452,9 +1452,10 @@ the [Service Data Model](#service-data-model) section.
 -->
 
 Upon receiving a request to update an existing Xml record, the service will
-validate the provided Xml object fields, and depending on a successful outcome,
-will persist the data in its database. If an error occurs while persisting the
-provided Xml object, the service will make that clear in the response generated.
+access and validate the provided Xml object fields, and depending on a
+successful outcome, will persist the data in its database. If an error occurs
+while persisting the provided Xml object, the service will make that clear in
+the response generated.
 
 #### Operation Parameters
 <!--
@@ -1793,9 +1794,9 @@ object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to create a new Doc record, the service will access
+Upon receiving a request to create a new Doc record, the service will access and
 validate the provided Doc object fields, and depending on a successful outcome,
-will persist the data in its database. If an error occurs while persisting the
+will persist the data in its database. If an error occurs while persisting the 
 provided Doc object, the service will make that clear in the response generated.
 
 #### Operation Parameters
@@ -1856,9 +1857,10 @@ section.
 -->
 
 Upon receiving a request to update an existing Doc record, the service will
-validate the provided Doc object fields, and depending on a successful outcome,
-will persist the data in its database. If an error occurs while persisting the
-provided Doc object, the service will make that clear in the response generated.
+access and validate the provided Doc object fields, and depending on a
+successful outcome, will persist the data in its database. If an error occurs
+while persisting the provided Doc object, the service will make that clear in
+the response generated.
 
 #### Operation Parameters
 <!--
@@ -1959,9 +1961,9 @@ in the response generated.
 -->
 
 The ***LedgerRequestInterface*** interface allows service providers to
-communicate with the global MSR ledger service, if that is available, in order
-to request an update on the global registration status of a registered service
-Instance. A Service provider should only be allowed to alter data related to the
+interface with the MSR and access information on the registration requests made
+to the global MSR ledger service, regarding their registered service Instances.
+A Service provider should only be allowed to alter data related to the
 services it provides. MSR administrator users however, are allowed to perform
 any data modifications.
 
@@ -2089,17 +2091,23 @@ response generated.
 -->
 
 After a service Instance has been registered locally in an MSR, if the current
-implementation supports a connection to a global MSR ledger service, the
+implementation supports a connection to a global MSR ledger service, the service
 Instance can be made available to other supported MSRs. This is done by
-performing a ledger request to the global MSR ledger service, usually by the
+sending a ledger request to the global MSR ledger service, usually through the
 [InstanceInterface updateInstanceLedgerStatus](#operation-updateinstanceledgerstatus)
-operation. Alternatively the ***createLedgerRequest*** operation can be used.
-This is implemented following the REST methodology and receives as an input a
-populated LedgerRequest object that contains all the mandatory information,
-including the applicable registered service Instance ID. The MSR will respond
-with a copy of the LedgerRequest object created, including its assigned ID.
-The internal structure of the LedgerRequest object is provided in more detail 
-in the [Service Data Model](#service-data-model) section.
+operation. Optionally, this operation can be initiated through the 
+***createLedgerRequest*** operation. Note that this operation does *NOT*
+contact the global MSR ledger service and will only create a local request entry
+in the database. Only the ***InstanceInterface*** operation can then be used to 
+update the global registration status. Therefore, it can be assumed that this
+operation is primarily for administration purposes.
+
+The operation is implemented following the REST methodology and receives as an
+input a populated LedgerRequest object that contains all the mandatory
+information, including the applicable registered service Instance ID. The MSR
+will respond with a copy of the LedgerRequest object created, including its
+assigned ID. The internal structure of the LedgerRequest object is provided in
+more detail in the [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -2107,10 +2115,11 @@ in the [Service Data Model](#service-data-model) section.
     output from the input payload.
 -->
 
-Upon receiving a request to create a new Doc record, the service will access
-validate the provided Doc object fields, and depending on a successful outcome,
-will persist the data in its database. If an error occurs while persisting the
-provided Doc object, the service will make that clear in the response generated.
+Upon receiving a request to create a new LedgerRequest record, the service will
+access and validate the provided LedgerRequest object fields, and depending on a
+successful outcome, will persist the data in its database. If an error occurs
+while persisting the provided LedgerRequest object, the service will make that
+clear in the response generated.
 
 #### Operation Parameters
 <!--
@@ -2135,73 +2144,12 @@ provided Doc object, the service will make that clear in the response generated.
 <!-- Spacing: |---|---|---|---------| -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
 |---|---|---|---------|
-| doc            | JSON     | 1     | The Doc object to be created with all mandatory fields populated |
+| LedgerRequest  | JSON     | 1     | The LedgerRequest object to be created with all mandatory fields populated |
 
 <!-- Spacing: |---|---|---|---------| -->
-| Return Type (out)  | Encoding | Mult. | Description                                              |
+| Return Type (out) | Encoding | Mult. | Description                                              |
 |---|---|---|---------|
-| Doc                | JSON     | 1     | The Doc object that was created along with its assigned ID |
-
-### Operation "updateLedgerRequestStatus"
-<!--
-    Give an overview of the operation: Include here a textual description of
-    the operation functionality. In most situations this will be the same as
-    the operation description taken from the UML modelling tool.
--->
-
-The relevant documents of a registered service are normally updated on the MSR
-as part of the [InstanceInterface createInstance](#operation-updateinstance)
-operation. However, additional documents describing a service Instance could
-be required, resulting in a service Instance being associated with more than one
-documents. The main purpose of the interface's ***updateDoc*** operation is
-to allow the service providers to update the Doc documents of a service
-Instance, after a service has already been registered with the MSR. It is
-implemented following the REST methodology and receives as an input a populated
-Doc object that contains all the mandatory information. The MSR will respond
-with a copy of the Doc object updated. The internal structure of the Doc object
-is provided in more detail in the [Service Data Model](#service-data-model)
-section.
-
-#### Operation Functionality
-<!--
-    Describe the functionality of the operation, i.e. how does it produce the
-    output from the input payload.
--->
-
-Upon receiving a request to update an existing Doc record, the service will
-validate the provided Doc object fields, and depending on a successful outcome,
-will persist the data in its database. If an error occurs while persisting the
-provided Doc object, the service will make that clear in the response generated.
-
-#### Operation Parameters
-<!--
-    Describe the logical data structure of input and output parameters of the 
-    operation (payload) by using an explanatory table (see below) and optionally
-    UML diagrams (which are usually sub-sets of the service data model described
-    in previous section above).
-
-    Figure 9 shows an example of a UML diagram (subset of the service data 
-    model, related to one operation).
-
-    It is mandatory to provide a table with a clear description of each service
-    operation parameter and the information about which data types defined in
-    the service data mode are used by the service operation in its input and
-    output parameters.
-
-    Note: While the descriptions provided in the service data model shall 
-    explain the data types in a neutral format, the descriptions provided here 
-    shall explicitly explain the purpose of the parameters for the operation.
--->
-
-<!-- Spacing: |---|---|---|---------| -->
-| Parameter (in) | Encoding | Mult. | Description                                                      |
-|---|---|---|---------|
-| doc            | JSON     | 1     | The Doc object to be updated with all mandatory fields populated |
-
-<!-- Spacing: |---|---|---|---------| -->
-| Return Type (out) | Encoding | Mult. | Description                   |
-|---|---|---|---------|
-| Doc               | JSON     | 1     | The Doc object that was updated |
+| LedgerRequest     | JSON     | 1     | LedgerRequest Doc object that was created along with its assigned ID |
 
 ### Operation "deleteLedgerRequest"
 <!--
@@ -2210,13 +2158,13 @@ provided Doc object, the service will make that clear in the response generated.
     the operation description taken from the UML modelling tool.
 -->
 
-It has been mentioned previously, that additional documents describing a service
-Instance could be required, resulting in a service Instance being associated
-with more than one documents. The main purpose of the interface's
-***deleteDoc*** operation is to allow the service provider to remove documents
-already uploaded for a registered service Instance. It is implemented following
-the REST methodology and receives as an input the ID of the Doc object to be
-deleted. The MSR will respond with the outcome of the deletion operation,
+Each service Instance, registered with an MSR, can only have at most one 
+LedgerRequest entry associated with it. Therefore, if something goes wrong, it
+might be required to delete this entry in order to create a new one. The 
+***deleteLedgerRequest*** provides this functionality and is mainly used by
+administrator users to correct this kind of issues. It is implemented following
+the REST methodology and receives as an input the ID of the LedgerRequest object
+to be deleted. The MSR will respond with the outcome of the deletion operation,
 whether successful or not.
 
 #### Operation Functionality
@@ -2225,10 +2173,10 @@ whether successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to delete an existing Doc record, the service will
-validate the respective entry indeed exists in its database. If an error occurs
-while deleting the identified Doc object, the service will make that clear
-in the response generated.
+Upon receiving a request to delete an existing LedgerRequest record, the service
+will validate the respective entry indeed exists in its database. If an error
+occurs while deleting the identified LedgerRequest object, the service will make
+that clear in the response generated.
 
 #### Operation Parameters
 <!--
@@ -2251,14 +2199,108 @@ in the response generated.
 -->
 
 <!-- Spacing: |---|---|---|---------| -->
-| Parameter (in) | Encoding  | Mult. | Description                   |
+| Parameter (in)  | Encoding  | Mult. | Description                   |
 |---|---|---|---------|
-| docId            | PathParam | 1     | The ID of the Doc to be deleted |
+| ledgerRequestId | PathParam | 1     | The ID of the LedgerRequest to be deleted |
 
 <!-- Spacing: |---|---|---|---------| -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
 |---|---|---|---------|
 | result from operation | none     | 1     | The result of the deletion operation |
+
+## Service Interface "LedgerRequestStatusInterface" (Optional)
+<!--
+    Please explain the purpose, message exchange pattern and architecture of 
+    the Interface.
+
+    A Service Interface supports one or several service operations.  Each 
+    operation in the service interface shall be described in the following 
+    sections.
+-->
+
+The ***LedgerRequestStatusInterface*** interface allows service providers to
+communicate with the global MSR ledger service, if that is available, in order
+to request an update on the global registration status of a registered service
+Instance. A Service provider should only be allowed to alter data related to the
+services it provides. MSR administrator users however, are allowed to perform
+any data modifications.
+
+### Operation "updateLedgerRequestStatus"
+<!--
+    Give an overview of the operation: Include here a textual description of
+    the operation functionality. In most situations this will be the same as
+    the operation description taken from the UML modelling tool.
+-->
+
+After a service Instance has been registered locally in an MSR, if the current
+implementation supports a connection to a global MSR ledger service, the service
+Instance can be made available to other connected MSRs. This is done by sending
+a ledger request to the global MSR ledger service, usually through the
+[InstanceInterface updateInstanceLedgerStatus](#operation-updateinstanceledgerstatus)
+operation. Alternatively, if a LedgerRequest entry has already been created and
+its assigned ID is known, this operation can be performed through the
+***updateLedgerRequestStatus*** operation.
+
+This operation is implemented following the REST methodology and receives as an
+input the ID of an already initialised LedgerRequest object that provides all
+the mandatory information, including the applicable registered service Instance
+ID. In addition, the new global registration status value is required. The MSR
+will respond with the outcome of the update operation, if successful or not.
+
+#### Operation Functionality
+<!--
+    Describe the functionality of the operation, i.e. how does it produce the
+    output from the input payload.
+-->
+
+Upon receiving a request to update a service Instance's global registration
+status for a specific LedgerRequest entry, the service will access its database
+to validate that the LedgerRequest ID provided is indeed valid. If that is the
+case, the MSR will return a response to the initial request and at the same time
+can initiate a request to the MSR global ledger service to update the global
+registration status value, for the specified service Instance. After a
+successful response from the ledger, the MSR will update its own local copy of
+the Instance based on the received response.
+
+As in the 
+[InstanceInterface updateInstanceLedgerStatus](#operation-updateinstanceledgerstatus)
+operation, the process of contacting the MSR global ledger service described
+above, is executed in an asynchronous manner, meaning the original request to
+the MSR will be answered before the global ledger service is updated. Service
+providers will only be informed on the final outcome, once this asynchronous 
+process has been completed.
+
+#### Operation Parameters
+<!--
+    Describe the logical data structure of input and output parameters of the 
+    operation (payload) by using an explanatory table (see below) and optionally
+    UML diagrams (which are usually sub-sets of the service data model described
+    in previous section above).
+
+    Figure 9 shows an example of a UML diagram (subset of the service data 
+    model, related to one operation).
+
+    It is mandatory to provide a table with a clear description of each service
+    operation parameter and the information about which data types defined in
+    the service data mode are used by the service operation in its input and
+    output parameters.
+
+    Note: While the descriptions provided in the service data model shall 
+    explain the data types in a neutral format, the descriptions provided here 
+    shall explicitly explain the purpose of the parameters for the operation.
+-->
+
+<!-- Spacing: |---|---|---|---------| -->
+| Parameter (in)      | Encoding   | Mult. | Description                                                                                               |
+|---|---|---|---------|
+| ledgerRequestId     | PathParam  | 1     | The ID of the ledger request to update the global regidstration status of the respective service Instance |
+| ledgerRequestStatus | QueryParam | 1     | The global regidstration status requested by the global MSR ledger service request                        |
+
+<!-- Spacing: |---|---|---|---------| -->
+| Return Type (out)     | Encoding | Mult. | Description                   |
+|---|---|---|---------|
+| result from operation | none     | 1     | The result of the deletion operation |
+
 
 # Service Dynamic Behaviour
 <!--
@@ -2393,7 +2435,7 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \newline [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467\(101\).pdf)
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \newline [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/)
 2. Maritime Connectivity Platform, [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
 4. EfficienSea2 Project, [https://efficiensea2.org/](https://efficiensea2.org/)
