@@ -660,12 +660,13 @@ that this interface is implemented as required.
 The purpose of the interface's ***searchService*** operation is to allow service
 consumers to query the MSR about registered instances of e-Navigation services  
 with specific properties, i.e. able to produce a compatible IALA S-100 [7] data 
-product dataset. It is implemented following the REST methodology and receives a 
-*SearhFilterObject* object, which contains all the necessary parameter required
-to identify a set of matching registered services. The MSR will respond with a
-list of matching services, encoded into *SearchObjectResult* objects, in a paged
-response. The internal structure of both the *SearhFilterObject* and 
-*SearchObjectResult* objects is governed by the SECOM standard.
+product dataset. It is implemented following the REST methodology using a POST
+HTTP method. It receives a *SearhFilterObject* object, which contains all the
+necessary parameter required to identify a set of matching registered services.
+The MSR will respond with a list of matching services, encoded into
+*SearchObjectResult* objects, in a paged response. The internal structure of
+both the *SearhFilterObject* and *SearchObjectResult* objects is governed by the
+SECOM standard.
 
 ##### Operation Functionality
 <!--
@@ -751,10 +752,10 @@ XML and human-readable text formats using the Xml and Doc objects respectively.
 The purpose of the interface's ***getInstances*** operation is to enable service
 providers to access a complete list of the registered service instances, without
 calling the more specialised but also expensive (resource-wise) SearchService
-interface. It is implemented following the REST methodology and receives only a
-page number and a page size as input parameters. The MSR will respond with a 
-list of all Instance objects, in a paged response. The internal structure of the
-Instance object is provided in more detail in the
+interface. It is implemented following the REST methodology using a GET HTTP 
+method. It receives only a page number and a page size as input parameters.
+The MSR will respond with a list of all Instance objects, in a paged response.
+The internal structure of the Instance object is provided in more detail in the
 [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
@@ -810,10 +811,10 @@ parameter.
 
 The purpose of the interface's ***getInstance*** operation is to enable service
 providers to access the information of a single registered service instance. 
-It is implemented following the REST methodology and receives the ID of the
-Instance to be retrieved as an input argument. The MSR will respond with the
-Instance object identified by the provided ID, if that is found. The internal
-structure the Instance is provided in more detail in the 
+It is implemented following the REST methodology using a GET HTTP method. It 
+receives the ID of the Instance to be retrieved as an input argument. The MSR
+will respond with the Instance object identified by the provided ID, if that is
+found. The internal structure the Instance is provided in more detail in the 
 [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
@@ -867,11 +868,12 @@ the response generated.
 
 The purpose of the interface's ***createInstance*** operation is to enable
 service providers to create new entries of registered service Instances. It is
-implemented following the REST methodology and receives as an input a populated
-Instance object that contains all the mandatory information. The MSR will 
-respond with a copy of the Instance object created, including its assigned ID.
-The internal structure of the Instance object is provided in more detail in the 
-[Service Data Model](#service-data-model) section.
+implemented following the REST methodology using a POST HTTP method. It receives
+as an input a populated Instance object that contains all the mandatory
+information. The MSR will  respond with a copy of the Instance object created,
+including its assigned ID. The internal structure of the Instance object is
+provided in more detail in the [Service Data Model](#service-data-model)
+section.
 
 #### Operation Functionality
 <!--
@@ -932,11 +934,12 @@ on the other hand, can be used to provide the human-readable text documentation.
 
 The purpose of the interface's ***updateInstance*** operation is to enable
 service providers to update existing entries of registered service Instances.
-It is implemented following the REST methodology and receives as an input a
-populated Instance object that contains all the mandatory information. The MSR
-will respond with a copy of the Instance object updated, including its assigned 
-ID. The internal structure of the Instance object is provided in more detail in
-the [Service Data Model](#service-data-model) section.
+It is implemented following the REST methodology using a PUT HTTP method. It
+receives as an input a populated Instance object that contains all the mandatory
+information. The MSR will respond with a copy of the Instance object updated,
+including its assigned ID. The internal structure of the Instance object is
+provided in more detail in the [Service Data Model](#service-data-model)
+section.
 
 #### Operation Functionality
 <!--
@@ -1001,9 +1004,9 @@ has been not change.
 
 The purpose of the interface's ***deleteInstance*** operation is to enable
 service providers to delete existing entries of registered service Instances. It
-is implemented following the REST methodology and receives as an input the ID of
-the registered Instance to be deleted. The MSR will respond with the outcome of
-the deletion operation, if successful or not.
+is implemented following the REST methodology using a DELETE HTTP method. It
+receives as an input the ID of the registered Instance to be deleted. The MSR
+will respond with the outcome of the deletion operation, if successful or not.
 
 #### Operation Functionality
 <!--
@@ -1082,10 +1085,10 @@ any data modifications.
 
 The purpose of the interface's ***updateInstanceStatus*** operation is to allow
 service providers to update the registration status of the Instances they
-provide. It is implemented following the REST methodology and receives as input
-the ID of the Instance of which the status will be updated, as well as the new
-applicable Instance status value. The MSR will respond with the outcome of the
-update operation, if successful or not.
+provide. It is implemented following the REST methodology using a PUT HTTP 
+method. It receives as input the ID of the Instance of which the status will be
+updated, as well as the new applicable Instance status value. The MSR will
+respond with the outcome of the update operation, if successful or not.
 
 #### Operation Functionality
 <!--
@@ -1174,10 +1177,10 @@ any data modifications.
 The purpose of the interface's ***updateInstanceLedgerStatus*** operation is to
 allow service providers to further register a provided service Instance to the
 MSR global ledger, if that functionality is supported. The operation is 
-implemented following the REST methodology and receives as input the ID of the
-Instance of which the global registration status will be updated, as well as the
-new applicable LedgerRequestStatus value. The MSR will respond with the outcome
-of the update operation, if successful or not.
+implemented following the REST methodology using a PUT HTTP method. It receives
+as input the ID of the Instance of which the global registration status will be
+updated, as well as the new applicable LedgerRequestStatus value. The MSR will
+respond with the outcome of the update operation, if successful or not.
 
 #### Operation Functionality
 <!--
@@ -1258,11 +1261,11 @@ perform any data modifications.
 
 The purpose of the interface's ***getXmls*** operation is to enable service
 providers to access a complete list of the registered service Instances' XML
-documents directly. It is implemented following the REST methodology and 
-receives only a page number and page size as input parameters. The MSR will
-respond with a list of all Xml objects, in a paged response. The internal 
-structure the Xml object is provided in more detail in the 
-[Service Data Model](#service-data-model) section.
+documents directly. It is implemented following the REST methodology using a
+GET HTTP method. It receives only a page number and page size as input
+parameters. The MSR will respond with a list of all Xml objects, in a paged
+response. The internal structure the Xml object is provided in more detail in
+the [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -1317,10 +1320,10 @@ parameter.
 
 The purpose of the interface's ***getXml*** operation is to enable service
 providers and consumers to access the information of a single XML document. It
-is implemented following the REST methodology and receives the ID of the Xml to
-be retrieved as an input argument. The MSR will respond with the Xml object
-identified by the provided ID, if that is found. The internal structure of the
-Xml object is provided in more detail in the 
+is implemented following the REST methodology using a GET HTTP method. It
+receives the ID of the Xml to be retrieved as an input argument. The MSR will
+respond with the Xml object identified by the provided ID, if that is found. The
+internal structure of the Xml object is provided in more detail in the 
 [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
@@ -1378,11 +1381,12 @@ should ever be required by any service provider, while it should not be allowed
 for any service consumers. The main purpose of the interface's ***createXml***
 operation to allow the system administrators to correct issues related to the
 registered Instances' XML documents. It is implemented following the REST
-methodology and receives as an input a populated Xml object that contains all
-the mandatory information, including the applicable registered service Instance
-ID. The MSR will respond with a copy of the Xml object created, including its
-assigned ID. The internal structure of the Xml object is provided in more detail
-in the [Service Data Model](#service-data-model) section.
+methodology using a POST HTTP method. It receives as an input a populated Xml
+object that contains all the mandatory information, including the applicable
+registered service Instance ID. The MSR will respond with a copy of the Xml
+object created, including its assigned ID. The internal structure of the Xml
+object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -1440,10 +1444,11 @@ should ever be required by any service provider, while it should not be allowed
 for any service consumers. The main purpose of the interface's ***updateXml***
 operation to allow the system administrators to correct issues related to the
 registered Instances XML documents. It is implemented following the REST
-methodology and receives as an input a populated Xml object that contains all
-the mandatory information. The MSR will respond with a copy of the Xml object
-updated. The internal structure of the Xml object is provided in more detail in
-the [Service Data Model](#service-data-model) section.
+methodology using a PUT HTTP method. It receives as an input a populated Xml
+object that contains all the mandatory information. The MSR will respond with a
+copy of the Xml object updated. The internal structure of the Xml object is
+provided in more detail in the [Service Data Model](#service-data-model)
+section.
 
 #### Operation Functionality
 <!--
@@ -1500,9 +1505,10 @@ Therefore, it is highly unlikely that the ***deleteXml*** operation should ever
 be required by any service provider, while it should not be allowed for any
 service consumers. The main purpose of the interface's ***deleteXml*** operation
 to allow the system administrators to correct issues related to the registered
-Instances XML documents. It is implemented following the REST methodology and
-receives as an input the ID of the Xml object to be deleted. The MSR will
-respond with the outcome of the deletion operation, whether successful or not.
+Instances XML documents. It is implemented following the REST methodology using
+a DELETE HTTP method. It receives as an input the ID of the Xml object to be
+deleted. The MSR will respond with the outcome of the deletion operation,
+whether successful or not.
 
 #### Operation Functionality
 <!--
@@ -1583,9 +1589,9 @@ of all three levels of G-1128 specifications. These are modeled  by the
 * DESIGN
 * INSTANCE
 
-The operation is implemented following the REST methodology and receives as an
-input the G1128Schemas type to be used for the validation and the XML input to
-be validated.
+The operation is implemented following the REST methodology using a POST HTTP
+method. It receives as an input the G1128Schemas type to be used for the
+validation and the XML input to be validated.
 
 #### Operation Functionality
 <!--
@@ -1661,11 +1667,11 @@ perform any data modifications.
 
 The purpose of the interface's ***getDocs*** operation is to enable service
 providers to access a complete list of the registered service Instances' Doc
-documents directly. It is implemented following the REST methodology and
-receives only a page number and page size as input parameters. The MSR will
-respond with a list of all Doc objects, in a paged response. The internal
-structure of the Doc object is provided in more detail in the
-[Service Data Model](#service-data-model) section.
+documents directly. It is implemented following the REST methodology using a
+GET HTTP method. It receives only a page number and page size as input
+parameters. The MSR will respond with a list of all Doc objects, in a paged
+response. The internal structure of the Doc object is provided in more detail in
+the [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -1720,10 +1726,10 @@ parameter.
 
 The purpose of the interface's ***getDoc*** operation is to enable service
 providers and consumers to access the information of a single Doc document. It
-is implemented following the REST methodology and receives the ID of the Doc to
-be retrieved as an input argument. The MSR will respond with the Doc object 
-identified by the provided ID, if that is found. The internal structure of the
-Doc object is provided in more detail in the
+is implemented following the REST methodology using a GET HTTP method. It
+receives the ID of the Doc to be retrieved as an input argument. The MSR will
+respond with the Doc object identified by the provided ID, if that is found. The
+internal structure of the Doc object is provided in more detail in the
 [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
@@ -1781,11 +1787,11 @@ be required, resulting in a service Instance being associated with more than one
 documents. The main purpose of the interface's ***createDoc*** operation is
 to allow the service providers to upload these additional Doc documents at a
 later stage, after a service has already been registered with the MSR. It is
-implemented following the REST methodology and receives as an input a populated
-Doc object that contains all the mandatory information, including the applicable 
-registered service Instance ID. The MSR will respond with a copy of the Doc
-object created, including its assigned ID. The internal structure of the Doc 
-object is provided in more detail in the
+implemented following the REST methodology using a POST HTTP method. It receives
+as an input a populated Doc object that contains all the mandatory information,
+including the applicable registered service Instance ID. The MSR will respond
+with a copy of the Doc object created, including its assigned ID. The internal
+structure of the Doc object is provided in more detail in the
 [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
@@ -1844,11 +1850,11 @@ be required, resulting in a service Instance being associated with more than one
 documents. The main purpose of the interface's ***updateDoc*** operation is
 to allow the service providers to update the Doc documents of a service
 Instance, after a service has already been registered with the MSR. It is
-implemented following the REST methodology and receives as an input a populated
-Doc object that contains all the mandatory information. The MSR will respond
-with a copy of the Doc object updated. The internal structure of the Doc object
-is provided in more detail in the [Service Data Model](#service-data-model)
-section.
+implemented following the REST methodology using a PUT HTTP method. It receives
+as an input a populated Doc object that contains all the mandatory information.
+The MSR will respond with a copy of the Doc object updated. The internal
+structure of the Doc object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -1905,9 +1911,9 @@ Instance could be required, resulting in a service Instance being associated
 with more than one documents. The main purpose of the interface's 
 ***deleteDoc*** operation is to allow the service provider to remove documents
 already uploaded for a registered service Instance. It is implemented following
-the REST methodology and receives as an input the ID of the Doc object to be
-deleted. The MSR will respond with the outcome of the deletion operation,
-whether successful or not.
+the REST methodology using a DELETE HTTP method. It receives as an input the ID
+of the Doc object to be deleted. The MSR will respond with the outcome of the
+deletion operation, whether successful or not.
 
 #### Operation Functionality
 <!--
@@ -1977,10 +1983,10 @@ any data modifications.
 The purpose of the interface's ***getLedgerRequests*** operation is to enable
 service providers to access a complete list of the global MSR ledger service 
 registration requests directly. It is implemented following the REST methodology
-and receives only a page number and page size as input parameters. The MSR will
-respond with a list of all LedgerRequest objects, in a paged response. The
-internal structure of the LedgerRequest object is provided in more detail in the
-[Service Data Model](#service-data-model) section.
+using a GET HTTP method. It receives only a page number and page size as input
+parameters. The MSR will respond with a list of all LedgerRequest objects, in a
+paged response. The internal structure of the LedgerRequest object is provided
+in more detail in the [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -2035,11 +2041,11 @@ index parameter.
 
 The purpose of the interface's ***getLedgerRequest*** operation is to enable
 service providers to access the information of a single getLedgerRequest entry.
-It is implemented following the REST methodology and receives the ID of the
-LedgerRequest to be retrieved as an input argument. The MSR will respond with
-the LedgerRequest object identified by the provided ID, if that is found. The
-internal structure of the LedgerRequest object is provided in more detail in the
-[Service Data Model](#service-data-model) section.
+It is implemented following the REST methodology using a GET HTTP method. It
+receives the ID of the LedgerRequest to be retrieved as an input argument. The
+MSR will respond with the LedgerRequest object identified by the provided ID, if
+that is found. The internal structure of the LedgerRequest object is provided in
+more detail in the [Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -2102,12 +2108,13 @@ in the database. Only the ***InstanceInterface*** operation can then be used to
 update the global registration status. Therefore, it can be assumed that this
 operation is primarily for administration purposes.
 
-The operation is implemented following the REST methodology and receives as an
-input a populated LedgerRequest object that contains all the mandatory
-information, including the applicable registered service Instance ID. The MSR
-will respond with a copy of the LedgerRequest object created, including its
-assigned ID. The internal structure of the LedgerRequest object is provided in
-more detail in the [Service Data Model](#service-data-model) section.
+The operation is implemented following the REST methodology using a POST HTTP
+method. It receives as an input a populated LedgerRequest object that contains
+all the mandatory information, including the applicable registered service
+Instance ID. The MSR will respond with a copy of the LedgerRequest object
+created, including its assigned ID. The internal structure of the LedgerRequest
+object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -2163,9 +2170,9 @@ LedgerRequest entry associated with it. Therefore, if something goes wrong, it
 might be required to delete this entry in order to create a new one. The 
 ***deleteLedgerRequest*** provides this functionality and is mainly used by
 administrator users to correct this kind of issues. It is implemented following
-the REST methodology and receives as an input the ID of the LedgerRequest object
-to be deleted. The MSR will respond with the outcome of the deletion operation,
-whether successful or not.
+the REST methodology using a DELETE HTTP method. It receives as an input the ID
+of the LedgerRequest object to be deleted. The MSR will respond with the outcome
+of the deletion operation, whether successful or not.
 
 #### Operation Functionality
 <!--
@@ -2241,11 +2248,12 @@ operation. Alternatively, if a LedgerRequest entry has already been created and
 its assigned ID is known, this operation can be performed through the
 ***updateLedgerRequestStatus*** operation.
 
-This operation is implemented following the REST methodology and receives as an
-input the ID of an already initialised LedgerRequest object that provides all
-the mandatory information, including the applicable registered service Instance
-ID. In addition, the new global registration status value is required. The MSR
-will respond with the outcome of the update operation, if successful or not.
+This operation is implemented following the REST methodology using a PUT HTTP
+method. It receives as an input the ID of an already initialised LedgerRequest
+object that provides all the mandatory information, including the applicable
+registered service Instance ID. In addition, the new global registration status
+value is required. The MSR will respond with the outcome of the update
+operation, if successful or not.
 
 #### Operation Functionality
 <!--
@@ -2290,9 +2298,9 @@ process has been completed.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: |------|---|---|------------| -->
 | Parameter (in)      | Encoding   | Mult. | Description                                                                                               |
-|---|---|---|---------|
+|------|---|---|------------|
 | ledgerRequestId     | PathParam  | 1     | The ID of the ledger request to update the global regidstration status of the respective service Instance |
 | ledgerRequestStatus | QueryParam | 1     | The global regidstration status requested by the global MSR ledger service request                        |
 
@@ -2344,7 +2352,7 @@ A description should be given.
   added here).
 -->
 
-# Service Provisioning (Optional)
+# Service Provisioning
 <!--
     This section shall describe the way services are planned to be provided and
     consumed.  It is labelled optional since one of the key aspects of
@@ -2354,20 +2362,33 @@ A description should be given.
     not necessarily known at the time, when the service is designed.
 -->
 
-A service management concept with MSR is visualised as below. Both, service 
-specifications as well as information about service instances can be published 
-in a service registry. A service registry can be a collection of documents, or 
-could be realised as a service itself that would have an Application 
+A service management concept using MSR can be described as follows. Both, 
+service specifications, and information about the service Instances can be
+published in a service registry. A service registry can be a collection of
+documents, or could be realised as a service itself that would have an Application 
 Programming Interface (API) for automatic interfacing to the registry (lookup, 
 updating, deleting etc.). This concept is implemented as MSR within MCP 
 (formerly called the Maritime Cloud), see https://maritimeconnectivity.net/.
 
-This section shall describe the way services are planned to be provided and
-consumed. It is labelled optional since one of the key aspects of
-service-orientation is to increase flexibility of the overall system by
-separating the definition of services from their implementation. This means
-that a service can be provided in several different contexts that are not
-necessarily known at the time, when the service is designed.
+In the current implementation described in this document, the MSR has been 
+implemented as an online web service, exposing an API using the REST
+methodology over HTTP. The following HTTP methods are used for the various 
+operations described in the
+[Interface Interface Specifications](#service-interface-specifications) section.
+
+<!-- Spacing: |---|------------| -->
+| Method | Description                                                                                                               |
+|---|------------|
+| GET    | Get a representation of the target resource’s state.                                                                      |
+| POST   | Let the target resource process the representation enclosed in the request.                                               |  
+| PUT    | Create or replace the state of the target resource with the state defined by the representation enclosed in the request.  | 
+| DELETE | Delete the target resource’s state.                                                                                       |                                                                                 
+
+The MSR uses a relational SQL database in order to store and retrieve the
+required service Instance and relevant documentation. In addition, in order to
+maximise its efficiency in terms of data querying an indexing operation is 
+applied on the stored data, using well know indexing mechanisms, such as
+ElasticSearch and Lucene.
 
 # Definitions
 <!--
@@ -2414,9 +2435,10 @@ following list as appropriate.
 Persons producing the Technical Service are invited to provide a list of
 acronyms as appropriate.
 
-<!-- Spacing: | --- | --------- | -->
+<!-- Spacing: |---|---------| -->
 | Acronym | Mearning                                                                          |
-| --- | --------- |
+|---|---------|
+| API     | Application Programming Interface                                                 |
 | IALA    | International Association of Marine Aids to Navigation and Lighthouse Authorities |
 | IMO     | International Maritime Organization                                               |
 | MCC     | Maritime Connectivity platform Consortium                                         |
@@ -2427,6 +2449,7 @@ acronyms as appropriate.
 | REST    | Representational State Transfer                                                   |
 | SECOM   | Secure Communication (IEC 63173-2)                                                |
 | SLA     | Service Level Agreement                                                           |
+| SQL     | Structured Query Language                                                         |
 
 # References
 <!--
@@ -2435,7 +2458,7 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, \newline [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/)
+1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation, [https://wwwcdn.imo.org/](https://wwwcdn.imo.org/)
 2. Maritime Connectivity Platform, [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
 4. EfficienSea2 Project, [https://efficiensea2.org/](https://efficiensea2.org/)
