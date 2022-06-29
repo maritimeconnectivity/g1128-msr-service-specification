@@ -352,7 +352,7 @@ scheme, defined in "MCC Identity Management and Security; Identity Management"
 For a service document, the MRN system is defined as follows:
 
 \vspace*{-0.9cm}
-```{.markdown caption="MSR Service Document MRN-IPSS definition"}
+```{.markdown caption="MSR Service Document MRN-IPSS Definition"}
 <MSR-IPSS> ::= <ORG> ":" <G1128-TYPE> ":" <SERVICE-NAME>
 <ORG> ::= pchar *(pchar / "/")
 <G1128-TYPE> ::= "instance" | "specification" | "design"
@@ -555,7 +555,7 @@ This section describes the interfaces of the service including the selected
 Message Exchange Pattern (MEP) by using UML diagrams that illustrate the 
 service interfaces definitions and operations and in tabular form.
 
-![MSR Interface Definition diagram](materials/interfacedefinitions.drawio.png)
+![MSR Interface Definition Diagram](materials/interfacedefinitions.drawio.png)
 
 <!-- Spacing: | --- | --- | --- | -->
 | Service Interface             | Role (from service provider point of view) | Service Operation                                                                                     | 
@@ -609,7 +609,7 @@ to be exchanged between providers and consumers of the service.  As suggested by
 the IALA G-1128 guideline, the data structure of the MSR implementation are 
 visualised in the following UML digram.
 
-![MSR Service Data Model Diagram](materials/umldiagram.png)
+![MSR UML Data Model Diagram](materials/umldiagram.png)
 
 As demonstrated by the displayed diagram, there are four main data structures
 employed by the MSR:
@@ -731,9 +731,9 @@ repeating the same search query, with a difference page index parameter.
 | --- | --- | --- | --------- |
 | SearhFilterObject | JSON    | 1     | The object contains information on the search filters to be applied |
 
-<!-- Spacing: | --- | --- | --- | --------- | -->
+<!-- Spacing: | ------ | --- | --- | --------- | -->
 | Return Type (out)  | Encoding | Mult. | Description                                                                                  |
-| --- | --- | --- | --------- |
+| ------ | --- | --- | --------- |
 | SearchObjectResult | JSON     | 0..*  | A list of Instances, matching the requested criteria, encoded as per the SECOM documentation |
 
 ## Service Interface "InstanceInterface"
@@ -2372,7 +2372,7 @@ MSR Instance manipulation operations are performed through simple REST calls.
 The service providers can perform these operations and receive the respective
 responses on the outcome of each.
 
-![MSR InstanceStatus Interface Operation Sequence Diagram](materials/instanceintseqdiagram.drawio.png)
+![MSR Instance Interface Operation Sequence Diagram](materials/instanceintseqdiagram.drawio.png)
 
 ## Service Interface "InstanceStatusInterface"
 <!--
@@ -2438,7 +2438,7 @@ a PUT HTTP method. The service providers can perform this operation to update
 determine whether an XML input conforms to a specific G-1128 schema
 specification and receive the response on the outcome.
 
-![MSR Xml Validation Interface Operation Sequence Diagram](materials/xmlvalidationintseqdiagram.drawio.png)
+![MSR XmlValidation Interface Operation Sequence Diagram](materials/xmlvalidationintseqdiagram.drawio.png)
 
 ## Service Interface "DocInterface"
 <!--
@@ -2488,7 +2488,7 @@ registered service Instance and receive the response on the outcome. It has
 already been noted that the actual global MSR ledger status update operatio
 takes place asynchronously.
 
-![MSR LedgerRequest Status Interface Operation Sequence Diagram](materials/ledgerrequeststatusintseqdiagram.drawio.png)
+![MSR LedgerRequestStatus Interface Operation Sequence Diagram](materials/ledgerrequeststatusintseqdiagram.drawio.png)
 
 
 <!-- ## Service orchestration (Optional) -->
