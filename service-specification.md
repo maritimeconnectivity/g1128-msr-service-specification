@@ -215,7 +215,7 @@ the figure below.
 Another operational node to be taken into account is the MSR Instance Provider.
 More specifically, multiple MSR Instances Providers can exist, each operating
 an MSR instance independently of each other. This kind of decentralized
-scenarios, demonstrate the need for a certain level of coordination, especially
+scenarios, demonstrates the need for a certain level of coordination, especially
 in terms of service discoverability. This can be provided by a centralized or 
 distributed ledger service, through which all interested MSRs can exchange
 information on their current registrations. The specification of this ledger
@@ -240,7 +240,7 @@ previously. Thus, the MSR instance provider needs to review whether to support
 a centralized or distributed ledger operation.
 
 Services registered in an MSR must follow the IALA guideline on the
-specification of e-Navigation technical services (G-1128). In this guideline]
+specification of e-Navigation technical services (G-1128). In this guideline
 services are described on three levels:
 
 * Service specification
@@ -251,7 +251,7 @@ The *Service Specification* is the highest level, giving a high level
 description and containing the data model of the service. This data model may be
 a reference to an IHO product specification - or it could be defined as a
 different bespoke data model. A service specification will have one or more
-associated technical designs. Each technical design describes how the service
+associated *Technical Designs*. Each technical design describes how the service
 can be implemented using a specific technology.
 
 Although these technologies in principle can be anything (even a phone number),
@@ -261,16 +261,16 @@ technical design there will be one or more service instances that provide the
 required information, relying on a service provider. The most important
 information is the endpoint of the service, but other significant information
 includes a geographical coverage of the service. It is therefore mandated that
-any MSR implementation must support at least the ***Service Instance***
-specification of G-1128. Support in this context refers to the provision of a
-G-1128 compliant service instance specification in XML format. References to the
+any MSR implementation must support at least the *Service Instance
+Specification* of G-1128. Support in this context refers to the provision of a
+G-1128 compliant service instance description in XML format. References to the
 other two G-1128 specifications (i.e. service specification and technical
 design) should also be provided, although it is acceptable that these are hosted
 by third parties.
 
 Optionally, MSR implementations may also support G-1128 non-compliant service
 registrations. In those cases, the XML description of the service instance 
-specification can be omitted and only the mandatory fields of a registration
+specification can be omitted, and only the mandatory fields of a registration
 will be required from the service provider.
 
 #### Service Discoverability
@@ -296,8 +296,8 @@ following additional aspects need to be satisfied:
 * Requirements on service provider authentication and service consumer
   authentication is entirely up to the service provider.
 
-In terms of the discoverability mechanism, this should be provided using a query
-operation. A query is a just character string broken up into terms and 
+In terms of the discoverability mechanism, this must support at least a basic
+query operation. A query is a just character string broken up into terms and 
 operators. There are two types of terms: Single Terms and Phrases.
 
 * A Single Term is a single word such as "test" or "hello".
@@ -330,12 +330,12 @@ Wildcard searches should also be supported.
 
 #### MRN of Service Documents for Identification
 
-At the time of registration of service, a service provider should be exposed to
-the MRN scheme [8] for the identification of service documents. G-1128 clearly 
-mentions MRN as a unique identifier scheme. A service provider should follow the
-MRN scheme of the MIR Instance Provider (who operates a MIR) that they belong.
-There is a possibility of having more than one MRN of a service document for the
-identification.
+Before registering a service, a service provider should be compliant with the
+provisions of the MRN scheme [8] for the identification of service documents.
+G-1128 clearly states MRN as a unique identifier scheme. A service provider
+should follow the MRN scheme of the MIR Instance Provider (who operates a MIR)
+that they belong. There is also the possibility of having more than one MRN of a
+service document for the identification.
 
 In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in "MCC Identity Management and Security; Identity Management"
@@ -365,7 +365,7 @@ representing a unique identifier of a service.
 
 More detailed description of the syntax is given in the referenced document.
 
-Governance of MRN of service documents is a responsibility of an MSR provider, 
+Governance of MRN of service documents is the responsibility of an MSR provider, 
 as well as the uniqueness of an MRN at the database level.
 
 ## Functional and non-functional requirements
@@ -390,30 +390,30 @@ The table below lists applicable existing functional requirements for the MSR
 service.
 
 <!-- Spacing: | --- | --- | ------ | --- | -->
-| Requirement Id | Requirement Name                 | Requirement Text                               | References |
+| Requirement Id | Requirement Name                 | Requirement Text                                                 | References |
 | --- | --- | ------ | --- |
-| MSR-FR001      | Service Registration             | Allow the registrations of new service         | MCC MSR WG |
-| MSR-FR002      | Service Registration Update      | Allow updates on an existing registrations     | MCC MSR WG |
-| MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing registration | MCC MSR WG |
-| MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM | MCC MSR WG |
+| MSR-FR001      | Service Registration             | Allow the registrations of new service.                          | MCC MSR WG |
+| MSR-FR002      | Service Registration Update      | Allow updates on an existing service instance registrations.     | MCC MSR WG |
+| MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing service instance registration. | MCC MSR WG |
+| MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM.                  | MCC MSR WG |
 
 The following tables define additional requirements for the MSR service.
 
 <!-- Spacing: | --- | --------- | -->
-| Requirement Id   | MSR-FR005                                                                           | 
+| Requirement Id   | MSR-FR005                                                                               | 
 | --- | --------- |
-| Requirement Name | G-1128 Support                                                                      |
-| Requirement Text | Support the registration of services using the G-1128 Service Instance XML schemas. |
-| Rationale        | G-1128 standardizes the description of e-Navigation service instances               |
-|  Author          | GRAD                                                                                |
+| Requirement Name | G-1128 Support                                                                          |
+| Requirement Text | Support the registration of services following the G-1128 Service Instance XML schemas. |
+| Rationale        | G-1128 standardizes the description of e-Navigation service instances.                  |
+| Author           | GRAD                                                                                    |
 
 <!-- Spacing: | --- | --------- | -->
-| Requirement Id   | MSR-FR006                                                                    |
+| Requirement Id   | MSR-FR006                                                                     |
 | --- | --------- |
-| Requirement Name | Service Instance Documentation                                               |
-| Requirement Text | Support multiple to documents to be attached to a service registration       |
-| Rationale        | Multiple documentation sources are frequently required to describe a service |
-|  Author          | GRAD                                                                         |
+| Requirement Name | Service Instance Documentation                                                |
+| Requirement Text | Support multiple to documents to be attached to a service registration.       |
+| Rationale        | Multiple documentation sources are frequently required to describe a service. |
+| Author           | GRAD                                                                          |
 
 #### Non-Functional Requirements
 
@@ -679,8 +679,8 @@ consumers to query the MSR about registered instances of e-Navigation services
 with specific properties, i.e. able to produce a compatible IALA S-100 [10] data 
 product dataset. It is implemented following the REST methodology, using a POST
 HTTP method. It receives a *SearhFilterObject* object, which contains all the
-necessary parameter required to identify a set of matching registered services.
-The MSR will respond with a list of matching services, encoded into
+necessary parameters required to identify a set of matching registered services.
+The MSR will respond with a list of matching service instances, encoded into
 *SearchObjectResult* objects, in a paged response. The internal structure of
 both the *SearhFilterObject* and *SearchObjectResult* objects is governed by the
 SECOM standard.
@@ -694,7 +694,7 @@ SECOM standard.
 Upon receiving a request with a valid *SearhFilterObject* payload, the service 
 will first determine which of the applicable search filters are to be applied. 
 This operation includes parsing the *freetext* field of the *SearhFilterObject* 
-object, if they have been populated. They should be processed according to the
+object, if it have been populated. This should be processed according to the
 rules outlined in the [Service Discoverability](#service-discoverability) 
 section. The parsing output should then be combined with the additional 
 *SearhFilterObject* fields to generate the complete set of search filters to be
@@ -884,7 +884,7 @@ the response generated.
 -->
 
 The purpose of the interface's ***createInstance*** operation is to enable
-service providers to create new entries of registered service Instances. It is
+service providers to create new entries of registered service instances. It is
 implemented following the REST methodology, using a POST HTTP method. It
 receives as an input a populated Instance object that contains all the mandatory
 information. The MSR will  respond with a copy of the Instance object created,
@@ -898,13 +898,13 @@ section.
     output from the input payload.
 -->
 
-Upon receiving a request to create a new registered Instance record, the service
+Upon receiving a request to create a new registered service instance, the service
 will access and validate the provided Instance fields, and depending on a
 successful outcome, will persist the data in its database. If an error occurs
 while persisting the provided Instance object, the service will make that clear
 in the response generated.
 
-It has to be noted at this point that since the Instance objects are linked
+It has to be noted at this point, that since the Instance objects are linked
 with the Xml and Doc entries through the *instanceAsXml* and *instanceAsDoc*
 fields, these should also be provided if necessary. The information from the XML
 source provided by the Xml object, will be used to populate the respective
@@ -950,13 +950,12 @@ on the other hand, can be used to provide the human-readable text documentation.
 -->
 
 The purpose of the interface's ***updateInstance*** operation is to enable
-service providers to update existing entries of registered service Instances.
+service providers to update existing entries of registered service instances.
 It is implemented following the REST methodology, using a PUT HTTP method. It
 receives as an input a populated Instance object that contains all the mandatory
-information. The MSR will respond with a copy of the Instance object updated,
-including its assigned ID. The internal structure of the Instance object is
-provided in more detail in the [Service Data Model](#service-data-model)
-section.
+information. The MSR will respond with a copy of the Instance object updated.
+The internal structure of the Instance object is provided in more detail in the
+[Service Data Model](#service-data-model) section.
 
 #### Operation Functionality
 <!--
@@ -964,7 +963,7 @@ section.
     output from the input payload.
 -->
 
-Upon receiving a request to update an existing registered Instance record, the
+Upon receiving a request to update an existing registered service instance, the
 service will access and validate the provided Instance fields, and depending on 
 a successful outcome, will persist the data in its database. If an error occurs
 while persisting the provided Instance object, the service will make that clear
@@ -976,11 +975,11 @@ fields, there is a clear distinction in how the service handles the two in an
 update operation. The information from the XML source provided by the Xml
 object, will be used to populate the respective fields of the Instance object,
 overwriting any existing values, exactly as described in the
-[Operation "updateInstance"](#operation-createinstance). In order to minimise
+["createInstance"](#operation-createinstance) operation. In order to minimise
 the amount of information exchange however, there is no need to re-upload the
 Doc object of the Instance. It is sufficient to provide an empty Doc object
 with just the ID field populated, so that the service can validate that there 
-has been not change.
+has not been change.
 
 #### Operation Parameters
 <!--
@@ -1020,7 +1019,7 @@ has been not change.
 -->
 
 The purpose of the interface's ***deleteInstance*** operation is to enable
-service providers to delete existing entries of registered service Instances. It
+service providers to delete existing entries of registered service instances. It
 is implemented following the REST methodology, using a DELETE HTTP method. It
 receives as an input the ID of the registered Instance to be deleted. The MSR
 will respond with the outcome of the deletion operation, if successful or not.
@@ -1031,9 +1030,9 @@ will respond with the outcome of the deletion operation, if successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to delete an existing registered Instance record, the
+Upon receiving a request to delete an existing registered service instance, the
 service will validate the respective entry indeed exists in its database. In
-that case, the Instance registration will be deleted and the service will send a
+that case, the Instance record will be deleted and the service will send a
 response to the original request. If an error occurs while deleting the
 identified Instance object, the service will make that clear in the response
 generated.
@@ -1079,8 +1078,8 @@ generated.
 -->
 
 The ***InstanceStatusInterface*** interface allows service providers to 
-manipulate the status of their registered service Instances. The status value of
-each Instance is restricted to the options specified in the IALA G-1128 
+manipulate the status of their registered service instances. The status value of
+each instance is restricted to the options specified in the IALA G-1128 
 guideline. As per the enumeration displayed in the UML diagram of the
 [Service Data Model](#service-data-model) section:
 
@@ -1101,8 +1100,8 @@ any data modifications.
 -->
 
 The purpose of the interface's ***updateInstanceStatus*** operation is to allow
-service providers to update the registration status of the Instances they
-provide. It is implemented following the REST methodology, using a PUT HTTP 
+service providers to update the registration status of the service instances
+they provide. It is implemented following the REST methodology, using a PUT HTTP 
 method. It receives as input the ID of the Instance of which the status will be
 updated, as well as the new applicable Instance status value. The MSR will
 respond with the outcome of the update operation, if successful or not.
