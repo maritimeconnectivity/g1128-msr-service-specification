@@ -134,7 +134,7 @@ other related e-Navigation services.
   finished) projects. 
 -->
 
-The service management concept originally given from the IALA G-1128
+The service management concept originally presented in the IALA G-1128
 guideline was given and implemented throughout previous projects such as
 EfficienSea2 [5] and Sea Traffic Management.
 
@@ -226,48 +226,49 @@ More detailed descriptions on the basic operational aspects can be found below.
 
 #### Service Registration
 
-An MSR instance provider is naturally only accountable towards its own users, as
-defined by any Service Level Agreement (SLA) present. Hence, in regard to 
+An MSR Instance Provider is naturally only accountable towards its own users,
+bounded by any Service Level Agreement (SLA) present. Hence, in regard to 
 service registration, an MSR instance should be able to work independently.
 
-Many services registered to an MSR might be local, i.e. will only be 
+Many services registered to an MSR might be *local*, i.e. will only be 
 discoverable in that specific MSR instance. Some services however, might be
 intended to be globally available, and should therefore be discoverable
 across multiple MSR instances. When such a service is registered in an MSR, 
 the registration will have to be propagated to the ledger mechanism mentioned
 previously. Thus, the MSR instance provider needs to review whether to support
-a centralized/distributed ledger operation.
+a centralized or distributed ledger operation.
 
-Services registered in an MSR must follow the IALA guideline on e-Navigation
-technical services (G-1128). In this guideline services are described on three
-levels:
+Services registered in an MSR must follow the IALA guideline on the
+specification of e-Navigation technical services (G-1128). In this guideline]
+services are described on three levels:
 
 * Service specification
 * Service technical design
 * Service instance
 
-The service specification is the highest level, giving a high level description
-and containing the data model of the service. This data model may be a reference
-to an IHO product specification - or it could define a different data model. A
-service specification will have one or more associated technical designs. Each
-technical design describes how the service can be implemented using a specific
-technology.
+The *Service Specification* is the highest level, giving a high level 
+description and containing the data model of the service. This data model may be
+a reference to an IHO product specification - or it could be defined as a
+different bespoke data model. A service specification will have one or more
+associated technical designs. Each technical design describes how the service
+can be implemented using a specific technology.
 
 Although these technologies in principle can be anything (even a phone number),
-the MCC promotes the use of web-services and services using the MMS. For each
-technical design there will be one or more service instances that provides
-information of concrete service providers. The most important information is the
-endpoint of the service, but other significant information includes a 
-geographical coverage of the service. It is therefore mandated that any MSR 
-implementation must support at least the ***Service Instance*** specification
-of G-1128. Support in this context refers to the provision of a G-1128 
-compliant service instance specification XML schema. References to the other two
-G-1128 specifications (i.e. service specification and technical design) should 
-also be provided, although it is acceptable that these are hosted by third 
-parties.
+the *Maritime Connectivity Platform Consortium* (MCC) promotes the use of
+web-services and services using the *Maritime Messaging Service* (MMS). For each
+technical design there will be one or more service instances that provide the
+required information, relying on a service provider. The most important
+information is the endpoint of the service, but other significant information
+includes a geographical coverage of the service. It is therefore mandated that
+any MSR implementation must support at least the ***Service Instance***
+specification of G-1128. Support in this context refers to the provision of a
+G-1128 compliant service instance specification in XML format. References to the
+other two G-1128 specifications (i.e. service specification and technical
+design) should also be provided, although it is acceptable that these are hosted
+by third parties.
 
 Optionally, MSR implementations may also support G-1128 non-compliant service
-registrations. In those cases, the XML schema of the service instance 
+registrations. In those cases, the XML description of the service instance 
 specification can be omitted and only the mandatory fields of a registration
 will be required from the service provider.
 
@@ -282,15 +283,15 @@ SECOM already defines a mechanism for service discovery and this should be
 employed by the MSR. Apart from the requirements set by SECOM however, the
 following additional aspects need to be satisfied:
 
-* Only organisations that are registered in a MIR instance (see details on
-  “Vetting procedure for organisations joining MCP instances”; Document ID: MCP
-  Gen 5) are allowed to submit service descriptions (any level, i.e. service
-  specifications, service designs, and service instances) to an MSR. i.e. a
-  submitter needs to authenticate itself using MIR.
+* Only organisations that are registered in a *Maritime Identity Registry* (MIR)
+  instance (see details on the MCP "Vetting Procedure for MCP Instance
+  Providers" [7]) are allowed to submit service descriptions (any level, i.e.
+  service specifications, service designs, and service instances) to an MSR.
+  i.e. a submitter needs to authenticate itself using MIR.
 * MSR needs to be open for queries/searches without authentication.
-* Endpoints in Service Instances needs to point to active services that are in
-  production (not test services). This is of course only the case if the MSR
-  itself is a production environment.
+* The registered endpoints of the service instances need to point to active 
+  services that are in production (not test services). This is of course only
+  the case if the MSR, itself is a production environment.
 * Requirements on service provider authentication and service consumer
   authentication is entirely up to the service provider.
 
@@ -329,15 +330,15 @@ Wildcard searches should also be supported.
 #### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
-the MRN scheme [7] for the identification of service documents. G-1128 clearly 
+the MRN scheme [8] for the identification of service documents. G-1128 clearly 
 mentions MRN as a unique identifier scheme. A service provider should follow the
 MRN scheme of the MCP Identity Service provider (who operates a MIR) that they
 belong. There is a possibility of having more than one MRN of a service document
 for the identification.
 
 In MSR, the primary identification MRN needs to be aligned with the MCP MRN
-scheme, defined in “MCC Identity Management and Security Identity Management” as
-follows:
+scheme, defined in "MCC Identity Management and Security; Identity Management"
+[9] as follows:
 
 \vspace*{-0.9cm}
 ```{.markdown caption="MCP MRN Scheme Rules"}
@@ -384,7 +385,8 @@ as well as the uniqueness of an MRN at the database level.
 
 ### Functional Requirements
 
-The table below lists applicable existing requirements for the MSR service.
+The table below lists applicable existing functional requirements for the MSR
+service.
 
 <!-- Spacing: | --- | --- | ------ | --- | -->
 | Requirement Id | Requirement Name                 | Requirement Text                                | References |
@@ -394,7 +396,7 @@ The table below lists applicable existing requirements for the MSR service.
 | MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing registrations | MCC MSR WG  |
 | MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM  | MCC MSR WG  |
 
-The following tables define additional requirements for the XYZ service.
+The following tables define additional requirements for the MSR service.
 
 <!-- Spacing: | --- | --------- | -->
 | Requirement Id   | MSR-FR005                                                                           | 
@@ -414,7 +416,8 @@ The following tables define additional requirements for the XYZ service.
 
 #### Non-Functional Requirements
 
-The table below lists applicable existing requirements for the MSR service.
+The table below lists applicable existing non-functional requirements for the
+MSR service.
 
 <!-- Spacing: | --- | --- | ------ | --- | -->
 | Requirement Id | Requirement Name | Requirement Text                                                                                                     | References |
@@ -423,7 +426,8 @@ The table below lists applicable existing requirements for the MSR service.
 | MSR-NFR002     | Integrity       | It must be clear to both service providers and consumers whether changes have been made to the registered services.   | MCC MSR WG |
 |  MSR-NFR003    | Availability    | The service must be available at least at a 99% availability rate.                                                    | MCC MSR WG |
 
-The tables below define additional non-functional requirements for the MSR service.
+The tables below define additional non-functional requirements for the MSR
+service.
 
 <!-- Spacing: | --- | --------- | -->
 | Requirement Id   | MSR-NFR004                                                                                             |
@@ -473,16 +477,17 @@ The following tables describe the operational nodes of the service.
 #### Operational nodes providing the MSR service
 
 <!-- Spacing: | --- | --------- | -->
-| Operational Node  | Remarks                                                                                                                    | 
+| Operational Node      | Remarks                                                                                              | 
 | --- | --------- |
-|  Service Provider | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services. |
+| MCP Instance Provider | The notion of an MSR instance provider includes all entities able to make an MSR instanxe available. |
 
 #### Operational nodes consuming the MSR service
 
 <!-- Spacing: | --- | --------- | -->
-| Operational Node | Remarks                                                                                                                                  | 
+| Operational Node  | Remarks                                                                                                                                  | 
 | --- | --------- |
-| Service Consumer | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services. |
+| Service Provider  | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services. |
+| Service Consumer  | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services. |
 
 <!-- #### Operational activities (Optional) -->
 <!--
@@ -671,7 +676,7 @@ that this interface is implemented as required.
 
 The purpose of the interface's ***searchService*** operation is to allow service
 consumers to query the MSR about registered instances of e-Navigation services  
-with specific properties, i.e. able to produce a compatible IALA S-100 [8] data 
+with specific properties, i.e. able to produce a compatible IALA S-100 [10] data 
 product dataset. It is implemented following the REST methodology using a POST
 HTTP method. It receives a *SearhFilterObject* object, which contains all the
 necessary parameter required to identify a set of matching registered services.
@@ -2547,7 +2552,7 @@ ElasticSearch and Lucene.
 -->
 
 The definitions of terms used in this IALA Guideline can be found in the 
-International Dictionary of Marine Aids to Navigation (IALA Dictionary) [9] and
+International Dictionary of Marine Aids to Navigation (IALA Dictionary) [11] and
 were checked as correct at the time of going to print. Where conflict arises, 
 the IALA Dictionary shall be  considered as the authoritative source of 
 definitions used in IALA documents.
@@ -2590,6 +2595,7 @@ acronyms as appropriate.
 | MCC     | Maritime Connectivity platform Consortium                                         |
 | MCP     | Maritime Connectivity Platform                                                    |
 | MIR     | Maritime Identity Registry                                                        |
+| MMS     | Maritime Messaging Service                                                        |
 | MRN     | Maritime Resource Name                                                            |
 | MSR     | Maritime Service Registry                                                         |
 | REST    | Representational State Transfer                                                   |
@@ -2607,7 +2613,7 @@ acronyms as appropriate.
 1. IMO Resolution MSC.85/26 'Strategy for the development and  implementation of e‐Navigation', Annex 20,
 [https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC 85 - annex 20 - Strategy for the development and implementation of e-nav.pdf](https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC%2085%20-%20annex%2020%20-%20Strategy%20for%20the%20development%20and%20implementation%20of%20e-nav.pdf)
 2. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
-[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467)
+[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf)
 3. Maritime Connectivity Platform, 
 [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 4. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 
@@ -2615,11 +2621,15 @@ acronyms as appropriate.
 5. EfficienSea2 Project, 
 [https://efficiensea2.org/](https://efficiensea2.org/)
 6. IEC 63173-2 - Maritime navigation and radiocommunication equipment and systems. Data interface Part 2. Secure exchange and communication of S-100 based products (SECOM)
-7. IALA Maritime Resource Name (MRN) Registry, 
+7. MCP Gen5 Vetting Procedure for MCP Instance Providers,
+[https://secureservercdn.net/160.153.138.143/qkh.3ac.myftpupload.com/wp-content/uploads/2022/06/MCP-Gen5-Vetting-procedure-for-MCP-instance-providers-v-1-1.pdf](https://secureservercdn.net/160.153.138.143/qkh.3ac.myftpupload.com/wp-content/uploads/2022/06/MCP-Gen5-Vetting-procedure-for-MCP-instance-providers-v-1-1.pdf)
+8. IALA Maritime Resource Name (MRN) Registry, 
 [https://www.iala-aism.org/technical/data-modelling/mrn/](https://www.iala-aism.org/technical/data-modelling/mrn/)
-8. S-100 Universal Hydrographic Data Model, 
+9. MCP IDsec2 MCC Identity Management and Security; Identity Management,
+[https://maritimeconnectivity.github.io/maritimeconnectivity.net/docs/MCP%20IDsec2%20MCC%20Identity%20Management%20and%20Security;%20Identity%20Management.pdf](https://maritimeconnectivity.github.io/maritimeconnectivity.net/docs/MCP%20IDsec2%20MCC%20Identity%20Management%20and%20Security;%20Identity%20Management.pdf)
+10. S-100 Universal Hydrographic Data Model, 
 [https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4](https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4)
-9. IALA International Dictionary of Marine Aids to Navigation, 
+11. IALA International Dictionary of Marine Aids to Navigation, 
 [http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
 
 # Annex A: OpenApi Documentation
