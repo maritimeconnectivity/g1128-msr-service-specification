@@ -558,6 +558,10 @@ service interfaces definitions and operations and in tabular form.
 | LedgerRequestsInterface       | Provided                                   | getLedgerRequest \newline createLedgerRequest \newline deleteLedgerRequest          |
 | LedgerRequestStatusInterface  | Provided                                   | updateLedgerRequestStatus                                                           |
 
+A more detailed description on the implementation of the defined interfaces
+can be found in the OpenAPI documentation (version 3.0.1) provided in
+[Annex A](#annex-a---openapi-documentation).
+
 # Service Data Model
 <!--
     It is recommended to visualise the data structures by using UML diagrams.
@@ -2381,7 +2385,7 @@ and receive the response on the outcome.
 -->
 
 As described in the
-[Instance Ledger Status Interface](#service-interface-instanceledgerstatusinterface)
+[Instance Ledger Status Interface](#service-interface-instanceledgerstatusinterface-optional)
 section, the MSR Instance Ledger Status update operation is performed through a
 simple REST call, using a PUT HTTP method. The service providers can perform
 this operation to update the global MSR ledger registration status of a
@@ -2460,7 +2464,7 @@ also allowed to retrieve Doc documents information through the getDoc operation.
 -->
 
 As described in the
-[LedgerRequest Status Interface](#service-interface-ledgerrequeststatusinterface)
+[LedgerRequest Status Interface](#service-interface-ledgerrequeststatusinterface-optional)
 section, the MSR Update LedgerRequest Status operation is performed through a
 simple REST call, using a PUT HTTP method. The service providers can perform
 this operation to update the global MSR ledger registration status of a
@@ -2501,7 +2505,8 @@ published in a service registry. A service registry can be a collection of
 documents, or could be realised as a service itself that would have an Application 
 Programming Interface (API) for automatic interfacing to the registry (lookup, 
 updating, deleting etc.). This concept is implemented as MSR within MCP 
-(formerly called the Maritime Cloud), see https://maritimeconnectivity.net/.
+(formerly called the Maritime Cloud), see
+[https://maritimeconnectivity.net/](https://maritimeconnectivity.net/).
 
 In the current implementation described in this document, the MSR has been 
 implemented as an online web service, exposing an API using the REST
@@ -2592,7 +2597,7 @@ acronyms as appropriate.
 -->
 
 1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
-[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467)
+[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467)
 2. Maritime Connectivity Platform, 
 [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 
