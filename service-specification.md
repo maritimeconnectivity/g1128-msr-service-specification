@@ -781,7 +781,7 @@ The internal structure of the Instance object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve all registered instances, the service
+Upon receiving a request to retrieve all registered service instances, the MSR
 will access its database to retrieve and package the full list of Instance 
 objects into a paged response. Only the results of the page that has been 
 selected by the service consumers are returned. Navigation to other pages can
@@ -817,7 +817,7 @@ parameter.
 <!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                          |
 | --- | --- | --- | --------- |
-| Instance          | JSON     | 0..*   | A paged list of Instances, matching the requested criteria, structured as per the service data model |
+| Page              | JSON     | 0..*   | A paged list of Instances, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getInstance"
 <!--
@@ -840,8 +840,8 @@ found. The internal structure the Instance is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve a specific registered instance, the
-service will access its database to locate, retrieve and package the Instance
+Upon receiving a request to retrieve a specific registered service instance, the
+MSR will access its database to locate, retrieve and package the Instance
 object that matches the provided ID. If the ID is not located, for example
 because it has  been selected by mistake, the service will make that clear in
 the response generated.
@@ -898,7 +898,7 @@ section.
     output from the input payload.
 -->
 
-Upon receiving a request to create a new registered service instance, the service
+Upon receiving a request to create a new registered service instance, the MSR
 will access and validate the provided Instance fields, and depending on a
 successful outcome, will persist the data in its database. If an error occurs
 while persisting the provided Instance object, the service will make that clear
@@ -964,7 +964,7 @@ The internal structure of the Instance object is provided in more detail in the
 -->
 
 Upon receiving a request to update an existing registered service instance, the
-service will access and validate the provided Instance fields, and depending on 
+MSR will access and validate the provided Instance fields, and depending on 
 a successful outcome, will persist the data in its database. If an error occurs
 while persisting the provided Instance object, the service will make that clear
 in the response generated.
@@ -1031,11 +1031,10 @@ will respond with the outcome of the deletion operation, if successful or not.
 -->
 
 Upon receiving a request to delete an existing registered service instance, the
-service will validate the respective entry indeed exists in its database. In
-that case, the Instance record will be deleted and the service will send a
-response to the original request. If an error occurs while deleting the
-identified Instance object, the service will make that clear in the response
-generated.
+MSR will validate the respective entry indeed exists in its database. In that
+case, the Instance record will be deleted and the service will send a response
+to the original request. If an error occurs while deleting the identified
+Instance object, the service will make that clear in the response generated.
 
 #### Operation Parameters
 <!--
@@ -1081,7 +1080,7 @@ The ***InstanceStatusInterface*** interface allows service providers to
 manipulate the status of their registered service instances. The status value of
 each instance is restricted to the options specified in the IALA G-1128 
 guideline. As per the enumeration displayed in the UML diagram of the
-[Service Data Model](#service-data-model) section:
+[Service Data Model](#service-data-model) sectionm, these options are:
 
 * PROVISIONAL
 * RELEASED
@@ -1113,10 +1112,10 @@ respond with the outcome of the update operation, if successful or not.
 -->
 
 Upon receiving a request to update a service Instance registration status, the
-service will access its database to validate that the Instance ID provided is
-indeed valid. If that is the case, the status of the retrieved Instance entry
-will be updated. The MSR will finally respond with the outcome of the update
-operation, if successful or not.
+MSR will access its database to validate that the Instance ID provided is indeed
+valid. If that is the case, the status of the retrieved Instance entry will be
+updated. The MSR will finally respond with the outcome of the update operation,
+if successful or not.
 
 #### Operation Parameters
 <!--
@@ -1145,9 +1144,9 @@ operation, if successful or not.
 | instanceStatus | QueryParam | 1    | The new value for the registration status of the selected Instance       |
 
 <!-- Spacing: | --- | --- | --- | --------- | -->
-| Return Type (out)     | Encoding | Mult. | Description                          |
+| Return Type (out)     | Encoding | Mult. | Description                               |
 | --- | --- | --- | --------- |
-| result from operation | none     | 1     | The result of the deletion operation |
+| result from operation | none     | 1     | The result of the status update operation |
 
 ## Service Interface "InstanceLedgerStatusInterface" (Optional)
 <!--
@@ -1204,17 +1203,17 @@ respond with the outcome of the update operation, if successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to update a service Instance's global registration 
-status, the service will access its database to validate that the Instance ID 
+Upon receiving a request to update a service instance's global registration 
+status, the MSR will access its database to validate that the Instance ID 
 provided is indeed valid. If that is the case, the MSR will return a response
 to the initial request and at the same time can initiate a request to the MSR
 global ledger service to update the global registration status value, for the
-specified Instance entry. After a successful response from the ledger, the MSR
+specified service instamce. After a successful response from the ledger, the MSR
 will update its own local copy of the Instance based on the received response. 
 
 The process of contacting the MSR global ledger service described above, is
 executed in an asynchronous manner, meaning the original request to the MSR will
-be answered before the global ledger service is updated. Service providers will
+be answered before the global ledger service is updated. Service providers can
 only be informed on the final outcome, once this asynchronous process has been
 completed.
 
@@ -1245,9 +1244,9 @@ completed.
 | ledgerRequestStatus | QueryParam | 1    | The new value for the global registration status of the selected Instance       |
 
 <!-- Spacing: | --- | --- | --- | --------- | -->
-| Return Type (out)     | Encoding | Mult. | Description                          |
+| Return Type (out)     | Encoding | Mult. | Description                                                   |
 | --- | --- | --- | --------- |
-| result from operation | none     | 1     | The result of the deletion operation |
+| result from operation | none     | 1     | The result of the global registration status update operation |
 
 ## Service Interface "XmlInterface"
 <!--
@@ -1261,12 +1260,12 @@ completed.
 
 The ***XmlInterface*** interface allows service providers and consumers to
 interact with the MSR in order to retrieve and manipulate the data on the
-registered service Instances' XML documents. A service provider should be able
+registered service instances' XML documents. A service provider should be able
 to access information about all registered service Instances but should only be
 allowed to alter/delete data related to the services it provides. Service
 consumers on the other hand, should only be allowed access operations to XML
-documents of the discovered Instances. MSR administrator users, are allowed to
-perform any data modifications.
+documents of the discovered Instances. MSR administrator users however, are
+allowed to perform any data modifications.
 
 ### Operation "getXmls"
 <!--
@@ -1276,7 +1275,7 @@ perform any data modifications.
 -->
 
 The purpose of the interface's ***getXmls*** operation is to enable service
-providers to access a complete list of the registered service Instances' XML
+providers to access a complete list of the registered service instances' XML
 documents directly. It is implemented following the REST methodology, using a
 GET HTTP method. It receives only a page number and page size as input
 parameters. The MSR will respond with a list of all Xml objects, in a paged
@@ -1289,12 +1288,11 @@ the [Service Data Model](#service-data-model) section.
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve all available XML documents, the service
-will access its database to retrieve and package the full list of Xml
-objects into a paged response. Only the results of the page that has been
-selected by the service consumers are returned. Navigation to other pages can
-be achieved by repeating the same search query, with a difference page index
-parameter.
+Upon receiving a request to retrieve all available XML documents, the MSR will
+access its database to retrieve and package the full list of Xml objects into a
+paged response. Only the results of the page that has been selected by the
+service consumers are returned. Navigation to other pages can be achieved by
+repeating the same search query, with a difference page index parameter.
 
 #### Operation Parameters
 <!--
@@ -1325,7 +1323,7 @@ parameter.
 <!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                    |
 | --- | --- | --- | --------- |
-| Xml               | JSON     | 0..*   | A paged list of Xml, matching the requested criteria, structured as per the service data model |
+| Page              | JSON     | 0..*   | A paged list of Xml, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getXml"
 <!--
@@ -1348,7 +1346,7 @@ internal structure of the Xml object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve a specific XML document, the service will
+Upon receiving a request to retrieve a specific XML document, the MSR will
 access its database to locate, retrieve and package the Xml object that matches
 the provided ID. If the ID is not located, for example because it has been
 selected by mistake, the service will make that clear in the response generated.
@@ -1394,9 +1392,9 @@ The XML documents of the registered services are normally uploaded to the MSR
 as part of the [InstanceInterface createInstance](#operation-createinstance)
 operation. Therefore, it is highly unlikely that the ***createXml*** operation
 should ever be required by any service provider, while it should not be allowed
-for any service consumers. The main purpose of the interface's ***createXml***
+for any service consumer. The main purpose of the interface's ***createXml***
 operation to allow the system administrators to correct issues related to the
-registered Instances' XML documents. It is implemented following the REST
+registered instances' XML documents. It is implemented following the REST
 methodology, using a POST HTTP method. It receives as an input a populated Xml
 object that contains all the mandatory information, including the applicable
 registered service Instance ID. The MSR will respond with a copy of the Xml
@@ -1410,7 +1408,7 @@ object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to create a new Xml record, the service will access and
+Upon receiving a request to create a new Xml record, the MSR will access and
 validate the provided Xml object fields, and depending on a successful outcome,
 will persist the data in its database. If an error occurs while persisting the
 provided Xml object, the service will make that clear in the response generated.
@@ -1454,12 +1452,12 @@ provided Xml object, the service will make that clear in the response generated.
 -->
 
 The XML documents of the registered services are normally updated on the MSR
-as part of the [InstanceInterface createInstance](#operation-updateinstance)
+as part of the [InstanceInterface updateInstance](#operation-updateinstance)
 operation. Therefore, it is highly unlikely that the ***updateXml*** operation
 should ever be required by any service provider, while it should not be allowed
-for any service consumers. The main purpose of the interface's ***updateXml***
+for any service consumer. The main purpose of the interface's ***updateXml***
 operation to allow the system administrators to correct issues related to the
-registered Instances XML documents. It is implemented following the REST
+registered instances' XML documents. It is implemented following the REST
 methodology, using a PUT HTTP method. It receives as an input a populated Xml
 object that contains all the mandatory information. The MSR will respond with a
 copy of the Xml object updated. The internal structure of the Xml object is
@@ -1472,11 +1470,11 @@ section.
     output from the input payload.
 -->
 
-Upon receiving a request to update an existing Xml record, the service will
-access and validate the provided Xml object fields, and depending on a
-successful outcome, will persist the data in its database. If an error occurs
-while persisting the provided Xml object, the service will make that clear in
-the response generated.
+Upon receiving a request to update an existing Xml record, the MSR will access
+and validate the provided Xml object fields, and depending on a successful
+outcome, will persist the data in its database. If an error occurs while
+persisting the provided Xml object, the service will make that clear in the
+response generated.
 
 #### Operation Parameters
 <!--
@@ -1516,10 +1514,11 @@ the response generated.
 -->
 
 The XML documents of the registered service are normally manipulated as part of
-the [InstanceInterface createInstance](#operation-updateinstance) operation.
+the [InstanceInterface createInstance](#operation-createinstance) and
+[InstanceInterface updateInstance](#operation-updateInstance) operations.
 Therefore, it is highly unlikely that the ***deleteXml*** operation should ever
 be required by any service provider, while it should not be allowed for any
-service consumers. The main purpose of the interface's ***deleteXml*** operation
+service consumer. The main purpose of the interface's ***deleteXml*** operation
 to allow the system administrators to correct issues related to the registered
 Instances XML documents. It is implemented following the REST methodology using
 a DELETE HTTP method. It receives as an input the ID of the Xml object to be
@@ -1532,10 +1531,10 @@ whether successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to delete an existing Xml record, the service will
-validate the respective entry indeed exists in its database. If an error occurs
-while deleting the identified Xml object, the service will make that clear
-in the response generated.
+Upon receiving a request to delete an existing Xml record, the MSR will validate
+the respective entry indeed exists in its database. If an error occurs while
+deleting the identified Xml object, the service will make that clear in the
+response generated.
 
 #### Operation parameters
 <!--
@@ -1579,10 +1578,10 @@ in the response generated.
 
 The ***XmlValidationInterface*** interface allows service providers to validate
 whether the XML service Instance specifications to be uploaded to the MSR are
-indeed valid. The composition of the correct G-1128 specifications could be seen
-as cumbersome task, this interface intends to alleviate some of the complexities
-by automatically parsing the provided XML and reporting back any errors that
-were detected.
+indeed valid. Since the compilation of a valid G-1128 specifications could be
+seen as cumbersome task, this interface intends to alleviate some of the
+complexities by automatically parsing the provided XML and reporting back any
+errors detected.
 
 ### Operation "validateXml"
 <!--
@@ -1593,7 +1592,7 @@ were detected.
 
 The purpose of the interface's ***validateXml*** operation is to allow
 service providers to perform the actual validation task for their G-1128 XML
-specification schemas.
+specifications.
 
 Although only the G-1128 Instance Specification documentation is actually
 mandatory for an MSR implementation, this interface can allow the verification
@@ -1616,13 +1615,13 @@ validation and the XML input to be validated.
 -->
 
 Upon receiving a request to validate an XML input based on a G-1128 schema
-specification, the service will access its database to retrieve the requested
-G-1128 schema. Afterwards it will attempt to parse the provided XML input using
-the detected schema. The MSR will finally respond with the outcome of the
-parsing operation, if successful or not. When the validation process is
-completed successfully, the response will contain the unmarshalled XML object
-encoded using JSON. If any errors have been detected, they will be described as
-clearly as possible in the error response.
+specification, the MSR will access its database to retrieve the requested G-1128
+schema. Afterwards it will attempt to parse the provided XML input using the
+detected schema. The MSR will finally respond with the outcome of the parsing
+operation, if successful or not. When the validation process is completed
+successfully, the response will contain the unmarshalled XML object encoded
+using JSON. If any errors have been detected, they will be described as clearly
+as possible in the error response.
 
 #### Operation Parameters
 <!--
@@ -1667,12 +1666,12 @@ clearly as possible in the error response.
 
 The ***DocInterface*** interface allows service providers and consumers to
 interact with the MSR in order to retrieve and manipulate the data on the
-registered service Instances' Doc documents. A service provider should be able
-to access information about all registered service Instances but should only be
+registered service instances' Doc documents. A service provider should be able
+to access information about all registered service instances, but should only be
 allowed to alter/delete data related to the services it provides. Service
 consumers on the other hand, should only be allowed access operations to Doc
-documents of the discovered Instances. MSR administrator users, are allowed to
-perform any data modifications.
+documents of the discovered Instances. MSR administrator users however, are
+allowed to perform any data modifications.
 
 ### Operation "getDocs"
 <!--
@@ -1682,7 +1681,7 @@ perform any data modifications.
 -->
 
 The purpose of the interface's ***getDocs*** operation is to enable service
-providers to access a complete list of the registered service Instances' Doc
+providers to access a complete list of the registered service instances' Doc
 documents directly. It is implemented following the REST methodology, using a
 GET HTTP method. It receives only a page number and page size as input
 parameters. The MSR will respond with a list of all Doc objects, in a paged
@@ -1695,12 +1694,11 @@ the [Service Data Model](#service-data-model) section.
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve all available XML documents, the service
-will access its database to retrieve and package the full list of Doc
-objects into a paged response. Only the results of the page that has been
-selected by the service consumers are returned. Navigation to other pages can
-be achieved by repeating the same search query, with a difference page index
-parameter.
+Upon receiving a request to retrieve all available Doc documents, the MSR will
+access its database to retrieve and package the full list of Doc objects into a
+paged response. Only the results of the page that has been selected by the
+service consumers are returned. Navigation to other pages can be achieved by
+repeating the same search query, with a difference page index parameter.
 
 #### Operation Parameters
 <!--
@@ -1731,7 +1729,7 @@ parameter.
 <!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                            |
 | --- | --- | --- | --------- |
-| Doc               | JSON     | 0..*   | A paged list of Doc objects, matching the requested criteria, structured as per the service data model |
+| Page              | JSON     | 0..*   | A paged list of Doc objects, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getDoc"
 <!--
@@ -1754,7 +1752,7 @@ internal structure of the Doc object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve a specific Doc document, the service will
+Upon receiving a request to retrieve a specific Doc document, the MSR will
 access its database to locate, retrieve and package the Doc object that matches 
 the provided ID. If the ID is not located, for example because it has been 
 selected by mistake, the service will make that clear in the response generated.
@@ -1798,7 +1796,7 @@ selected by mistake, the service will make that clear in the response generated.
 
 The relevant documents of a registered service are normally uploaded to the MSR
 as part of the [InstanceInterface createInstance](#operation-createinstance)
-operation. However, additional documents describing a service Instance could
+operation. However, additional documents describing a service instance could
 be required, resulting in a service Instance being associated with more than one
 documents. The main purpose of the interface's ***createDoc*** operation is
 to allow the service providers to upload these additional Doc documents at a
@@ -1816,7 +1814,7 @@ structure of the Doc object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to create a new Doc record, the service will access and
+Upon receiving a request to create a new Doc record, the MSR will access and
 validate the provided Doc object fields, and depending on a successful outcome,
 will persist the data in its database. If an error occurs while persisting the 
 provided Doc object, the service will make that clear in the response generated.
@@ -1860,7 +1858,7 @@ provided Doc object, the service will make that clear in the response generated.
 -->
 
 The relevant documents of a registered service are normally updated on the MSR
-as part of the [InstanceInterface createInstance](#operation-updateinstance)
+as part of the [InstanceInterface updateInstance](#operation-updateinstance)
 operation. However, additional documents describing a service Instance could
 be required, resulting in a service Instance being associated with more than one
 documents. The main purpose of the interface's ***updateDoc*** operation is
@@ -1878,11 +1876,11 @@ structure of the Doc object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to update an existing Doc record, the service will
-access and validate the provided Doc object fields, and depending on a
-successful outcome, will persist the data in its database. If an error occurs
-while persisting the provided Doc object, the service will make that clear in
-the response generated.
+Upon receiving a request to update an existing Doc record, the MSR will access
+and validate the provided Doc object fields, and depending on a successful
+outcome, will persist the data in its database. If an error occurs while]
+persisting the provided Doc object, the service will make that clear in the
+response generated.
 
 #### Operation Parameters
 <!--
@@ -1926,7 +1924,7 @@ It has been mentioned previously, that additional documents describing a service
 Instance could be required, resulting in a service Instance being associated
 with more than one documents. The main purpose of the interface's 
 ***deleteDoc*** operation is to allow the service provider to remove documents
-already uploaded for a registered service Instance. It is implemented following
+already uploaded for a registered service instance. It is implemented following
 the REST methodology, using a DELETE HTTP method. It receives as an input the ID
 of the Doc object to be deleted. The MSR will respond with the outcome of the
 deletion operation, whether successful or not.
@@ -1937,7 +1935,7 @@ deletion operation, whether successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to delete an existing Doc record, the service will
+Upon receiving a request to delete an existing Doc record, the MSR will
 validate the respective entry indeed exists in its database. If an error occurs
 while deleting the identified Doc object, the service will make that clear
 in the response generated.
@@ -1972,7 +1970,7 @@ in the response generated.
 | --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
-## Service Interface "LedgerRequestInterface"
+## Service Interface "LedgerRequestInterface" (Optional)
 <!--
     Please explain the purpose, message exchange pattern and architecture of 
     the Interface.
@@ -1984,8 +1982,8 @@ in the response generated.
 
 The ***LedgerRequestInterface*** interface allows service providers to
 interface with the MSR and access information on the registration requests made
-to the global MSR ledger service, regarding their registered service Instances.
-A Service provider should only be allowed to alter data related to the
+to the global MSR ledger service, regarding their registered service instances.
+A service provider should only be allowed to alter data related to the
 services it provides. MSR administrator users however, are allowed to perform
 any data modifications.
 
@@ -1998,11 +1996,12 @@ any data modifications.
 
 The purpose of the interface's ***getLedgerRequests*** operation is to enable
 service providers to access a complete list of the global MSR ledger service 
-registration requests directly. It is implemented following the REST methodology
-using a GET HTTP method. It receives only a page number and page size as input
-parameters. The MSR will respond with a list of all LedgerRequest objects, in a
-paged response. The internal structure of the LedgerRequest object is provided
-in more detail in the [Service Data Model](#service-data-model) section.
+registration requests directly. It is implemented following the REST
+methodology, using a GET HTTP method. It receives only a page number and page
+size as input parameters. The MSR will respond with a list of all LedgerRequest
+objects, in a paged response. The internal structure of the LedgerRequest object
+is provided in more detail in the [Service Data Model](#service-data-model)
+section.
 
 #### Operation Functionality
 <!--
@@ -2010,8 +2009,8 @@ in more detail in the [Service Data Model](#service-data-model) section.
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve all available LedgerRequest entries, the
-service will access its database to retrieve and package the full list of
+Upon receiving a request to retrieve all available LedgerRequest records, the
+MSR will access its database to retrieve and package the full list of
 LedgerRequest objects into a paged response. Only the results of the page that
 has been selected by the service consumers are returned. Navigation to other
 pages can be achieved by repeating the same search query, with a difference page
@@ -2046,7 +2045,7 @@ index parameter.
 <!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)  | Encoding | Mult.  | Description                                                                                                      |
 | --- | --- | --- | --------- |
-| LedgerRequest      | JSON     | 0..*   | A paged list of LedgerRequest objects, matching the requested criteria, structured as per the service data model |
+| Page               | JSON     | 0..*   | A paged list of LedgerRequest objects, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getLedgerRequest"
 <!--
@@ -2069,7 +2068,7 @@ more detail in the [Service Data Model](#service-data-model) section.
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve a specific LedgerRequest entry, the service
+Upon receiving a request to retrieve a specific LedgerRequest entry, the MSR
 will access its database to locate, retrieve and package the LedgerRequest
 object that matches the provided ID. If the ID is not located, for example
 because it has been selected by mistake, the service will make that clear in the
@@ -2138,7 +2137,7 @@ object is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to create a new LedgerRequest record, the service will
+Upon receiving a request to create a new LedgerRequest record, the MSR will
 access and validate the provided LedgerRequest object fields, and depending on a
 successful outcome, will persist the data in its database. If an error occurs
 while persisting the provided LedgerRequest object, the service will make that
@@ -2196,7 +2195,7 @@ of the deletion operation, whether successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to delete an existing LedgerRequest record, the service
+Upon receiving a request to delete an existing LedgerRequest record, the MSR
 will validate the respective entry indeed exists in its database. If an error
 occurs while deleting the identified LedgerRequest object, the service will make
 that clear in the response generated.
@@ -2244,7 +2243,7 @@ that clear in the response generated.
 The ***LedgerRequestStatusInterface*** interface allows service providers to
 communicate with the global MSR ledger service, if that is available, in order
 to request an update on the global registration status of a registered service
-Instance. A Service provider should only be allowed to alter data related to the
+instance. A Service provider should only be allowed to alter data related to the
 services it provides. MSR administrator users however, are allowed to perform
 any data modifications.
 
@@ -2277,12 +2276,12 @@ operation, if successful or not.
     output from the input payload.
 -->
 
-Upon receiving a request to update a service Instance's global registration
-status for a specific LedgerRequest entry, the service will access its database
-to validate that the LedgerRequest ID provided is indeed valid. If that is the
+Upon receiving a request to update a service instance's global registration
+status for a specific LedgerRequest entry, the MSR will access its database to
+validate that the LedgerRequest ID provided is indeed valid. If that is the
 case, the MSR will return a response to the initial request and at the same time
 can initiate a request to the MSR global ledger service to update the global
-registration status value, for the specified service Instance. After a
+registration status value, for the specified service instance. After a
 successful response from the ledger, the MSR will update its own local copy of
 the Instance based on the received response.
 
@@ -2373,6 +2372,8 @@ MSR Instance manipulation operations are performed through simple REST calls.
 The service providers can perform these operations and receive the respective
 responses on the outcome of each.
 
+![MSR InstanceStatus Interface Operation Sequence Diagram](materials/instanceintseqdiagram.drawio.png)
+
 ## Service Interface "InstanceStatusInterface"
 <!--
     Include some information about the dynamic aspects of the service
@@ -2381,13 +2382,13 @@ responses on the outcome of each.
 -->
 
 As described in the
-[Instance Status Interface](#service-interface-instancestatusinterface) section,
+[InstanceStatus Interface](#service-interface-instancestatusinterface) section,
 the MSR Instance Status update operation is performed through a simple REST 
 call, using a PUT HTTP method. The service providers can perform this operation
 to update the local status of a registered service Instance (based on G-1128)
 and receive the response on the outcome.
 
-![MSR InstanceLedger  Status Interface Operation Sequence Diagram](materials/instanceledgerstatusintseqdiagram.drawio.png)
+![MSR InstanceStatus Interface Operation Sequence Diagram](materials/instancestatusintseqdiagram.drawio.png)
 
 ## Service Interface "InstanceLedgerStatusInterface"
 <!--
@@ -2397,13 +2398,15 @@ and receive the response on the outcome.
 -->
 
 As described in the
-[Instance Ledger Status Interface](#service-interface-instanceledgerstatusinterface-optional)
+[InstanceLedgerStatus Interface](#service-interface-instanceledgerstatusinterface-optional)
 section, the MSR Instance Ledger Status update operation is performed through a
 simple REST call, using a PUT HTTP method. The service providers can perform
 this operation to update the global MSR ledger registration status of a
-registered service Instance and receive the response on the outcome.
+registered service Instance and receive the response on the outcome. It has
+already been noted that the actual global MSR ledger status update operatio
+takes place asynchronously.
 
-![MSR Instance Ledger Status Interface Operation Sequence Diagram](materials/instanceledgerstatusintseqdiagram.drawio.png)
+![MSR InstanceLedgerStatus Interface Operation Sequence Diagram](materials/instanceledgerstatusintseqdiagram.drawio.png)
 
 ## Service Interface "XmlInterface"
 <!--
@@ -2416,7 +2419,8 @@ As described in the
 [Xml Interface](#service-interface-xmlinterface) section, the
 MSR Xml manipulation operations are performed through simple REST calls. The
 service providers can perform these operations and receive the respective
-responses on the outcome of each.
+responses on the outcome of each. Note that service consumers are also allowed
+to retrieve Xml document information through the getXml operation
 
 ![MSR Xml Interface Operations Sequence Diagram](materials/xmlintseqdiagram.drawio.png)
 
@@ -2428,7 +2432,7 @@ responses on the outcome of each.
 -->
 
 As described in the
-[Xml Validation Interface](#service-interface-xmlvalidationinterface) section,
+[XmlValidation Interface](#service-interface-xmlvalidationinterface) section,
 the MSR Xml validation operation is performed through a simple REST call, using
 a PUT HTTP method. The service providers can perform this operation to update
 determine whether an XML input conforms to a specific G-1128 schema
@@ -2448,7 +2452,7 @@ As described in the
 MSR Doc manipulation operations are performed through simple REST calls. The
 service providers can perform these operations and receive the respective
 responses on the outcome of each. Note that service consumers are also allowed
-to retrieve Xml document information through the getXml operation.
+to retrieve Doc document information through the getDoc operation.
 
 ![MSR Doc Interface Operations Sequence Diagram](materials/docintseqdiagram.drawio.png)
 
@@ -2476,11 +2480,13 @@ also allowed to retrieve Doc documents information through the getDoc operation.
 -->
 
 As described in the
-[LedgerRequest Status Interface](#service-interface-ledgerrequeststatusinterface-optional)
+[LedgerRequestStatus Interface](#service-interface-ledgerrequeststatusinterface-optional)
 section, the MSR Update LedgerRequest Status operation is performed through a
 simple REST call, using a PUT HTTP method. The service providers can perform
 this operation to update the global MSR ledger registration status of a
-registered service Instance and receive the response on the outcome.
+registered service Instance and receive the response on the outcome. It has
+already been noted that the actual global MSR ledger status update operatio
+takes place asynchronously.
 
 ![MSR LedgerRequest Status Interface Operation Sequence Diagram](materials/ledgerrequeststatusintseqdiagram.drawio.png)
 
@@ -2609,7 +2615,7 @@ acronyms as appropriate.
 -->
 
 1. IMO Resolution MSC.85/26 'Strategy for the development and  implementation of e‐Navigation', Annex 20,
-[https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC 85 - annex 20 - Strategy for the development and implementation of e-nav.pdf](https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC%2085%20-%20annex%2020%20-%20Strategy%20for%20the%20development%20and%20implementation%20of%20e-nav.pdf)
+[https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC%2085%20-%20annex%2020%20-%20Strategy%20for%20the%20development%20and%20implementation%20of%20e-nav.pdf](https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC%2085%20-%20annex%2020%20-%20Strategy%20for%20the%20development%20and%20implementation%20of%20e-nav.pdf)
 2. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
 [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467%28101%29.pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467%28101%29.pdf)
 3. Maritime Connectivity Platform, 
