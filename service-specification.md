@@ -145,9 +145,9 @@ and describe where the service is in terms of the engineering lifecycle.
 
 <!-- Table below shall be completed. -->
 
-<!-- Spacing: |--- | --------- | -->
+<!-- Spacing: | --- | --------- | -->
 | Attribute    | Content                                                                                                                                                                                                             |
-|--- | --------- |
+| --- | --------- |
 | Name         | Maritime Service Registry (MSR)                                                                                                                                                                                     |
 | ID           | urn:mrn:mcp:service:mcc:mcc:specification:msr                                                                                                                                                                       |
 | Version      | 0.0.1                                                                                                                                                                                                               |
@@ -726,14 +726,14 @@ repeating the same search query, with a difference page index parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in)   | Encoding | Mult. | Description                                                         |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | SearhFilterObject | JSON    | 1     | The object contains information on the search filters to be applied |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)  | Encoding | Mult. | Description                                                                                  |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | SearchObjectResult | JSON     | 0..*  | A list of Instances, matching the requested criteria, encoded as per the SECOM documentation |
 
 ## Service Interface "InstanceInterface"
@@ -808,15 +808,15 @@ parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Instance          | JSON     | 0..*   | A paged list of Instances, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getInstance"
@@ -866,14 +866,14 @@ the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                                             |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | instanceId     | PathParam | 1     | The ID of the Instance object to be retrieved           |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                      |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Instance          | JSON     | 1     | The Instance object that matches the provided ID |
 
 ### Operation "createInstance"
@@ -931,14 +931,14 @@ on the other hand, can be used to provide the human-readable text documentation.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                           |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | instance       | JSON     | 1     | The Instance object to be created with all mandatory fields populated |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                                     |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Instance          | JSON     | 1     | The Instance object that was created along with its assigned ID |
 
 
@@ -1002,14 +1002,14 @@ has been not change.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                           |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | instance       | JSON     | 1     | The Instance object to be updated with all mandatory fields populated |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Instance          | JSON     | 1     | The Instance object that was updated |
 
 ### Operation "deleteInstance"
@@ -1058,14 +1058,14 @@ generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | instanceId     | PathParam | 1     | The ID of the Instance to be deleted |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "InstanceStatusInterface"
@@ -1139,15 +1139,15 @@ operation, if successful or not.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter      | Encoding   | Mult | Description                                                              |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | instanceId     | PathParam  | 1    | The ID of the Instance for which the registration status will be updated |
 | instanceStatus | QueryParam | 1    | The new value for the registration status of the selected Instance       |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "InstanceLedgerStatusInterface" (Optional)
@@ -1239,15 +1239,15 @@ completed.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter           | Encoding   | Mult | Description                                                                     |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | instanceId          | PathParam  | 1    | The ID of the Instance for which the global registration status will be updated |
 | ledgerRequestStatus | QueryParam | 1    | The new value for the global registration status of the selected Instance       |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "XmlInterface"
@@ -1317,15 +1317,15 @@ parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                    |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Xml               | JSON     | 0..*   | A paged list of Xml, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getXml"
@@ -1374,14 +1374,14 @@ selected by mistake, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                              |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | xmlId          | PathParam | 1     | The ID of the Xml object to be retrieved |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
-| Return Type (out)  | Encoding | Mult. | Description                                      |
-| --- | --- |--- | --------- |
+<!-- Spacing: | --- | --- | --- | --------- | -->
+| Return Type (out)  | Encoding | Mult. | Description                                 |
+| --- | --- | --- | --------- |
 | Xml                | JSON     | 1     | The Xml object that matches the provided ID |
 
 ### Operation "createXml"
@@ -1436,14 +1436,14 @@ provided Xml object, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | xml            | JSON     | 1     | The Xml object to be created with all mandatory fields populated |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                                |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Xml               | JSON     | 1     | The Xml object that was created along with its assigned ID |
 
 
@@ -1499,14 +1499,14 @@ the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | xml            | JSON     | 1     | The Xml object to be updated with all mandatory fields populated |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                     |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Xml               | JSON     | 1     | The Xml object that was updated |
 
 ### Operation "deleteXml"
@@ -1558,14 +1558,14 @@ in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                     |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | xmlId          | PathParam | 1     | The ID of the Xml to be deleted |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "XmlValidationInterface"
@@ -1645,15 +1645,15 @@ clearly as possible in the error response.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter | Encoding  | Mult | Description                                                           |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | schema    | PathParam | 1    | The the ID of the G-1128 schema to be used for the validation         |
 | xml       | XML       | 1    | The XML input to be validated against the G-1128 schema specification |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                                             |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Object            | JSON     | 1     | The umarshalled object generated after the successful parsing operation |
 
 ## Service Interface "DocInterface"
@@ -1723,15 +1723,15 @@ parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                            |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Doc               | JSON     | 0..*   | A paged list of Doc objects, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getDoc"
@@ -1780,14 +1780,14 @@ selected by mistake, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                              |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | docId          | PathParam | 1     | The ID of the Doc object to be retrieved |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                 |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | Doc               | JSON     | 1     | The Doc object that matches the provided ID |
 
 ### Operation "createDoc"
@@ -1842,14 +1842,14 @@ provided Doc object, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | doc            | JSON     | 1     | The Doc object to be created with all mandatory fields populated |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
-| Return Type (out)  | Encoding | Mult. | Description                                              |
-| --- | --- |--- | --------- |
+<!-- Spacing: | --- | --- | --- | --------- | -->
+| Return Type (out)  | Encoding | Mult. | Description                                                |
+| --- | --- | --- | --------- |
 | Doc                | JSON     | 1     | The Doc object that was created along with its assigned ID |
 
 
@@ -1905,14 +1905,14 @@ the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | doc            | JSON     | 1     | The Doc object to be updated with all mandatory fields populated |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
-| Return Type (out) | Encoding | Mult. | Description                   |
-| --- | --- |--- | --------- |
+<!-- Spacing: | --- | --- | --- | --------- | -->
+| Return Type (out) | Encoding | Mult. | Description                     |
+| --- | --- | --- | --------- |
 | Doc               | JSON     | 1     | The Doc object that was updated |
 
 ### Operation "deleteDoc"
@@ -1963,14 +1963,14 @@ in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
-| Parameter (in) | Encoding  | Mult. | Description                   |
-| --- | --- |--- | --------- |
+<!-- Spacing: | --- | --- | --- | --------- | -->
+| Parameter (in) | Encoding  | Mult. | Description                       |
+| --- | --- | --- | --------- |
 | docId            | PathParam | 1     | The ID of the Doc to be deleted |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "LedgerRequestInterface"
@@ -2038,15 +2038,15 @@ index parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
-| Return Type (out)  | Encoding | Mult.  | Description                                                                                            |
-| --- | --- |--- | --------- |
+<!-- Spacing: | --- | --- | --- | --------- | -->
+| Return Type (out)  | Encoding | Mult.  | Description                                                                                                      |
+| --- | --- | --- | --------- |
 | LedgerRequest      | JSON     | 0..*   | A paged list of LedgerRequest objects, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getLedgerRequest"
@@ -2096,14 +2096,14 @@ response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in)  | Encoding  | Mult. | Description                              |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | ledgerRequestId | PathParam | 1     | The ID of the LedgerRequest object to be retrieved |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                 |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | LedgerRequest     | JSON     | 1     | The LedgerRequest object that matches the provided ID |
 
 ### Operation "createLedgerRequest"
@@ -2165,14 +2165,14 @@ clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | LedgerRequest  | JSON     | 1     | The LedgerRequest object to be created with all mandatory fields populated |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                              |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | LedgerRequest     | JSON     | 1     | LedgerRequest Doc object that was created along with its assigned ID |
 
 ### Operation "deleteLedgerRequest"
@@ -2222,14 +2222,14 @@ that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
-| Parameter (in)  | Encoding  | Mult. | Description                   |
-| --- | --- |--- | --------- |
+<!-- Spacing: | --- | --- | --- | --------- | -->
+| Parameter (in)  | Encoding  | Mult. | Description                               |
+| --- | --- | --- | --------- |
 | ledgerRequestId | PathParam | 1     | The ID of the LedgerRequest to be deleted |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
+<!-- Spacing: | --- | --- | --- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-| --- | --- |--- | --------- |
+| --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "LedgerRequestStatusInterface" (Optional)
@@ -2315,15 +2315,15 @@ process has been completed.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |------|---|---|------------| -->
+<!-- Spacing: | ------ | --- | --- | ------------ | -->
 | Parameter (in)      | Encoding   | Mult. | Description                                                                                               |
-|------|---|---|------------|
+| ------ | --- | --- | ------------ |
 | ledgerRequestId     | PathParam  | 1     | The ID of the ledger request to update the global regidstration status of the respective service Instance |
 | ledgerRequestStatus | QueryParam | 1     | The global regidstration status requested by the global MSR ledger service request                        |
 
-<!-- Spacing: | --- | --- |--- | --------- | -->
-| Return Type (out)     | Encoding | Mult. | Description                   |
-| --- | --- |--- | --------- |
+<!-- Spacing: | --- | --- | --- | --------- | -->
+| Return Type (out)     | Encoding | Mult. | Description                          |
+| --- | --- | --- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 
@@ -2527,9 +2527,9 @@ methodology over HTTP. The following HTTP methods are used for the various
 operations described in the
 [Service Interface Specifications](#service-interface-specifications) section.
 
-<!-- Spacing: |---|------------| -->
+<!-- Spacing: | --- | ------------ | -->
 | Method | Description                                                                                                               |
-|---|------------|
+| --- | ------------ |
 | GET    | Get a representation of the target resource’s state.                                                                      |
 | POST   | Let the target resource process the representation enclosed in the request.                                               |  
 | PUT    | Create or replace the state of the target resource with the state defined by the representation enclosed in the request.  | 
@@ -2586,9 +2586,9 @@ following list as appropriate.
 Persons producing the Technical Service are invited to provide a list of
 acronyms as appropriate.
 
-<!-- Spacing: |---|---------| -->
+<!-- Spacing: | --- | --------- | -->
 | Acronym | Mearning                                                                          |
-|---|---------|
+| --- | --------- |
 | API     | Application Programming Interface                                                 |
 | IALA    | International Association of Marine Aids to Navigation and Lighthouse Authorities |
 | IMO     | International Maritime Organization                                               |
@@ -2613,7 +2613,7 @@ acronyms as appropriate.
 1. IMO Resolution MSC.85/26 'Strategy for the development and  implementation of e‐Navigation', Annex 20,
 [https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC 85 - annex 20 - Strategy for the development and implementation of e-nav.pdf](https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC%2085%20-%20annex%2020%20-%20Strategy%20for%20the%20development%20and%20implementation%20of%20e-nav.pdf)
 2. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
-[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467#40;101&#40;.pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467&#40;101&#40;.pdf)
+[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467#40;101&#41;.pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467&#40;101&#41;.pdf)
 3. Maritime Connectivity Platform, 
 [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 4. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 
@@ -2632,7 +2632,7 @@ acronyms as appropriate.
 11. IALA International Dictionary of Marine Aids to Navigation, 
 [http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
 
-# Annex A: OpenApi Documentation
+# Annex A: MSR OpenApi Documentation
 ```json
 {
   "openapi": "3.0.1",
