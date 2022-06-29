@@ -4,7 +4,7 @@ toc: true
 toc-own-page: true
 title: "Service specification for the MCP Service Registry (MSR)"
 author: [MCP Consortium]
-date: "2022-06-21"
+date: "2022-06-29"
 keywords: [maritime, technical, service, registry, MCP, MSR]
 logo: "materials/mcplogo.png"
 titlepage-text-color: "476E7D"
@@ -15,25 +15,33 @@ listings-disable-line-numbers: true
 
 # Introduction
 
+The International Maritime Organization (IMO) in its 'Strategy for the
+development and  implementation of e‐Navigation' (MSC85/26, Annex 20) [1]
+resolution, provides the following definition of e‐Navigation:
+
+***E-Navigation, is the harmonised collection, integration, exchange,
+presentation and analysis of maritime information on-board and ashore by
+electronic means to enhance berth-to-berth navigation and related services, for
+safety and security at sea and protection of the marine environment.***
+
 In IMO resolution MSC.467(101) “Guidance on the Definition and Harmonization of
 the Format and Structure of Maritime Services in the Context of e-Navigation”
-[1], IMO defines Maritime Services and Technical Services in the context of
+[2], IMO defines Maritime Services and Technical Services in the context of
 e-Navigation. In this resolution, the Maritime Services are on the highest 
 level, describing a service in an entirely non-technical manner. One or more
 Technical Services are associated with a Maritime Service, and these Technical
 Services are the ones defining the actual information exchange needed to take
 place in order to carry our a Maritime Service.
 
-The Maritime Service Registry [2], or MSR for short, assumes the role of a
+The Maritime Service Registry [3], or MSR for short, assumes the role of a
 general  registry for Technical Services. It provides a reference point to the
-most relevant information and the respective end-points of the registered  
-services and thus to improve the accessibility of available services in the  
+most relevant information and the respective end-points of the registered
+services and thus to improve the accessibility of available services in the
 maritime domain.
 
-The Technical Services in the resolution are also defined on three levels
-following the same structure as in IALA G-1128 [3] guideline, where MSR 
-supervises all service providers to describe their service in the format of 
-G-1128.
+The Technical Services in the resolution are defined on three levels following
+the same structure as in IALA G-1128 [4] guideline. The MSR supervises all
+service providers to describe their service in the format of G-1128.
 
 ## Purpose
 <!--
@@ -93,9 +101,9 @@ Technical Services by a service provider and the provision of a discovery
 mechanism for the registered services, so that any service consumer can identify
 available services and gain access. 
 
-The MSR registration needs to be able to register all relevant e-Navigation 
-services, commercial and non-commercial, authorized and non-authorized, for free
-and against payment. The MSR also needs to allow service consumers to discover
+The MSR registration is required to support all relevant e-Navigation services,
+commercial and non-commercial, authorized and non-authorized, for free and
+against payment. The MSR also needs to allow service consumers to discover
 available services and enable the use of those services through defined 
 end-point locations. It can therefore be seen as a sophisticated yellow pages 
 phone book. A registry can be searched using a wide variety of different
@@ -128,7 +136,7 @@ other related e-Navigation services.
 
 The service management concept originally given from the IALA G-1128
 guideline was given and implemented throughout previous projects such as
-EfficienSea2 [4] and Sea Traffic Management.
+EfficienSea2 [5] and Sea Traffic Management.
 
 # Service identification
 
@@ -268,7 +276,7 @@ will be required from the service provider.
 Service discoverability is intended to facilitate the dissemination of the 
 e-Navigation service information. As such, the employed mechanism should follow
 the most widely-used set of standards, which in the maritime domain related 
-directly to the IEC 63173-2 ED1 standard [5], more widely known as SECOM. 
+directly to the IEC 63173-2 ED1 standard [6], more widely known as SECOM. 
 
 SECOM already defines a mechanism for service discovery and this should be 
 employed by the MSR. Apart from the requirements set by SECOM however, the
@@ -321,7 +329,7 @@ Wildcard searches should also be supported.
 #### MRN of Service Documents for Identification
 
 At the time of registration of service, a service provider should be exposed to
-the MRN scheme [6] for the identification of service documents. G-1128 clearly 
+the MRN scheme [7] for the identification of service documents. G-1128 clearly 
 mentions MRN as a unique identifier scheme. A service provider should follow the
 MRN scheme of the MCP Identity Service provider (who operates a MIR) that they
 belong. There is a possibility of having more than one MRN of a service document
@@ -560,7 +568,7 @@ service interfaces definitions and operations and in tabular form.
 
 A more detailed description on the implementation of the defined interfaces
 can be found in the OpenAPI documentation (version 3.0.1) provided in
-[Annex A](#annex-a---openapi-documentation).
+[Annex A](#annex-a-openapi-documentation).
 
 # Service Data Model
 <!--
@@ -663,7 +671,7 @@ that this interface is implemented as required.
 
 The purpose of the interface's ***searchService*** operation is to allow service
 consumers to query the MSR about registered instances of e-Navigation services  
-with specific properties, i.e. able to produce a compatible IALA S-100 [7] data 
+with specific properties, i.e. able to produce a compatible IALA S-100 [8] data 
 product dataset. It is implemented following the REST methodology using a POST
 HTTP method. It receives a *SearhFilterObject* object, which contains all the
 necessary parameter required to identify a set of matching registered services.
@@ -2539,7 +2547,7 @@ ElasticSearch and Lucene.
 -->
 
 The definitions of terms used in this IALA Guideline can be found in the 
-International Dictionary of Marine Aids to Navigation (IALA Dictionary) [8] and
+International Dictionary of Marine Aids to Navigation (IALA Dictionary) [9] and
 were checked as correct at the time of going to print. Where conflict arises, 
 the IALA Dictionary shall be  considered as the authoritative source of 
 definitions used in IALA documents.
@@ -2596,23 +2604,25 @@ acronyms as appropriate.
     listed.
 -->
 
-1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
+1. IMO Resolution MSC.85/26 'Strategy for the development and  implementation of e‐Navigation', Annex 20,
+[https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC 85 - annex 20 - Strategy for the development and implementation of e-nav.pdf](https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC%2085%20-%20annex%2020%20-%20Strategy%20for%20the%20development%20and%20implementation%20of%20e-nav.pdf)
+2. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
 [https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467(101).pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467)
-2. Maritime Connectivity Platform, 
+3. Maritime Connectivity Platform, 
 [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
-3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 
+4. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 
 [https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/](https://www.iala-aism.org/product/g1128-specification-e-navigation-technical-services/)
-4. EfficienSea2 Project, 
+5. EfficienSea2 Project, 
 [https://efficiensea2.org/](https://efficiensea2.org/)
-5. IEC 63173-2 - Maritime navigation and radiocommunication equipment and systems. Data interface Part 2. Secure exchange and communication of S-100 based products (SECOM)
-6. IALA Maritime Resource Name (MRN) Registry, 
+6. IEC 63173-2 - Maritime navigation and radiocommunication equipment and systems. Data interface Part 2. Secure exchange and communication of S-100 based products (SECOM)
+7. IALA Maritime Resource Name (MRN) Registry, 
 [https://www.iala-aism.org/technical/data-modelling/mrn/](https://www.iala-aism.org/technical/data-modelling/mrn/)
-7. S-100 Universal Hydrographic Data Model, 
+8. S-100 Universal Hydrographic Data Model, 
 [https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4](https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4)
-8. IALA International Dictionary of Marine Aids to Navigation, 
+9. IALA International Dictionary of Marine Aids to Navigation, 
 [http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
 
-# Annex A - OpenApi Documentation
+# Annex A: OpenApi Documentation
 ```json
 {
   "openapi": "3.0.1",
