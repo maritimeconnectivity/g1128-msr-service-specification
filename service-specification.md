@@ -680,6 +680,10 @@ with specific properties, i.e. able to produce a compatible IALA S-100 [10] data
 product dataset. It is implemented following the REST methodology, using a POST
 HTTP method. It receives a *SearhFilterObject* object, which contains all the
 necessary parameters required to identify a set of matching registered services.
+The geometry field of the *SearhFilterObject* object is specified by SECOM to 
+accept a string in a WKT format. Optionally however, a GeoJSON formatted string
+could also be accepted.
+
 The MSR will respond with a list of matching service instances, encoded into
 *SearchObjectResult* objects, in a paged response. The internal structure of
 both the *SearhFilterObject* and *SearchObjectResult* objects is governed by the
