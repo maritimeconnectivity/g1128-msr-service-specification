@@ -2339,9 +2339,8 @@ This section describes the interactive behaviour between service interfaces
 As described in the
 [SearchService Interface](#service-interface-searchserviceinterface) section, the
 MSR service discovery operation is performed through a simple REST call, using
-the POST HTTP method. The service consumer can then get the response which 
-contains all discovered registered service Instances which match the provided
-criteria.
+the POST HTTP method. The service consumer can then receive a response,
+containing all registered service Instances that match the provided criteria.
 
 ![MSR SearchService Interface Operation Sequence Diagram](materials/searchserviceintseqdiagram.drawio.png)
 
@@ -2354,10 +2353,41 @@ criteria.
 
 As described in the
 [Instance Interface](#service-interface-instanceinterface) section, the
-MSR Instance manipulation operations are performed through a simple REST calls.
-The service providers can then get the responses on the requested operations.
+MSR Instance manipulation operations are performed through simple REST calls.
+The service providers can perform these operations and receive the respective
+responses on the outcome of each.
 
-![MSR Instance Interface Operation Sequence Diagram](materials/instanceintseqdiagram.drawio.png)
+## Service Interface "InstanceStatusInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[Instance Status Interface](#service-interface-instancestatusinterface) section,
+the MSR Instance Status update operation is performed through a simple REST 
+call, using a PUT HTTP method. The service providers can perform this operation
+to update the local status of a registered service Instance (based on G-1128)
+and receive the response on the outcome.
+
+![MSR InstanceLedger  Status Interface Operation Sequence Diagram](materials/instanceledgerstatusintseqdiagram.drawio.png)
+
+## Service Interface "InstanceLedgerStatusInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[Instance Ledger Status Interface](#service-interface-instanceledgerstatusinterface)
+section, the MSR Instance Ledger Status update operation is performed through a
+simple REST call, using a PUT HTTP method. The service providers can perform
+this operation to update the global MSR ledger registration status of a
+registered service Instance and receive the response on the outcome.
+
+![MSR Instance Ledger Status Interface Operation Sequence Diagram](materials/instanceledgerstatusintseqdiagram.drawio.png)
 
 ## Service Interface "XmlInterface"
 <!--
@@ -2368,10 +2398,27 @@ The service providers can then get the responses on the requested operations.
 
 As described in the
 [Xml Interface](#service-interface-xmlinterface) section, the
-MSR Xml manipulation operations are performed through a simple REST calls.
-The service providers can then get the responses on the requested operations.
+MSR Xml manipulation operations are performed through simple REST calls. The
+service providers can perform these operations and receive the respective
+responses on the outcome of each.
 
-![MSR Xml Interface Operation Sequence Diagram](materials/xmlintseqdiagram.drawio.png)
+![MSR Xml Interface Operations Sequence Diagram](materials/xmlintseqdiagram.drawio.png)
+
+## Service Interface "XmlValidationInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[Xml Validation Interface](#service-interface-xmlvalidationinterface) section,
+the MSR Xml validation operation is performed through a simple REST call, using
+a PUT HTTP method. The service providers can perform this operation to update
+determine whether an XML input conforms to a specific G-1128 schema
+specification and receive the response on the outcome.
+
+![MSR Xml Validation Interface Operation Sequence Diagram](materials/xmlvalidationintseqdiagram.drawio.png)
 
 ## Service Interface "DocInterface"
 <!--
@@ -2382,10 +2429,12 @@ The service providers can then get the responses on the requested operations.
 
 As described in the
 [Doc Interface](#service-interface-docinterface) section, the
-MSR Doc manipulation operations are performed through a simple REST calls.
-The service providers can then get the responses on the requested operations.
+MSR Doc manipulation operations are performed through simple REST calls. The
+service providers can perform these operations and receive the respective
+responses on the outcome of each. Note that service consumers are also allowed
+to retrieve Xml document information through the getXml operation.
 
-![MSR Doc Interface Operation Sequence Diagram](materials/docintseqdiagram.drawio.png)
+![MSR Doc Interface Operations Sequence Diagram](materials/docintseqdiagram.drawio.png)
 
 ## Service Interface "LedgerRequestInterface"
 <!--
@@ -2396,11 +2445,29 @@ The service providers can then get the responses on the requested operations.
 
 As described in the
 [LedgerRequest Interface](#service-interface-ledgerrequestinterface) section,
-the MSR LedgerRequest manipulation operations are performed through a simple
-REST calls. The service providers can then get the responses on the requested
-operations.
+the MSR LedgerRequest manipulation operations are performed through simple REST
+calls. The service providers can perform these operations and receive the
+respective responses on the outcome of each. Note that service consumers are 
+also allowed to retrieve Doc documents information through the getDoc operation.
 
-![MSR LedgerRequest Interface Operation Sequence Diagram](materials/ledgerrequestintseqdiagram.drawio.png)
+![MSR LedgerRequest Interface Operations Sequence Diagram](materials/ledgerrequestintseqdiagram.drawio.png)
+
+## Service Interface "LedgerRequestStatusInterface"
+<!--
+    Include some information about the dynamic aspects of the service
+    interface; each operation shall be exposed on at least one diagram.
+    An example sequence diagram is shown in Figure 4.
+-->
+
+As described in the
+[LedgerRequest Status Interface](#service-interface-ledgerrequeststatusinterface)
+section, the MSR Update LedgerRequest Status operation is performed through a
+simple REST call, using a PUT HTTP method. The service providers can perform
+this operation to update the global MSR ledger registration status of a
+registered service Instance and receive the response on the outcome.
+
+![MSR LedgerRequest Status Interface Operation Sequence Diagram](materials/ledgerrequeststatusintseqdiagram.drawio.png)
+
 
 <!-- ## Service orchestration (Optional) -->
 <!--
@@ -2421,9 +2488,9 @@ operations.
 # Service Provisioning
 <!--
     This section shall describe the way services are planned to be provided and
-    consumed.  It is labelled optional since one of the key aspects of
+    consumed. It is labelled optional since one of the key aspects of
     service-orientation is to increase flexibility of the overall system by
-    separating the definition of services from their implementation.  This
+    separating the definition of services from their implementation. This
     means that a service can be provided in several different contexts that are
     not necessarily known at the time, when the service is designed.
 -->
@@ -2440,7 +2507,7 @@ In the current implementation described in this document, the MSR has been
 implemented as an online web service, exposing an API using the REST
 methodology over HTTP. The following HTTP methods are used for the various 
 operations described in the
-[Interface Interface Specifications](#service-interface-specifications) section.
+[Service Interface Specifications](#service-interface-specifications) section.
 
 <!-- Spacing: |---|------------| -->
 | Method | Description                                                                                                               |
@@ -2525,7 +2592,7 @@ acronyms as appropriate.
 -->
 
 1. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
-[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/)
+[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/)
 2. Maritime Connectivity Platform, 
 [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 3. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 

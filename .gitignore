@@ -1,2 +1,5 @@
 .DS_Store
 .idea
+
+# Ingore the drawio backup files
+*.bkp
