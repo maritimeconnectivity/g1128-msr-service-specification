@@ -1241,15 +1241,15 @@ completed.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- | --- | --------- | -->
+<!-- Spacing: | ------ | --- | --- | ------------ | -->
 | Parameter           | Encoding   | Mult | Description                                                                     |
-| --- | --- | --- | --------- |
+| ------ | --- | --- | ------------ |
 | instanceId          | PathParam  | 1    | The ID of the Instance for which the global registration status will be updated |
 | ledgerRequestStatus | QueryParam | 1    | The new value for the global registration status of the selected Instance       |
 
-<!-- Spacing: | --- | --- | --- | --------- | -->
+<!-- Spacing: | ------ | --- | --- | ------------ |-->
 | Return Type (out)     | Encoding | Mult. | Description                                                   |
-| --- | --- | --- | --------- |
+| ------ | --- | --- | ------------ |
 | result from operation | none     | 1     | The result of the global registration status update operation |
 
 ## Service Interface "XmlInterface"
@@ -2323,9 +2323,9 @@ process has been completed.
 | ledgerRequestId     | PathParam  | 1     | The ID of the ledger request to update the global regidstration status of the respective service Instance |
 | ledgerRequestStatus | QueryParam | 1     | The global regidstration status requested by the global MSR ledger service request                        |
 
-<!-- Spacing: | --- | --- | --- | --------- | -->
+<!-- Spacing: | ------ | --- | --- | ------------ || -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-| --- | --- | --- | --------- |
+| ------ | --- | --- | ------------ |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 
