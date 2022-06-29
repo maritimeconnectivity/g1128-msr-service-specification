@@ -135,8 +135,8 @@ other related e-Navigation services.
 -->
 
 The service management concept originally presented in the IALA G-1128
-guideline was given and implemented throughout previous projects such as
-EfficienSea2 [5] and Sea Traffic Management.
+guideline has already bee considered and implemented by previous projects such
+as EfficienSea2 [5] and Sea Traffic Management.
 
 # Service identification
 
@@ -2613,7 +2613,7 @@ acronyms as appropriate.
 1. IMO Resolution MSC.85/26 'Strategy for the development and  implementation of e‐Navigation', Annex 20,
 [https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC 85 - annex 20 - Strategy for the development and implementation of e-nav.pdf](https://wwwcdn.imo.org/localresources/en/OurWork/Safety/Documents/enavigation/MSC%2085%20-%20annex%2020%20-%20Strategy%20for%20the%20development%20and%20implementation%20of%20e-nav.pdf)
 2. IMO Resolution MSC.467(101) - Guidance on the Definition and Harmonization of the Format and Structure of Maritime Services in the Context of e-Navigation,
-[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467#40;101&#41;.pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467&#40;101&#41;.pdf)
+[https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467.101.pdf](https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MSCResolutions/MSC.467&#40;101&#41;.pdf)
 3. Maritime Connectivity Platform, 
 [https://maritimeconnectivity.net/](https://maritimeconnectivity.net/)
 4. IALA Guideline - G1128 The Specification of e-Navigation Technical Services, 
