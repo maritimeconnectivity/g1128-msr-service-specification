@@ -208,19 +208,20 @@ which they can acquire a list of services that conform to a set of selection
 criteria. For service providers the MSR facilitates the dissemination of their 
 service information and an access point where the relevant information is 
 successfully registered. An example of this whole process can be seen in
-the @fig:msrcontext.
+the figure below.
 
-![MSR Service Registration/Discoverability Concept](materials/mcpcontext.drawio.png)
+![MSR Service Registration/Discoverability Concept](materials/msrcontext.drawio.png)
 
-Another operational node to be taken into account is the MSR itself. More
-specifically, multiple MSR instances that may exist independently of each other.
-This kind of decentralized scenarios, demonstrate the need for a certain level
-of coordination, especially in terms of service discoverability. This can be
-provided by a centralized/distributed ledger service, through which all 
-interested MSRs can exchange information on their current registrations. The 
-specification of this ledger operation however is outside the scope of this 
-document. The participation of an MSR is such a scheme and any implementation 
-decisions are therefore left to the MSR service developers/providers.
+Another operational node to be taken into account is the MSR Instance Provider.
+More specifically, multiple MSR Instances Providers can exist, each operating
+an MSR instance independently of each other. This kind of decentralized
+scenarios, demonstrate the need for a certain level of coordination, especially
+in terms of service discoverability. This can be provided by a centralized or 
+distributed ledger service, through which all interested MSRs can exchange
+information on their current registrations. The specification of this ledger
+operation however is outside the scope of this document. The participation of an
+MSR is such a scheme and any implementation decisions are therefore left to the
+MSR service developers/providers.
 
 More detailed descriptions on the basic operational aspects can be found below.
 
@@ -332,9 +333,9 @@ Wildcard searches should also be supported.
 At the time of registration of service, a service provider should be exposed to
 the MRN scheme [8] for the identification of service documents. G-1128 clearly 
 mentions MRN as a unique identifier scheme. A service provider should follow the
-MRN scheme of the MCP Identity Service provider (who operates a MIR) that they
-belong. There is a possibility of having more than one MRN of a service document
-for the identification.
+MRN scheme of the MIR Instance Provider (who operates a MIR) that they belong.
+There is a possibility of having more than one MRN of a service document for the
+identification.
 
 In MSR, the primary identification MRN needs to be aligned with the MCP MRN
 scheme, defined in "MCC Identity Management and Security; Identity Management"
@@ -389,12 +390,12 @@ The table below lists applicable existing functional requirements for the MSR
 service.
 
 <!-- Spacing: | --- | --- | ------ | --- | -->
-| Requirement Id | Requirement Name                 | Requirement Text                                | References |
+| Requirement Id | Requirement Name                 | Requirement Text                               | References |
 | --- | --- | ------ | --- |
-| MSR-FR001      | Service Registration             | Allow the registrations of new service          | MCC MSR WG |
-| MSR-FR002      | Service Registration Update      | Allow updates on an existing registrations      | MCC MSR WG  |
-| MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing registrations | MCC MSR WG  |
-| MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM  | MCC MSR WG  |
+| MSR-FR001      | Service Registration             | Allow the registrations of new service         | MCC MSR WG |
+| MSR-FR002      | Service Registration Update      | Allow updates on an existing registrations     | MCC MSR WG |
+| MSR-FR003      | Service Registration Cancelation | Allow the deletion of an existing registration | MCC MSR WG |
+| MSR-FR004      | Service Discoverability          | Allow services to be discoverable as per SECOM | MCC MSR WG |
 
 The following tables define additional requirements for the MSR service.
 
@@ -433,7 +434,7 @@ service.
 | Requirement Id   | MSR-NFR004                                                                                             |
 | --- | --------- |
 | Requirement Name | Performance                                                                                            |
-| Requirement Text | The service must respond to a request in a timely fashion and not allow any HTTP call to timeout.      | 
+| Requirement Text | The service must respond to a request in a timely fashion and not allow any request call to timeout.   | 
 | Rationale        | Performance, especially in terms of service discoverability is crucial for a smooth service provision. |
 |  Author          | GRAD                                                                                                   |
 
@@ -443,14 +444,13 @@ service.
 | Requirement Name | Modularity                                                                                                                                                                       |
 | Requirement Text | The services architecture must be constructed in such a way that individual functionality can be extended, modified or deleted, without changing the basic service architecture. |
 | Rationale        | The MSR should be easily upgradable to ensure future operations.                                                                                                                 |
-|  Author          | GRAD                                                                                                                                                                             |
+| Author           | GRAD                                                                                                                                                                             |
 
 ## Other constraints
 
-Inter-compatibility with the other MCP components, namely the MCP Identity
-Registry (MIR) and the MCP Messaging Service (MMS) should be ensured. In
-regard to different versions, the MSR should make clear which MCP version it
-supports and if more than one.
+Inter-compatibility with the other MCP components, namely the MIR and the MMS
+should be ensured. In regard to different versions, the MSR should make clear
+which MCP version it supports and if more than one.
 
 ### Relevant industrial standards
 <!--
@@ -479,14 +479,14 @@ The following tables describe the operational nodes of the service.
 <!-- Spacing: | --- | --------- | -->
 | Operational Node      | Remarks                                                                                              | 
 | --- | --------- |
-| MCP Instance Provider | The notion of an MSR instance provider includes all entities able to make an MSR instanxe available. |
+| MCP Instance Provider | The notion of an MSR instance provider includes all entities able to make an MSR instance available. |
 
 #### Operational nodes consuming the MSR service
 
 <!-- Spacing: | --- | --------- | -->
-| Operational Node  | Remarks                                                                                                                                  | 
+| Operational Node  | Remarks                                                                                                                                  |
 | --- | --------- |
-| Service Provider  | The notion of a service provider includes all entities able to register to the MSR and provide e-Navigation data services. |
+| Service Provider  | The notion of a service provider includes all entities able to host and provide e-Navigation data services.                              |
 | Service Consumer  | The notion of a service consumer includes all entities, human and non-human able to lookup and use the registered e-Navigation services. |
 
 <!-- #### Operational activities (Optional) -->
@@ -525,7 +525,6 @@ The following tables describe the operational nodes of the service.
 -->
 
 This section aims at providing an overview of the main elements of the service.
-The elements in this view are all usually created by an UML modelling tool.
 
 ## Service interfaces
 
@@ -553,27 +552,28 @@ The elements in this view are all usually created by an UML modelling tool.
 -->
 
 This section describes the interfaces of the service including the selected 
-Message Exchange Pattern (MEP) by using UML diagrams that illustrates the 
+Message Exchange Pattern (MEP) by using UML diagrams that illustrate the 
 service interfaces definitions and operations and in tabular form.
 
 ![MSR Interface Definition diagram](materials/interfacedefinitions.drawio.png)
 
 <!-- Spacing: | --- | --- | --- | -->
-| Service Interface             | Role (from service provider point of view) | Service Operation                                                                   | 
+| Service Interface             | Role (from service provider point of view) | Service Operation                                                                                     | 
 | --- | --- | --- |
-| SearchServiceInterface        | Provided                                   | searchService                                                                       |
-| InstanceInterface             | Provided                                   | getInstance \newline createInstance \newline updateInstance \newline deleteInstance |
-| InstanceStatusInterface       | Provided                                   | updateInstanceStatus                                                                |
-| InstanceLedgerStatusInterface | Provided                                   | updateInstanceLedgerStatus                                                          |
-| XmlInterface                  | Provided                                   | getXmls \newline getXml \newline createXml \newline UpdateXml \newline deleteXml    |
-| XmlValidationInterface        | Provided                                   | validateXml                                                                         |
-| DocInterface                  | Provided                                   | getDocs \newline getDoc \newline createDoc \newline UpdateDoc \newline deleteDoc    |
-| LedgerRequestsInterface       | Provided                                   | getLedgerRequest \newline createLedgerRequest \newline deleteLedgerRequest          |
-| LedgerRequestStatusInterface  | Provided                                   | updateLedgerRequestStatus                                                           |
+| SearchServiceInterface        | Provided                                   | searchService                                                                                         |
+| InstanceInterface             | Provided                                   | getInstance \newline createInstance \newline updateInstance \newline deleteInstance                   |
+| InstanceStatusInterface       | Provided                                   | updateInstanceStatus                                                                                  |
+| InstanceLedgerStatusInterface | Provided                                   | updateInstanceLedgerStatus                                                                            |
+| XmlInterface                  | Provided                                   | getXmls \newline getXml \newline createXml \newline UpdateXml \newline deleteXml                      |
+| XmlValidationInterface        | Provided                                   | validateXml                                                                                           |
+| DocInterface                  | Provided                                   | getDocs \newline getDoc \newline createDoc \newline UpdateDoc \newline deleteDoc                      |
+| LedgerRequestsInterface       | Provided                                   | getLedgerRequests \newline getLedgerRequest \newline createLedgerRequest \newline deleteLedgerRequest |
+| LedgerRequestStatusInterface  | Provided                                   | updateLedgerRequestStatus                                                                             |
 
 A more detailed description on the implementation of the defined interfaces
-can be found in the OpenAPI documentation (version 3.0.1) provided in
-[Annex A](#annex-a-openapi-documentation).
+can be found in the OpenAPI documentation (version 3.0.1) provided in the
+[Annex A](#annex-a-openapi-documentation) and
+[Annex B](#annex-b-secom-openapi-documentation) sections.
 
 # Service Data Model
 <!--
@@ -609,7 +609,9 @@ to be exchanged between providers and consumers of the service.  As suggested by
 the IALA G-1128 guideline, the data structure of the MSR implementation are 
 visualised in the following UML digram.
 
-As demonstrated by the displayed diagram, there are four main data structure
+![MSR Service Data Model Diagram](materials/umldiagram.png)
+
+As demonstrated by the displayed diagram, there are four main data structures
 employed by the MSR:
 
 * The Instance Model
@@ -618,8 +620,6 @@ employed by the MSR:
 * The LedgerRequest Model
 
 Each has its own unique purpose and should be used accordingly.
-
-![MSR Service Data Model Diagram](materials/umldiagram.png)
 
 <!-- ### Service internal data model (Optional) -->
 <!--
@@ -663,7 +663,7 @@ section.
 -->
 
 The ***SearchServiceInterface*** interface is mandated by SECOM to allow service
-consumers to use a SECOM-compliant Service Registry. Since the MSR 
+consumers to use a SECOM-compliant Service Registry. Since the MSR
 implementation aspires to be a fully SECOM-compliant service, it is mandatory
 that this interface is implemented as required.
 
@@ -675,9 +675,9 @@ that this interface is implemented as required.
 -->
 
 The purpose of the interface's ***searchService*** operation is to allow service
-consumers to query the MSR about registered instances of e-Navigation services  
+consumers to query the MSR about registered instances of e-Navigation services
 with specific properties, i.e. able to produce a compatible IALA S-100 [10] data 
-product dataset. It is implemented following the REST methodology using a POST
+product dataset. It is implemented following the REST methodology, using a POST
 HTTP method. It receives a *SearhFilterObject* object, which contains all the
 necessary parameter required to identify a set of matching registered services.
 The MSR will respond with a list of matching services, encoded into
@@ -693,7 +693,7 @@ SECOM standard.
 
 Upon receiving a request with a valid *SearhFilterObject* payload, the service 
 will first determine which of the applicable search filters are to be applied. 
-This operation includes parsing the query field of the *SearhFilterObject* 
+This operation includes parsing the *freetext* field of the *SearhFilterObject* 
 object, if they have been populated. They should be processed according to the
 rules outlined in the [Service Discoverability](#service-discoverability) 
 section. The parsing output should then be combined with the additional 
@@ -726,15 +726,15 @@ repeating the same search query, with a difference page index parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in)   | Encoding | Mult. | Description                                                         |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | SearhFilterObject | JSON    | 1     | The object contains information on the search filters to be applied |
 
-<!-- Spacing: |---|---|---|---------| -->
-| Return Type (out) | Encoding | Mult. | Description                                                                                  |
-|---|---|---|---------|
-| SearhFilterObject | JSON     | 0..*  | A list of instances, matching the requested criteria, encoded as per the SECOM documentation |
+<!-- Spacing: | --- | --- |--- | --------- | -->
+| Return Type (out)  | Encoding | Mult. | Description                                                                                  |
+| --- | --- |--- | --------- |
+| SearchObjectResult | JSON     | 0..*  | A list of Instances, matching the requested criteria, encoded as per the SECOM documentation |
 
 ## Service Interface "InstanceInterface"
 <!--
@@ -749,7 +749,7 @@ repeating the same search query, with a difference page index parameter.
 The ***InstanceInterface*** interface allows service providers to interact with
 the MSR in order to retrieve and manipulate the data on the registered service
 instances. A service provider should be able to access information about all
-registered service instances but should only be allowed to alter/delete data
+registered service instances, but should only be allowed to modify/delete data
 related to services it provides. MSR administrator users however, are allowed to
 perform any data modifications.
 
@@ -769,7 +769,7 @@ XML and human-readable text formats using the Xml and Doc objects respectively.
 The purpose of the interface's ***getInstances*** operation is to enable service
 providers to access a complete list of the registered service instances, without
 calling the more specialised but also expensive (resource-wise) SearchService
-interface. It is implemented following the REST methodology using a GET HTTP 
+interface. It is implemented following the REST methodology, using a GET HTTP 
 method. It receives only a page number and a page size as input parameters.
 The MSR will respond with a list of all Instance objects, in a paged response.
 The internal structure of the Instance object is provided in more detail in the
@@ -808,16 +808,16 @@ parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                          |
-|---|---|---|---------|
-| Instance          | JSON     | 0..*   | A paged list of instances, matching the requested criteria, structured as per the service data model |
+| --- | --- |--- | --------- |
+| Instance          | JSON     | 0..*   | A paged list of Instances, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getInstance"
 <!--
@@ -828,7 +828,7 @@ parameter.
 
 The purpose of the interface's ***getInstance*** operation is to enable service
 providers to access the information of a single registered service instance. 
-It is implemented following the REST methodology using a GET HTTP method. It 
+It is implemented following the REST methodology, using a GET HTTP method. It 
 receives the ID of the Instance to be retrieved as an input argument. The MSR
 will respond with the Instance object identified by the provided ID, if that is
 found. The internal structure the Instance is provided in more detail in the 
@@ -840,7 +840,7 @@ found. The internal structure the Instance is provided in more detail in the
     output from the input payload.
 -->
 
-Upon receiving a request to retrieve a specific registered Instance, the
+Upon receiving a request to retrieve a specific registered instance, the
 service will access its database to locate, retrieve and package the Instance
 object that matches the provided ID. If the ID is not located, for example
 because it has  been selected by mistake, the service will make that clear in
@@ -866,14 +866,14 @@ the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                                             |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | instanceId     | PathParam | 1     | The ID of the Instance object to be retrieved           |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                      |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Instance          | JSON     | 1     | The Instance object that matches the provided ID |
 
 ### Operation "createInstance"
@@ -885,8 +885,8 @@ the response generated.
 
 The purpose of the interface's ***createInstance*** operation is to enable
 service providers to create new entries of registered service Instances. It is
-implemented following the REST methodology using a POST HTTP method. It receives
-as an input a populated Instance object that contains all the mandatory
+implemented following the REST methodology, using a POST HTTP method. It
+receives as an input a populated Instance object that contains all the mandatory
 information. The MSR will  respond with a copy of the Instance object created,
 including its assigned ID. The internal structure of the Instance object is
 provided in more detail in the [Service Data Model](#service-data-model)
@@ -931,14 +931,14 @@ on the other hand, can be used to provide the human-readable text documentation.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                           |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | instance       | JSON     | 1     | The Instance object to be created with all mandatory fields populated |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                                     |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Instance          | JSON     | 1     | The Instance object that was created along with its assigned ID |
 
 
@@ -951,7 +951,7 @@ on the other hand, can be used to provide the human-readable text documentation.
 
 The purpose of the interface's ***updateInstance*** operation is to enable
 service providers to update existing entries of registered service Instances.
-It is implemented following the REST methodology using a PUT HTTP method. It
+It is implemented following the REST methodology, using a PUT HTTP method. It
 receives as an input a populated Instance object that contains all the mandatory
 information. The MSR will respond with a copy of the Instance object updated,
 including its assigned ID. The internal structure of the Instance object is
@@ -1002,14 +1002,14 @@ has been not change.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                           |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | instance       | JSON     | 1     | The Instance object to be updated with all mandatory fields populated |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Instance          | JSON     | 1     | The Instance object that was updated |
 
 ### Operation "deleteInstance"
@@ -1021,7 +1021,7 @@ has been not change.
 
 The purpose of the interface's ***deleteInstance*** operation is to enable
 service providers to delete existing entries of registered service Instances. It
-is implemented following the REST methodology using a DELETE HTTP method. It
+is implemented following the REST methodology, using a DELETE HTTP method. It
 receives as an input the ID of the registered Instance to be deleted. The MSR
 will respond with the outcome of the deletion operation, if successful or not.
 
@@ -1058,14 +1058,14 @@ generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | instanceId     | PathParam | 1     | The ID of the Instance to be deleted |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "InstanceStatusInterface"
@@ -1102,7 +1102,7 @@ any data modifications.
 
 The purpose of the interface's ***updateInstanceStatus*** operation is to allow
 service providers to update the registration status of the Instances they
-provide. It is implemented following the REST methodology using a PUT HTTP 
+provide. It is implemented following the REST methodology, using a PUT HTTP 
 method. It receives as input the ID of the Instance of which the status will be
 updated, as well as the new applicable Instance status value. The MSR will
 respond with the outcome of the update operation, if successful or not.
@@ -1139,15 +1139,15 @@ operation, if successful or not.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter      | Encoding   | Mult | Description                                                              |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | instanceId     | PathParam  | 1    | The ID of the Instance for which the registration status will be updated |
 | instanceStatus | QueryParam | 1    | The new value for the registration status of the selected Instance       |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "InstanceLedgerStatusInterface" (Optional)
@@ -1194,7 +1194,7 @@ any data modifications.
 The purpose of the interface's ***updateInstanceLedgerStatus*** operation is to
 allow service providers to further register a provided service Instance to the
 MSR global ledger, if that functionality is supported. The operation is 
-implemented following the REST methodology using a PUT HTTP method. It receives
+implemented following the REST methodology, using a PUT HTTP method. It receives
 as input the ID of the Instance of which the global registration status will be
 updated, as well as the new applicable LedgerRequestStatus value. The MSR will
 respond with the outcome of the update operation, if successful or not.
@@ -1239,15 +1239,15 @@ completed.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter           | Encoding   | Mult | Description                                                                     |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | instanceId          | PathParam  | 1    | The ID of the Instance for which the global registration status will be updated |
 | ledgerRequestStatus | QueryParam | 1    | The new value for the global registration status of the selected Instance       |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "XmlInterface"
@@ -1278,7 +1278,7 @@ perform any data modifications.
 
 The purpose of the interface's ***getXmls*** operation is to enable service
 providers to access a complete list of the registered service Instances' XML
-documents directly. It is implemented following the REST methodology using a
+documents directly. It is implemented following the REST methodology, using a
 GET HTTP method. It receives only a page number and page size as input
 parameters. The MSR will respond with a list of all Xml objects, in a paged
 response. The internal structure the Xml object is provided in more detail in
@@ -1317,15 +1317,15 @@ parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                    |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Xml               | JSON     | 0..*   | A paged list of Xml, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getXml"
@@ -1337,7 +1337,7 @@ parameter.
 
 The purpose of the interface's ***getXml*** operation is to enable service
 providers and consumers to access the information of a single XML document. It
-is implemented following the REST methodology using a GET HTTP method. It
+is implemented following the REST methodology, using a GET HTTP method. It
 receives the ID of the Xml to be retrieved as an input argument. The MSR will
 respond with the Xml object identified by the provided ID, if that is found. The
 internal structure of the Xml object is provided in more detail in the 
@@ -1374,14 +1374,14 @@ selected by mistake, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                              |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | xmlId          | PathParam | 1     | The ID of the Xml object to be retrieved |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)  | Encoding | Mult. | Description                                      |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Xml                | JSON     | 1     | The Xml object that matches the provided ID |
 
 ### Operation "createXml"
@@ -1398,7 +1398,7 @@ should ever be required by any service provider, while it should not be allowed
 for any service consumers. The main purpose of the interface's ***createXml***
 operation to allow the system administrators to correct issues related to the
 registered Instances' XML documents. It is implemented following the REST
-methodology using a POST HTTP method. It receives as an input a populated Xml
+methodology, using a POST HTTP method. It receives as an input a populated Xml
 object that contains all the mandatory information, including the applicable
 registered service Instance ID. The MSR will respond with a copy of the Xml
 object created, including its assigned ID. The internal structure of the Xml
@@ -1436,14 +1436,14 @@ provided Xml object, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | xml            | JSON     | 1     | The Xml object to be created with all mandatory fields populated |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                                |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Xml               | JSON     | 1     | The Xml object that was created along with its assigned ID |
 
 
@@ -1461,7 +1461,7 @@ should ever be required by any service provider, while it should not be allowed
 for any service consumers. The main purpose of the interface's ***updateXml***
 operation to allow the system administrators to correct issues related to the
 registered Instances XML documents. It is implemented following the REST
-methodology using a PUT HTTP method. It receives as an input a populated Xml
+methodology, using a PUT HTTP method. It receives as an input a populated Xml
 object that contains all the mandatory information. The MSR will respond with a
 copy of the Xml object updated. The internal structure of the Xml object is
 provided in more detail in the [Service Data Model](#service-data-model)
@@ -1499,14 +1499,14 @@ the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | xml            | JSON     | 1     | The Xml object to be updated with all mandatory fields populated |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                     |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Xml               | JSON     | 1     | The Xml object that was updated |
 
 ### Operation "deleteXml"
@@ -1558,14 +1558,14 @@ in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                     |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | xmlId          | PathParam | 1     | The ID of the Xml to be deleted |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "XmlValidationInterface"
@@ -1606,7 +1606,7 @@ of all three levels of G-1128 specifications. These are modeled  by the
 * DESIGN
 * INSTANCE
 
-The operation is implemented following the REST methodology using a POST HTTP
+The operation is implemented following the REST methodology, using a POST HTTP
 method. It receives as an input the G1128Schemas type to be used for the
 validation and the XML input to be validated.
 
@@ -1645,15 +1645,15 @@ clearly as possible in the error response.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter | Encoding  | Mult | Description                                                           |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | schema    | PathParam | 1    | The the ID of the G-1128 schema to be used for the validation         |
 | xml       | XML       | 1    | The XML input to be validated against the G-1128 schema specification |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                                             |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Object            | JSON     | 1     | The umarshalled object generated after the successful parsing operation |
 
 ## Service Interface "DocInterface"
@@ -1684,7 +1684,7 @@ perform any data modifications.
 
 The purpose of the interface's ***getDocs*** operation is to enable service
 providers to access a complete list of the registered service Instances' Doc
-documents directly. It is implemented following the REST methodology using a
+documents directly. It is implemented following the REST methodology, using a
 GET HTTP method. It receives only a page number and page size as input
 parameters. The MSR will respond with a list of all Doc objects, in a paged
 response. The internal structure of the Doc object is provided in more detail in
@@ -1723,15 +1723,15 @@ parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult.  | Description                                                                                            |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Doc               | JSON     | 0..*   | A paged list of Doc objects, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getDoc"
@@ -1743,7 +1743,7 @@ parameter.
 
 The purpose of the interface's ***getDoc*** operation is to enable service
 providers and consumers to access the information of a single Doc document. It
-is implemented following the REST methodology using a GET HTTP method. It
+is implemented following the REST methodology, using a GET HTTP method. It
 receives the ID of the Doc to be retrieved as an input argument. The MSR will
 respond with the Doc object identified by the provided ID, if that is found. The
 internal structure of the Doc object is provided in more detail in the
@@ -1780,14 +1780,14 @@ selected by mistake, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                              |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | docId          | PathParam | 1     | The ID of the Doc object to be retrieved |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                 |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Doc               | JSON     | 1     | The Doc object that matches the provided ID |
 
 ### Operation "createDoc"
@@ -1804,7 +1804,7 @@ be required, resulting in a service Instance being associated with more than one
 documents. The main purpose of the interface's ***createDoc*** operation is
 to allow the service providers to upload these additional Doc documents at a
 later stage, after a service has already been registered with the MSR. It is
-implemented following the REST methodology using a POST HTTP method. It receives
+implemented following the REST methodology, using a POST HTTP method. It receives
 as an input a populated Doc object that contains all the mandatory information,
 including the applicable registered service Instance ID. The MSR will respond
 with a copy of the Doc object created, including its assigned ID. The internal
@@ -1842,14 +1842,14 @@ provided Doc object, the service will make that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | doc            | JSON     | 1     | The Doc object to be created with all mandatory fields populated |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)  | Encoding | Mult. | Description                                              |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Doc                | JSON     | 1     | The Doc object that was created along with its assigned ID |
 
 
@@ -1867,7 +1867,7 @@ be required, resulting in a service Instance being associated with more than one
 documents. The main purpose of the interface's ***updateDoc*** operation is
 to allow the service providers to update the Doc documents of a service
 Instance, after a service has already been registered with the MSR. It is
-implemented following the REST methodology using a PUT HTTP method. It receives
+implemented following the REST methodology, using a PUT HTTP method. It receives
 as an input a populated Doc object that contains all the mandatory information.
 The MSR will respond with a copy of the Doc object updated. The internal
 structure of the Doc object is provided in more detail in the
@@ -1905,14 +1905,14 @@ the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | doc            | JSON     | 1     | The Doc object to be updated with all mandatory fields populated |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                   |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | Doc               | JSON     | 1     | The Doc object that was updated |
 
 ### Operation "deleteDoc"
@@ -1928,7 +1928,7 @@ Instance could be required, resulting in a service Instance being associated
 with more than one documents. The main purpose of the interface's 
 ***deleteDoc*** operation is to allow the service provider to remove documents
 already uploaded for a registered service Instance. It is implemented following
-the REST methodology using a DELETE HTTP method. It receives as an input the ID
+the REST methodology, using a DELETE HTTP method. It receives as an input the ID
 of the Doc object to be deleted. The MSR will respond with the outcome of the
 deletion operation, whether successful or not.
 
@@ -1963,14 +1963,14 @@ in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding  | Mult. | Description                   |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | docId            | PathParam | 1     | The ID of the Doc to be deleted |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "LedgerRequestInterface"
@@ -2038,15 +2038,15 @@ index parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter   | Encoding   | Mult | Description                                             |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | page        | QueryParam | 0..1 | The number of the page the results to be returned       |
 | pageSize    | QueryParam | 0..1 | The maximum size of each page that contains the results |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)  | Encoding | Mult.  | Description                                                                                            |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | LedgerRequest      | JSON     | 0..*   | A paged list of LedgerRequest objects, matching the requested criteria, structured as per the service data model |
 
 ### Operation "getLedgerRequest"
@@ -2058,7 +2058,7 @@ index parameter.
 
 The purpose of the interface's ***getLedgerRequest*** operation is to enable
 service providers to access the information of a single getLedgerRequest entry.
-It is implemented following the REST methodology using a GET HTTP method. It
+It is implemented following the REST methodology, using a GET HTTP method. It
 receives the ID of the LedgerRequest to be retrieved as an input argument. The
 MSR will respond with the LedgerRequest object identified by the provided ID, if
 that is found. The internal structure of the LedgerRequest object is provided in
@@ -2096,14 +2096,14 @@ response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in)  | Encoding  | Mult. | Description                              |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | ledgerRequestId | PathParam | 1     | The ID of the LedgerRequest object to be retrieved |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                 |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | LedgerRequest     | JSON     | 1     | The LedgerRequest object that matches the provided ID |
 
 ### Operation "createLedgerRequest"
@@ -2125,7 +2125,7 @@ in the database. Only the ***InstanceInterface*** operation can then be used to
 update the global registration status. Therefore, it can be assumed that this
 operation is primarily for administration purposes.
 
-The operation is implemented following the REST methodology using a POST HTTP
+The operation is implemented following the REST methodology, using a POST HTTP
 method. It receives as an input a populated LedgerRequest object that contains
 all the mandatory information, including the applicable registered service
 Instance ID. The MSR will respond with a copy of the LedgerRequest object
@@ -2165,14 +2165,14 @@ clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in) | Encoding | Mult. | Description                                                      |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | LedgerRequest  | JSON     | 1     | The LedgerRequest object to be created with all mandatory fields populated |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out) | Encoding | Mult. | Description                                              |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | LedgerRequest     | JSON     | 1     | LedgerRequest Doc object that was created along with its assigned ID |
 
 ### Operation "deleteLedgerRequest"
@@ -2187,7 +2187,7 @@ LedgerRequest entry associated with it. Therefore, if something goes wrong, it
 might be required to delete this entry in order to create a new one. The 
 ***deleteLedgerRequest*** provides this functionality and is mainly used by
 administrator users to correct this kind of issues. It is implemented following
-the REST methodology using a DELETE HTTP method. It receives as an input the ID
+the REST methodology, using a DELETE HTTP method. It receives as an input the ID
 of the LedgerRequest object to be deleted. The MSR will respond with the outcome
 of the deletion operation, whether successful or not.
 
@@ -2222,14 +2222,14 @@ that clear in the response generated.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Parameter (in)  | Encoding  | Mult. | Description                   |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | ledgerRequestId | PathParam | 1     | The ID of the LedgerRequest to be deleted |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                          |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 ## Service Interface "LedgerRequestStatusInterface" (Optional)
@@ -2265,7 +2265,7 @@ operation. Alternatively, if a LedgerRequest entry has already been created and
 its assigned ID is known, this operation can be performed through the
 ***updateLedgerRequestStatus*** operation.
 
-This operation is implemented following the REST methodology using a PUT HTTP
+This operation is implemented following the REST methodology, using a PUT HTTP
 method. It receives as an input the ID of an already initialised LedgerRequest
 object that provides all the mandatory information, including the applicable
 registered service Instance ID. In addition, the new global registration status
@@ -2321,9 +2321,9 @@ process has been completed.
 | ledgerRequestId     | PathParam  | 1     | The ID of the ledger request to update the global regidstration status of the respective service Instance |
 | ledgerRequestStatus | QueryParam | 1     | The global regidstration status requested by the global MSR ledger service request                        |
 
-<!-- Spacing: |---|---|---|---------| -->
+<!-- Spacing: | --- | --- |--- | --------- | -->
 | Return Type (out)     | Encoding | Mult. | Description                   |
-|---|---|---|---------|
+| --- | --- |--- | --------- |
 | result from operation | none     | 1     | The result of the deletion operation |
 
 
@@ -4001,6 +4001,310 @@ acronyms as appropriate.
             "items": {
               "type": "string"
             }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+# Annex B: SECOM OpenApi Documentation
+```json
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "MCP Service Registry (MSR) - SECOM Interfaces",
+    "description": "Maritime Connectivity Platform Service Registry, developed by the MCC MSR WG",
+    "termsOfService": "https://gla-rad.org/",
+    "contact": {
+      "email": "Nikolaos.Vastardis@gla-rad.org"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://rnavlab.gla-rad.org/msr/"
+    },
+    {
+      "url": "http://palatia:8444"
+    },
+    {
+      "url": "http://localhost:8444"
+    }
+  ],
+  "paths": {
+    "/api/secom/v1/searchService": {
+      "post": {
+        "tags": [
+          "SECOM"
+        ],
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchFilterObject"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "default response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SearchObjectResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SearchObjectResult": {
+        "required": [
+          "description",
+          "endpointType",
+          "endpointUri",
+          "instanceId",
+          "name",
+          "organizationId",
+          "status",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "instanceId": {
+            "pattern": "^urn:mrn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\\-.:=@;$_!*'%/?#]+$",
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dataProductType": {
+            "type": "string",
+            "enum": [
+              "OTHER",
+              "S57",
+              "S101",
+              "S102",
+              "S104",
+              "S111",
+              "S122",
+              "S123",
+              "S124",
+              "S125",
+              "S126",
+              "S127",
+              "S128",
+              "S129",
+              "S131",
+              "S210",
+              "S211",
+              "S212",
+              "S401",
+              "S402",
+              "S411",
+              "S412",
+              "S413",
+              "S414",
+              "S421",
+              "RTZ",
+              "EPC"
+            ]
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "endpointUri": {
+            "type": "string"
+          },
+          "endpointType": {
+            "type": "string"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "unlocode": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "instanceAsXml": {
+            "type": "string"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "mmsi": {
+            "type": "string"
+          },
+          "imo": {
+            "type": "string"
+          },
+          "geometry": {
+            "type": "object"
+          }
+        }
+      },
+      "SearchFilterObject": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/SearchParameters"
+          },
+          "geometry": {
+            "type": "string"
+          },
+          "freetext": {
+            "pattern": "^[a-zA-Z0-9 +_:\\-,.\\*\\?]*$",
+            "type": "string"
+          }
+        }
+      },
+      "SearchParameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dataProductType": {
+            "type": "string",
+            "enum": [
+              "OTHER",
+              "S57",
+              "S101",
+              "S102",
+              "S104",
+              "S111",
+              "S122",
+              "S123",
+              "S124",
+              "S125",
+              "S126",
+              "S127",
+              "S128",
+              "S129",
+              "S131",
+              "S210",
+              "S211",
+              "S212",
+              "S401",
+              "S402",
+              "S411",
+              "S412",
+              "S413",
+              "S414",
+              "S421",
+              "RTZ",
+              "EPC"
+            ]
+          },
+          "specificationId": {
+            "pattern": "^urn:mrn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\\-.:=@;$_!*'%/?#]+$",
+            "type": "string"
+          },
+          "designId": {
+            "pattern": "^urn:mrn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\\-.:=@;$_!*'%/?#]+$",
+            "type": "string"
+          },
+          "instanceId": {
+            "pattern": "^urn:mrn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\\-.:=@;$_!*'%/?#]+$",
+            "type": "string"
+          },
+          "mmsi": {
+            "pattern": "^(MID\\d{6}|0MID\\d{5}|00MID\\{4})",
+            "type": "string"
+          },
+          "imo": {
+            "pattern": "^\\d{7}(?:\\d{2})?$",
+            "type": "string"
+          },
+          "serviceType": {
+            "type": "string"
+          },
+          "unlocode": {
+            "pattern": "^[a-zA-Z]{2}[a-zA-Z2-9]{3}",
+            "type": "string"
+          },
+          "endpointUri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "page": {
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
           }
         }
       }
