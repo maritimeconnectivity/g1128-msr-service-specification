@@ -726,9 +726,9 @@ repeating the same search query, with a difference page index parameter.
     shall explicitly explain the purpose of the parameters for the operation.
 -->
 
-<!-- Spacing: | --- | --- | --- | --------- | -->
+<!-- Spacing: | ------ | --- | --- | --------- | -->
 | Parameter (in)   | Encoding | Mult. | Description                                                         |
-| --- | --- | --- | --------- |
+| ------ | --- | --- | --------- |
 | SearhFilterObject | JSON    | 1     | The object contains information on the search filters to be applied |
 
 <!-- Spacing: | ------ | --- | --- | --------- | -->
