@@ -33,8 +33,8 @@ Technical Services are associated with a Maritime Service, and these Technical
 Services are the ones defining the actual information exchange needed to take
 place in order to carry our a Maritime Service.
 
-The Maritime Service Registry [3], or MSR for short, assumes the role of a
-general  registry for Technical Services. It provides a reference point to the
+The MCP Service Registry [3] service, or MSR for short, assumes the role of a
+general registry for Technical Services. It provides a reference point to the
 most relevant information and the respective end-points of the registered
 services and thus to improve the accessibility of available services in the
 maritime domain.
@@ -256,7 +256,7 @@ can be implemented using a specific technology.
 
 Although these technologies in principle can be anything (even a phone number),
 the *Maritime Connectivity Platform Consortium* (MCC) promotes the use of
-web-services and services using the *Maritime Messaging Service* (MMS). For each
+web-services and services using the *MCP Messaging Service* (MMS). For each
 technical design there will be one or more service instances that provide the
 required information, relying on a service provider. The most important
 information is the endpoint of the service, but other significant information
@@ -284,7 +284,7 @@ SECOM already defines a mechanism for service discovery and this should be
 employed by the MSR. Apart from the requirements set by SECOM however, the
 following additional aspects need to be satisfied:
 
-* Only organisations that are registered in a *Maritime Identity Registry* (MIR)
+* Only organisations that are registered in a *MCP Identity Registry* (MIR)
   instance (see details on the MCP "Vetting Procedure for MCP Instance
   Providers" [7]) are allowed to submit service descriptions (any level, i.e.
   service specifications, service designs, and service instances) to an MSR.
@@ -2605,10 +2605,10 @@ acronyms as appropriate.
 | IMO     | International Maritime Organization                                               |
 | MCC     | Maritime Connectivity platform Consortium                                         |
 | MCP     | Maritime Connectivity Platform                                                    |
-| MIR     | Maritime Identity Registry                                                        |
-| MMS     | Maritime Messaging Service                                                        |
+| MIR     | MCP Identity Registry                                                             |
+| MMS     | MCP Messaging Service                                                             |
 | MRN     | Maritime Resource Name                                                            |
-| MSR     | Maritime Service Registry                                                         |
+| MSR     | MCP Service Registry                                                              |
 | REST    | Representational State Transfer                                                   |
 | SECOM   | Secure Communication (IEC 63173-2)                                                |
 | SLA     | Service Level Agreement                                                           |
