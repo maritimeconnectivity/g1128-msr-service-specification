@@ -682,7 +682,8 @@ HTTP method. It receives a *SearhFilterObject* object, which contains all the
 necessary parameters required to identify a set of matching registered services.
 The geometry field of the *SearhFilterObject* object is specified by SECOM to 
 accept a string in a WKT format. Optionally however, a GeoJSON formatted string
-could also be accepted.
+could also be accepted. Optionally, the results page number and page size can
+also be provided as input parameters.
 
 The MSR will respond with a list of matching service instances, encoded into
 *SearchObjectResult* objects, in a paged response. The internal structure of
@@ -731,9 +732,11 @@ repeating the same search query, with a difference page index parameter.
 -->
 
 <!-- Spacing: | ------ | --- | --- | --------- | -->
-| Parameter (in)   | Encoding | Mult. | Description                                                         |
+| Parameter (in)    | Encoding   | Mult. | Description                                                         |
 | ------ | --- | --- | --------- |
-| SearhFilterObject | JSON    | 1     | The object contains information on the search filters to be applied |
+| SearhFilterObject | JSON       | 1     | The object contains information on the search filters to be applied |
+| page              | QueryParam | 0..1  | The number of the page the results to be returned                   |
+| pageSize          | QueryParam | 0..1  | The maximum size of each page that contains the results             |
 
 <!-- Spacing: | ------ | --- | --- | --------- | -->
 | Return Type (out)  | Encoding | Mult. | Description                                                                                  |
@@ -2640,7 +2643,7 @@ acronyms as appropriate.
 11. IALA International Dictionary of Marine Aids to Navigation, 
 [http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
 
-# Annex A: MSR OpenApi Documentation
+# Annex A: MSR OpenAPI Documentation
 ```json
 {
   "openapi": "3.0.1",
@@ -4017,7 +4020,7 @@ acronyms as appropriate.
 }
 ```
 
-# Annex B: SECOM OpenApi Documentation
+# Annex B: SECOM OpenAPI Documentation
 ```json
 {
   "openapi": "3.0.1",
