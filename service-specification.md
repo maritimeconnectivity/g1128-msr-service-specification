@@ -41,7 +41,8 @@ maritime domain.
 
 The Technical Services in the resolution are defined on three levels following
 the same structure as in IALA G-1128 [4] guideline. The MSR supervises all
-service providers to describe their service in the format of G-1128.
+service providers to describe their service in the format of G-1128. MSR contains service information from those the three levels to facilitate the service discoverability,
+but services without the G-1128 documentation also can be registered.
 
 ## Purpose
 <!--
@@ -95,13 +96,15 @@ service providers to describe their service in the format of G-1128.
     instance:
 -->
 
-The MSR is an implementation of service management concept which was given from
+The MSR in conjunction with Maritime Resource Registry (MRR in short) is an implementation of service management concept which was given from
 the IALA G-1128 guideline. The main tasks of MSR are the registration of 
 Technical Services by a service provider and the provision of a discovery 
 mechanism for the registered services, so that any service consumer can identify
 available services and gain access. 
+MRR storing the G-1128 documents as a part of maritime resources provides actual documents corresponding to MRN and version of a reference stored in MSR.
+The motivation of applying the service management concept into MSR is for service interoperability so that the user is able to get services of interest which are consumable from their device. 
 
-The MSR registration is required to support all relevant e-Navigation services,
+The MSR registration is required to support all relevant digital services,
 commercial and non-commercial, authorized and non-authorized, for free and
 against payment. The MSR also needs to allow service consumers to discover
 available services and enable the use of those services through defined 
@@ -136,7 +139,7 @@ other related e-Navigation services.
 
 The service management concept originally presented in the IALA G-1128
 guideline has already bee considered and implemented by previous projects such
-as EfficienSea2 [5] and Sea Traffic Management.
+as EfficienSea2 [5] and Sea Traffic Management [12].
 
 # Service identification
 
@@ -217,9 +220,9 @@ More specifically, multiple MSR Instances Providers can exist, each operating
 an MSR instance independently of each other. This kind of decentralized
 scenarios, demonstrates the need for a certain level of coordination, especially
 in terms of service discoverability. This can be provided by a centralized or 
-distributed ledger service, through which all interested MSRs can exchange
-information on their current registrations. The specification of this ledger
-operation however is outside the scope of this document. The participation of an
+distributed ledger service, which enables the global discovery of services across different MSR instances,
+through which all interested MSRs can share information on their current registrations.
+The specification of this ledger operation however is outside the scope of this document. The participation of an
 MSR is such a scheme and any implementation decisions are therefore left to the
 MSR service developers/providers.
 
@@ -2642,6 +2645,7 @@ acronyms as appropriate.
 [https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4](https://iho-monaco.reisswolf.fit/content/7ad4b7fb-4bd8-4c51-920a-c972e5834df4)
 11. IALA International Dictionary of Marine Aids to Navigation, 
 [http://www.iala-aism.org/wiki/dictionary](http://www.iala-aism.org/wiki/dictionary)
+12. Sea Traffic Management, [https://www.seatrafficmanagement.info/](https://www.seatrafficmanagement.info/)
 
 # Annex A: MSR OpenAPI Documentation
 ```json
