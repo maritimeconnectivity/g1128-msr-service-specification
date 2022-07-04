@@ -316,14 +316,14 @@ assuming there are two terms included in it is the following:
 
 \vspace*{-0.9cm}
 ```{.jql caption="MSR query format example"}
-instanceId:"usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
+instanceId:"urn:mrn:mcp:msr:int:specification:test" AND version=0.0.1
 ```
 
 If the *instanceId* is the default field, then field indicator is not required:
 
 \vspace*{-0.9cm}
 ```{.jql caption="MSR query format example with default field"}
-"usr:mrn:mcp:msr:int:specification:test" AND version=0.0.1
+"urn:mrn:mcp:msr:int:specification:test" AND version=0.0.1
 ```
 
 Wildcard searches should also be supported. 
